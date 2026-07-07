@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#AFA9EC"/><stop offset="1" stop-color="#534AB7"/></linearGradient>
+    <style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&amp;display=swap');</style>
+  </defs>
+  <rect width="512" height="512" fill="#0D0B1A"/>
+  <path d="M176 300 L256 150 L336 300" fill="none" stroke="url(#g)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M208 300 L256 210 L304 300" fill="none" stroke="#7F77DD" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+  <circle cx="256" cy="150" r="24" fill="#CEBBFF" opacity="0.28"/>
+  <circle cx="256" cy="150" r="12" fill="#FFFFFF"/>
+  <text x="256" y="388" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="62" font-weight="700" fill="#EEEDFE">Vértice</text>
+  <text x="256" y="420" text-anchor="middle" font-family="Poppins,system-ui,sans-serif" font-size="15" font-weight="600" letter-spacing="7" fill="#7F77DD">AUTOMATIZACIÓN DIGITAL</text>
+</svg>

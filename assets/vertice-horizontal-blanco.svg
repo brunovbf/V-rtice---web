@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 150" width="510" height="150">
+  <defs><style>@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&amp;display=swap');</style></defs>
+  <g transform="translate(8,18)">
+    <path d="M18 100 L60 22 L102 100" fill="none" stroke="#FFFFFF" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M35 100 L60 56 L85 100" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="60" cy="22" r="6.5" fill="#FFFFFF"/>
+  </g>
+  <text x="168" y="90" font-family="Poppins,system-ui,sans-serif" font-size="62" font-weight="700" fill="#FFFFFF">Vértice</text>
+  <text x="171" y="118" font-family="Poppins,system-ui,sans-serif" font-size="13" font-weight="600" letter-spacing="6" fill="#FFFFFF">AUTOMATIZACIÓN DIGITAL</text>
+</svg>

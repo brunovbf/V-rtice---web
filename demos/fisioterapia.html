@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kinesis — Centro de Fisioterapia</title>
+<meta name="description" content="Centro de fisioterapia y kinesiología con rehabilitación deportiva, RPG, masoterapia y reservas online por WhatsApp."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Righteous&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F97316' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 12h-4l-3 9L9 3l-3 9H2'/%3E%3C/svg%3E"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0F172A;--panel:#16213B;--panel2:#1B2947;--border:rgba(255,255,255,.09);
+  --naranja:#F97316;--naranja2:#EA580C;--verde:#22C55E;--verde2:#4ADE80;
+  --text:#F1F5F9;--muted:#94A3B8;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Poppins',system-ui,sans-serif;line-height:1.7}
+h1,h2,h3,.display{font-family:'Righteous',system-ui,sans-serif;font-weight:400;letter-spacing:.01em}
+section{scroll-margin-top:86px}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+.wrap{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.overline{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--verde2)}
+.overline::before{content:'';width:26px;height:3px;background:var(--naranja);border-radius:2px}
+
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--naranja);outline-offset:2px}
+a,button,select{touch-action:manipulation}
+
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(15,23,42,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:.85rem 0}
+.nav-in{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:flex;align-items:center;gap:.55rem;text-decoration:none}
+.logo .display{font-size:1.35rem;color:var(--text);text-transform:uppercase}
+.logo svg{flex-shrink:0}
+.nav-links{display:flex;gap:1.8rem;align-items:center}
+.nav-links a{color:var(--muted);text-decoration:none;font-weight:500;font-size:.92rem;transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{background:var(--naranja);color:#0F172A;text-decoration:none;font-weight:700;font-size:.9rem;padding:.6rem 1.4rem;border-radius:10px;transition:all .2s;white-space:nowrap}
+.nav-cta:hover{background:var(--verde2);transform:translateY(-1px)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text);font-size:1.6rem;cursor:pointer}
+
+.hero{padding:9.5rem 0 4rem;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:-10%;right:-15%;width:560px;height:560px;background:radial-gradient(circle,rgba(249,115,22,.16) 0%,transparent 65%);pointer-events:none}
+.hero-pulse{position:absolute;right:-40px;top:22%;width:420px;opacity:.1;pointer-events:none}
+.hero-pulse svg{width:100%;stroke:var(--verde);stroke-width:1.4;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.hero-content{position:relative;max-width:720px}
+.hero h1{font-size:clamp(2.6rem,7vw,4.6rem);line-height:1.05;text-transform:uppercase;margin:1.1rem 0 1.2rem;color:var(--text)}
+.hero h1 .hl{color:var(--naranja)}
+.hero h1 .hl2{color:var(--verde2)}
+.hero p{font-size:1.12rem;color:var(--muted);max-width:520px;margin-bottom:2.2rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2.8rem}
+.btn-naranja{display:inline-flex;align-items:center;gap:.55rem;background:var(--naranja);color:#0F172A;text-decoration:none;font-weight:700;font-size:1rem;padding:.95rem 2rem;border-radius:12px;transition:all .2s;border:none;cursor:pointer;font-family:'Poppins',sans-serif}
+.btn-naranja:hover{background:var(--verde2);transform:translateY(-2px);box-shadow:0 12px 30px rgba(34,197,94,.25)}
+.btn-out{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--text);border:1.5px solid var(--border);text-decoration:none;font-weight:600;font-size:1rem;padding:.95rem 1.8rem;border-radius:12px;transition:all .2s}
+.btn-out:hover{border-color:var(--naranja);color:var(--naranja)}
+.hero-stats{display:flex;gap:2.8rem;flex-wrap:wrap}
+.hs .n{font-family:'Righteous',sans-serif;font-size:2.1rem;color:var(--naranja);line-height:1.1}
+.hs:nth-child(2) .n{color:var(--verde2)}
+.hs .l{font-size:.85rem;color:var(--muted)}
+
+.marquee{border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:.95rem 0;background:var(--panel)}
+.marquee-track{display:flex;gap:2.5rem;width:max-content;animation:marquee 26s linear infinite;font-family:'Righteous',sans-serif;text-transform:uppercase;font-size:.95rem;letter-spacing:.15em;color:var(--muted);white-space:nowrap}
+.marquee-track span b{color:var(--naranja);font-weight:400;margin-right:2.5rem}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.sec{padding:5.5rem 0}
+.sec-head{max-width:640px;margin-bottom:3rem}
+.sec-head h2{font-size:clamp(1.9rem,4.5vw,2.9rem);text-transform:uppercase;line-height:1.15;margin-top:.9rem}
+.sec-head p{color:var(--muted);margin-top:.7rem}
+
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:1.1rem}
+.b-card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:1.9rem;transition:all .25s;position:relative;overflow:hidden}
+.b-card:hover{transform:translateY(-4px);border-color:rgba(249,115,22,.5)}
+.b-card.big{grid-column:span 3}
+.b-card.small{grid-column:span 2}
+.b-ico{width:52px;height:52px;border-radius:13px;background:rgba(249,115,22,.14);color:var(--naranja);display:flex;align-items:center;justify-content:center;margin-bottom:1.2rem}
+.b-card:nth-child(even) .b-ico{background:rgba(34,197,94,.13);color:var(--verde2)}
+.b-card:nth-child(even):hover{border-color:rgba(34,197,94,.5)}
+.b-ico svg{width:27px;height:27px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.b-card h3{font-size:1.2rem;text-transform:uppercase;margin-bottom:.5rem;color:var(--text)}
+.b-card p{font-size:.92rem;color:var(--muted)}
+.b-tag{position:absolute;top:1.2rem;right:1.2rem;font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(34,197,94,.15);color:var(--verde2);border:1px solid rgba(34,197,94,.35);padding:.2rem .6rem;border-radius:100px}
+
+.proceso{background:var(--panel)}
+.timeline{position:relative;max-width:640px;margin:0 auto;padding-left:2.4rem}
+.timeline::before{content:'';position:absolute;left:12px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--naranja),var(--verde))}
+.t-item{position:relative;padding-bottom:2.4rem}
+.t-item:last-child{padding-bottom:0}
+.t-item::before{content:'';position:absolute;left:-2.4rem;top:6px;width:26px;height:26px;border-radius:50%;background:var(--bg);border:3px solid var(--naranja)}
+.t-item:nth-child(even)::before{border-color:var(--verde)}
+.t-item h3{font-size:1.15rem;text-transform:uppercase;margin-bottom:.35rem}
+.t-item p{font-size:.95rem;color:var(--muted);max-width:520px}
+
+.turnos-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:2.5rem;align-items:start}
+.contact-rows{display:flex;flex-direction:column;gap:1.1rem;margin-top:1.5rem}
+.c-row{display:flex;gap:.9rem;align-items:flex-start;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.3rem}
+.c-row svg{width:22px;height:22px;stroke:var(--verde2);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:.2rem}
+.c-row b{color:var(--text);display:block;font-size:.95rem}
+.c-row p{color:var(--muted);font-size:.9rem}
+.form-card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:2.2rem}
+.form-card h3{font-size:1.3rem;text-transform:uppercase;margin-bottom:1.3rem}
+.fg{margin-bottom:1rem}
+.fg label{display:block;font-weight:600;font-size:.85rem;margin-bottom:.35rem;color:var(--text)}
+.fg input,.fg select{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:.75rem .9rem;font-family:'Poppins',sans-serif;font-size:.95rem;color:var(--text);background:var(--bg);transition:border .2s;color-scheme:dark}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--naranja)}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-ok{display:none;margin-top:1rem;background:rgba(34,197,94,.12);border:1.5px solid var(--verde);color:var(--verde2);border-radius:12px;padding:.8rem 1rem;font-weight:600;font-size:.95rem}
+.form-ok.show{display:block}
+
+.testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem}
+.testi{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:2.1rem;position:relative}
+.testi .q{font-family:'Righteous',sans-serif;font-size:3.2rem;color:var(--verde);line-height:1;opacity:.55}
+.testi p{color:var(--text);font-size:1.02rem;margin:.6rem 0 1.3rem}
+.testi-who b{color:var(--text);font-size:.95rem}
+.testi-who span{color:var(--muted);font-size:.85rem;display:block}
+
+.cta-final{text-align:center;padding:5.5rem 0;position:relative;overflow:hidden}
+.cta-final .glow{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:640px;height:400px;background:radial-gradient(ellipse,rgba(34,197,94,.14) 0%,transparent 65%);pointer-events:none}
+.cta-final h2{font-size:clamp(2.2rem,6vw,3.8rem);text-transform:uppercase;position:relative}
+.cta-final h2 .hl{color:var(--verde2)}
+.cta-final p{color:var(--muted);margin:.8rem 0 2.2rem;position:relative}
+.btn-wa{display:inline-flex;align-items:center;gap:.6rem;background:var(--verde);color:#0F172A;text-decoration:none;font-weight:700;font-size:1.05rem;padding:1rem 2.4rem;border-radius:12px;transition:all .2s;position:relative}
+.btn-wa:hover{background:var(--verde2);transform:translateY(-2px);box-shadow:0 12px 34px rgba(34,197,94,.3)}
+
+footer{background:#0B1120;border-top:1px solid var(--border);padding:2.6rem 0;font-size:.9rem}
+.foot-in{max-width:1100px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;color:var(--muted)}
+footer a{color:var(--verde2);text-decoration:none}
+footer .display{color:var(--text);text-transform:uppercase;font-size:1.1rem}
+
+.demo-badge{position:fixed;bottom:1rem;right:1rem;z-index:200;background:#0D0B1A;color:#EEEDFE;text-decoration:none;padding:.55rem .9rem;border-radius:100px;font-size:.8rem;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.45);border:1px solid rgba(127,119,221,.4);display:flex;align-items:center;gap:.45rem;font-family:'Poppins',sans-serif}
+.demo-badge:hover{background:#1a1535}
+
+@media(max-width:900px){
+  .bento{grid-template-columns:1fr 1fr}
+  .b-card.big,.b-card.small{grid-column:span 1}
+  .turnos-grid,.testi-grid{grid-template-columns:1fr}
+  .hero-pulse{display:none}
+}
+@media(max-width:640px){
+  .nav-toggle{display:block}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;background:#0F172A;box-shadow:0 14px 30px rgba(0,0,0,.5);border-bottom:1px solid var(--border);padding:1.1rem 1.5rem;gap:1.1rem}
+  .nav-links.open{display:flex}
+  .bento{grid-template-columns:1fr}
+  .fg-row{grid-template-columns:1fr}
+  .hero-stats{gap:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="logo">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <span class="display">Kinesis</span>
+    </a>
+    <div class="nav-links">
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Cómo trabajamos</a>
+      <a href="#turnos">Turnos</a>
+      <a href="#testimonios">Pacientes</a>
+    </div>
+    <a href="#turnos" class="nav-cta">Reservar turno</a>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-pulse" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="wrap">
+    <div class="hero-content">
+      <span class="overline">Centro de fisioterapia · Melo</span>
+      <h1>Volvé a moverte <span class="hl">más fuerte</span> que <span class="hl2">antes</span></h1>
+      <p>Rehabilitación deportiva, RPG y kinesiología con planes a medida. Sin dolor no significa sin desafío: te acompañamos hasta el alta.</p>
+      <div class="hero-btns">
+        <a href="#turnos" class="btn-naranja">Reservar turno</a>
+        <a href="#servicios" class="btn-out">Ver servicios</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hs"><div class="n">900+</div><div class="l">pacientes recuperados</div></div>
+        <div class="hs"><div class="n">10</div><div class="l">años de experiencia</div></div>
+        <div class="hs"><div class="n">5</div><div class="l">especialidades</div></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span><b>Rehabilitación deportiva</b><b>RPG</b><b>Kinesiología</b><b>Masoterapia</b><b>Pilates terapéutico</b><b>Electroterapia</b></span>
+    <span><b>Rehabilitación deportiva</b><b>RPG</b><b>Kinesiología</b><b>Masoterapia</b><b>Pilates terapéutico</b><b>Electroterapia</b></span>
+  </div>
+</div>
+
+<section id="servicios" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="overline">Servicios</span>
+      <h2>Entrená tu recuperación</h2>
+      <p>Cada lesión es distinta. Cada plan también.</p>
+    </div>
+    <div class="bento">
+      <div class="b-card big">
+        <span class="b-tag">Más pedido</span>
+        <div class="b-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v6l-3 8M12 13l3 8M8 11l4-2 4 2"/></svg></div>
+        <h3>Rehabilitación deportiva</h3>
+        <p>Recuperación de lesiones y readaptación progresiva al deporte. Trabajamos con objetivos medibles hasta que volvés a competir con confianza.</p>
+      </div>
+      <div class="b-card big">
+        <div class="b-ico"><svg viewBox="0 0 24 24"><path d="M12 2v20M5 8l7-6 7 6M5 16l7 6 7-6"/></svg></div>
+        <h3>RPG · Reeducación postural</h3>
+        <p>Corrección postural global para dolores crónicos de espalda, cuello y articulaciones. Resultados que se sienten en el día a día.</p>
+      </div>
+      <div class="b-card small">
+        <div class="b-ico"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <h3>Kinesiología</h3>
+        <p>Evaluación y tratamiento de lesiones musculoesqueléticas.</p>
+      </div>
+      <div class="b-card small">
+        <div class="b-ico"><svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 0 1 16 0"/><path d="M4 12v6a2 2 0 0 0 2 2h1v-8H6a2 2 0 0 0-2 2ZM20 12v6a2 2 0 0 1-2 2h-1v-8h1a2 2 0 0 1 2 2Z"/></svg></div>
+        <h3>Masoterapia</h3>
+        <p>Masajes terapéuticos para relajar y descontracturar.</p>
+      </div>
+      <div class="b-card small">
+        <div class="b-ico"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-14h-7z"/></svg></div>
+        <h3>Electroterapia</h3>
+        <p>Ultrasonido, TENS y corrientes para acelerar la recuperación.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proceso" class="sec proceso">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="overline">Cómo trabajamos</span>
+      <h2>Tu plan de recuperación</h2>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <h3>1 · Evaluación inicial</h3>
+        <p>Analizamos tu lesión, tu historia y tus objetivos. Salís de la primera sesión sabiendo qué tenés y cuánto va a llevar.</p>
+      </div>
+      <div class="t-item">
+        <h3>2 · Plan a medida</h3>
+        <p>Diseñamos un plan con etapas y metas concretas: qué vamos a trabajar cada semana y cómo medimos el avance.</p>
+      </div>
+      <div class="t-item">
+        <h3>3 · Tratamiento activo</h3>
+        <p>Sesiones combinando terapia manual, ejercicio y tecnología. Vos ponés el esfuerzo, nosotros el método.</p>
+      </div>
+      <div class="t-item">
+        <h3>4 · Alta y prevención</h3>
+        <p>No te soltamos al primer día sin dolor: te damos rutinas de mantenimiento para que la lesión no vuelva.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="turnos" class="sec">
+  <div class="wrap">
+    <div class="turnos-grid">
+      <div>
+        <span class="overline">Turnos</span>
+        <h2 class="sec-head" style="margin-bottom:0;font-size:clamp(1.9rem,4.5vw,2.9rem);text-transform:uppercase;line-height:1.15;margin-top:.9rem">Reservá tu lugar</h2>
+        <div class="contact-rows">
+          <div class="c-row"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><div><b>Horarios</b><p>Lun a Vie 8–20 hs · Sáb 9–13 hs</p></div></div>
+          <div class="c-row"><svg viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><div><b>Dónde estamos</b><p>Rincón 512, Melo, Cerro Largo</p></div></div>
+          <div class="c-row"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg><div><b>WhatsApp</b><p>099 492 918 — te respondemos en el día</p></div></div>
+        </div>
+      </div>
+      <form class="form-card" id="turnoForm">
+        <h3>Datos del turno</h3>
+        <div class="fg-row">
+          <div class="fg"><label for="t-nombre">Tu nombre *</label><input id="t-nombre" name="nombre" type="text" placeholder="Ej. Fernanda Silva" required/></div>
+          <div class="fg"><label for="t-tel">Teléfono *</label><input id="t-tel" name="telefono" type="tel" placeholder="099 123 456" required/></div>
+        </div>
+        <div class="fg"><label for="t-motivo">Motivo de la consulta</label><select id="t-motivo" name="motivo"><option>Evaluación inicial</option><option>Rehabilitación deportiva</option><option>RPG</option><option>Masoterapia</option><option>Electroterapia</option></select></div>
+        <div class="fg"><label for="t-indicacion">¿Tenés indicación médica?</label><select id="t-indicacion" name="indicacion"><option>Sí</option><option>No</option></select></div>
+        <div class="fg"><label for="t-fecha">Fecha preferida</label><input id="t-fecha" name="fecha" type="date"/></div>
+        <button type="submit" class="btn-naranja" style="width:100%;justify-content:center">Solicitar turno</button>
+        <p class="form-ok" role="status">✓ ¡Solicitud enviada! Te confirmamos el turno por WhatsApp.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section id="testimonios" class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="overline">Pacientes</span>
+      <h2>Historias de vuelta al juego</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <div class="q" aria-hidden="true">“</div>
+        <p>Llegué con una rotura de ligamentos y la cabeza en cualquier lado. En cinco meses volví a jugar al fútbol, más fuerte que antes de la lesión.</p>
+        <div class="testi-who"><b>Matías Pereira</b><span>rehabilitación deportiva</span></div>
+      </div>
+      <div class="testi">
+        <div class="q" aria-hidden="true">“</div>
+        <p>Diez años con dolor de espalda por el trabajo. Con RPG y el plan de ejercicios, hoy hago jornadas completas sin molestias. Increíble.</p>
+        <div class="testi-who"><b>Fernanda Silva</b><span>reeducación postural</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final">
+  <div class="glow"></div>
+  <div class="wrap">
+    <h2>¿Listo para <span class="hl">empezar</span>?</h2>
+    <p>Escribinos por WhatsApp y coordinamos tu evaluación inicial.</p>
+    <a href="https://wa.me/59899492918" target="_blank" rel="noopener" class="btn-wa">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <div class="display">Kinesis</div>
+      <div>Centro de fisioterapia · Rincón 512, Melo</div>
+    </div>
+    <div><a href="https://wa.me/59899492918">099 492 918</a></div>
+    <div>© 2026 Kinesis · Melo, Uruguay</div>
+  </div>
+</footer>
+
+<a href="../index.html" class="demo-badge">◣ Demo creada por Vértice</a>
+
+<script>
+  var tg=document.querySelector('.nav-toggle'),nl=document.querySelector('.nav-links');
+  tg.addEventListener('click',function(){
+    var open=nl.classList.toggle('open');
+    tg.setAttribute('aria-expanded',open?'true':'false');
+  });
+  nl.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){nl.classList.remove('open');tg.setAttribute('aria-expanded','false')});
+  });
+  var f=document.getElementById('turnoForm');
+  if(f){f.addEventListener('submit',function(e){e.preventDefault();f.querySelector('.form-ok').classList.add('show')});}
+</script>
+
+</body>
+</html>

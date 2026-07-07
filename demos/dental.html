@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bianchi Odontología — Consultorio Dental</title>
+<meta name="description" content="Consultorio dental con turnos online, limpieza, blanqueamiento, ortodoncia invisible e implantes. Precios transparentes y financiación en cuotas."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230A0A0B' d='M12 2C9 2 7 4 7 7c0 1.5.5 2.5 1 4 .7 2 .5 4 1 6.5.3 1.5 1 2.5 2 2.5s1.5-1.5 1.7-3c.2-1.3.3-2 .3-2s.1.7.3 2c.2 1.5.7 3 1.7 3s1.7-1 2-2.5c.5-2.5.3-4.5 1-6.5.5-1.5 1-2.5 1-4 0-3-2-5-5-5-1 0-1.8.3-2.5.8C13.8 2.3 13 2 12 2Z'/%3E%3C/svg%3E"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0A0A0B;--body:#3F3F46;--muted:#71717A;--border:#E4E4E7;--soft:#F6F7F9;
+  --blue:#2563EB;--bg:#FFFFFF;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--body);font-family:'Inter',system-ui,sans-serif;line-height:1.7;font-size:16px}
+h1,h2,h3,.serif{font-family:'Playfair Display',Georgia,serif;font-weight:500;color:var(--ink)}
+section{scroll-margin-top:88px}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+.wrap{max-width:1060px;margin:0 auto;padding:0 1.5rem}
+.overline{font-size:.78rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--blue)}
+
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+a,button,select,summary{touch-action:manipulation}
+
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.9rem 0}
+.nav-in{max-width:1060px;margin:0 auto;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{display:flex;flex-direction:column;line-height:1.05;text-decoration:none}
+.logo .serif{font-size:1.35rem}
+.logo small{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.nav-links{display:flex;gap:1.7rem;align-items:center}
+.nav-links a{color:var(--body);text-decoration:none;font-size:.92rem;font-weight:500;transition:color .2s;cursor:pointer}
+.nav-links a:hover{color:var(--ink)}
+.nav-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:.9rem;padding:.6rem 1.4rem;border-radius:100px;transition:background .2s;white-space:nowrap}
+.nav-cta:hover{background:#27272A}
+.nav-toggle{display:none;background:none;border:none;color:var(--ink);font-size:1.6rem;cursor:pointer}
+
+.hero{padding:9.5rem 0 3.5rem;text-align:center}
+.hero h1{font-size:clamp(2.5rem,6vw,4.1rem);line-height:1.12;margin:1.1rem auto .9rem;max-width:760px;letter-spacing:-.01em}
+.hero h1 em{font-style:italic;color:var(--blue)}
+.hero>.wrap>p{font-size:1.12rem;color:var(--muted);max-width:540px;margin:0 auto 2rem}
+.hero-trust{display:flex;gap:1.8rem;justify-content:center;flex-wrap:wrap;font-size:.9rem;font-weight:500;color:var(--body)}
+.hero-trust span{display:inline-flex;align-items:center;gap:.45rem}
+.hero-trust svg{width:17px;height:17px;stroke:var(--blue);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+
+.booking{padding:1.6rem 0 3rem}
+.booking-bar{max-width:940px;margin:0 auto;background:#fff;border:1px solid var(--border);border-radius:22px;box-shadow:0 24px 60px -24px rgba(10,10,11,.14);padding:.6rem;display:grid;grid-template-columns:1.15fr 1fr 1.25fr 1fr auto;align-items:stretch}
+.bb-field{padding:.55rem 1.1rem;border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center}
+.bb-field:first-child{border-left:none}
+.bb-field label{font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:.15rem}
+.bb-field input,.bb-field select{border:none;background:transparent;font-family:'Inter',sans-serif;font-size:.95rem;color:var(--ink);width:100%;padding:.15rem 0}
+.bb-field input:focus,.bb-field select:focus{outline:none}
+.bb-btn{align-self:center;margin-left:.5rem;background:var(--ink);color:#fff;border:none;font-family:'Inter',sans-serif;font-weight:600;font-size:.95rem;padding:.95rem 1.9rem;border-radius:100px;cursor:pointer;transition:background .2s;white-space:nowrap}
+.bb-btn:hover{background:#27272A}
+.form-ok{display:none;max-width:940px;margin:1rem auto 0;background:var(--soft);border:1px solid var(--border);border-left:3px solid var(--blue);color:var(--ink);border-radius:10px;padding:.85rem 1.2rem;font-weight:500;font-size:.95rem;text-align:center}
+.form-ok.show{display:block}
+.booking-note{text-align:center;font-size:.82rem;color:var(--muted);margin-top:.9rem}
+
+.stats{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.4rem 0}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center}
+.stat-n{font-family:'Playfair Display',serif;font-size:2.5rem;color:var(--ink);line-height:1.1}
+.stat-l{font-size:.88rem;color:var(--muted);margin-top:.2rem}
+
+.sec{padding:5.5rem 0}
+.sec-head{max-width:620px;margin-bottom:3rem}
+.sec-head h2{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.18;margin-top:.8rem}
+.sec-head p{color:var(--muted);margin-top:.7rem}
+.sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+
+.serv-list{border-top:1px solid var(--border)}
+.serv-row{display:grid;grid-template-columns:90px 260px 1fr 46px;gap:1.4rem;align-items:center;padding:1.7rem .6rem;border-bottom:1px solid var(--border);transition:background .2s}
+.serv-row:hover{background:var(--soft)}
+.serv-num{font-family:'Playfair Display',serif;font-style:italic;font-size:1.25rem;color:var(--muted)}
+.serv-row h3{font-size:1.3rem;font-weight:500}
+.serv-row p{font-size:.95rem;color:var(--muted)}
+.serv-arrow{width:34px;height:34px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--ink);transition:all .2s}
+.serv-row:hover .serv-arrow{background:var(--ink);color:#fff;border-color:var(--ink)}
+.serv-arrow svg{width:15px;height:15px;stroke:currentColor;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+.pasos{background:var(--soft)}
+.pasos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.2rem}
+.paso{border-top:2px solid var(--ink);padding-top:1.3rem}
+.paso .p-num{font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--blue)}
+.paso h3{font-size:1.25rem;margin:.4rem 0 .4rem}
+.paso p{font-size:.95rem;color:var(--muted)}
+
+.precios-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.precio-row{display:flex;align-items:baseline;padding:1rem 0;border-bottom:1px solid var(--border);font-size:1rem}
+.precio-row b{color:var(--ink);font-weight:600}
+.precio-row .dots{flex:1;border-bottom:2px dotted var(--border);margin:0 .8rem;transform:translateY(-4px)}
+.precio-row .monto{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--ink);white-space:nowrap}
+.precios-nota{margin-top:1.2rem;font-size:.85rem;color:var(--muted)}
+.cuotas-card{background:var(--soft);border:1px solid var(--border);border-radius:18px;padding:2rem}
+.cuotas-card h3{font-size:1.35rem;margin-bottom:.5rem}
+.cuotas-card p{font-size:.95rem;color:var(--muted);margin-bottom:1.2rem}
+.cuotas-card ul{list-style:none}
+.cuotas-card li{display:flex;gap:.55rem;align-items:flex-start;padding:.35rem 0;font-size:.95rem;color:var(--body)}
+.cuotas-card li svg{width:17px;height:17px;stroke:var(--blue);stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;margin-top:.3rem}
+
+.equipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.member{border:1px solid var(--border);border-radius:18px;padding:2rem;text-align:center;transition:box-shadow .25s}
+.member:hover{box-shadow:0 20px 50px -20px rgba(10,10,11,.15)}
+.member-av{width:84px;height:84px;border-radius:50%;margin:0 auto 1rem;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.7rem}
+.member h3{font-size:1.2rem}
+.member .role{font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin:.25rem 0 .6rem}
+.member p{font-size:.9rem;color:var(--muted)}
+
+.faq{max-width:700px;margin:0 auto}
+.faq details{border-bottom:1px solid var(--border)}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1.25rem .2rem;font-weight:600;color:var(--ink);font-size:1.02rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq .fx{font-size:1.4rem;font-weight:400;color:var(--muted);transition:transform .2s;line-height:1}
+.faq details[open] .fx{transform:rotate(45deg)}
+.faq details p{padding:0 .2rem 1.25rem;color:var(--muted);font-size:.96rem;max-width:600px}
+
+.cta-band{background:var(--ink);color:#fff;padding:4.5rem 0;text-align:center}
+.cta-band h2{color:#fff;font-size:clamp(1.9rem,4vw,2.8rem);max-width:640px;margin:0 auto .8rem}
+.cta-band p{color:#A1A1AA;margin-bottom:2rem}
+.btn-white{display:inline-flex;align-items:center;gap:.6rem;background:#fff;color:var(--ink);text-decoration:none;font-weight:600;font-size:1rem;padding:.95rem 2.1rem;border-radius:100px;transition:all .2s}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(0,0,0,.35)}
+
+footer{border-top:1px solid var(--border);padding:2.8rem 0;font-size:.9rem}
+.foot-in{max-width:1060px;margin:0 auto;padding:0 1.5rem;display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap}
+footer a{color:var(--body);text-decoration:none}
+footer a:hover{color:var(--ink)}
+.foot-copy{color:var(--muted);font-size:.82rem}
+
+.demo-badge{position:fixed;bottom:1rem;right:1rem;z-index:200;background:#0D0B1A;color:#EEEDFE;text-decoration:none;padding:.55rem .9rem;border-radius:100px;font-size:.8rem;font-weight:700;box-shadow:0 8px 24px rgba(0,0,0,.25);display:flex;align-items:center;gap:.45rem;font-family:'Inter',sans-serif}
+.demo-badge:hover{background:#1a1535}
+
+@media(max-width:900px){
+  .booking-bar{grid-template-columns:1fr 1fr;padding:1rem}
+  .bb-field{border-left:none;border-bottom:1px solid var(--border);padding:.7rem .4rem}
+  .bb-btn{grid-column:1/-1;margin:.9rem 0 0}
+  .serv-row{display:block;position:relative;padding-right:3.4rem}
+  .serv-num{display:block;margin-bottom:.25rem}
+  .serv-row h3{margin-bottom:.2rem}
+  .serv-arrow{position:absolute;top:1.7rem;right:.6rem}
+  .pasos-grid,.equipo-grid{grid-template-columns:1fr}
+  .precios-grid{grid-template-columns:1fr;gap:2rem}
+  .stats .wrap{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:640px){
+  .nav-toggle{display:block}
+  .nav-links{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;background:#fff;box-shadow:0 14px 30px rgba(0,0,0,.12);border-bottom:1px solid var(--border);padding:1.1rem 1.5rem;gap:1.1rem}
+  .nav-links.open{display:flex}
+  .booking-bar{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a href="#" class="logo"><span class="serif">Bianchi</span><small>Odontología</small></a>
+    <div class="nav-links">
+      <a href="#servicios">Tratamientos</a>
+      <a href="#visita">Primera visita</a>
+      <a href="#precios">Precios</a>
+      <a href="#equipo">Equipo</a>
+      <a href="#faq">Preguntas</a>
+    </div>
+    <a href="#agenda" class="nav-cta">Agendar visita</a>
+    <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="overline">Consultorio dental · Melo</span>
+    <h1>Odontología moderna, <em>sin vueltas</em> y sin sorpresas</h1>
+    <p>Turnos online, precios claros antes de empezar y tecnología que hace que ir al dentista deje de ser un problema.</p>
+    <div class="hero-trust">
+      <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> +3.000 pacientes</span>
+      <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> 14 años de experiencia</span>
+      <span><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Hasta 6 cuotas sin recargo</span>
+    </div>
+  </div>
+</header>
+
+<section id="agenda" class="booking">
+  <div class="wrap">
+    <form class="booking-bar" id="turnoForm">
+      <div class="bb-field">
+        <label for="t-nombre">Tu nombre *</label>
+        <input id="t-nombre" name="nombre" type="text" placeholder="Diego Ramírez" required/>
+      </div>
+      <div class="bb-field">
+        <label for="t-tel">Teléfono *</label>
+        <input id="t-tel" name="telefono" type="tel" placeholder="099 123 456" required/>
+      </div>
+      <div class="bb-field">
+        <label for="t-motivo">Motivo</label>
+        <select id="t-motivo" name="motivo"><option>Control / limpieza</option><option>Blanqueamiento</option><option>Ortodoncia</option><option>Implantes</option><option>Urgencia</option></select>
+      </div>
+      <div class="bb-field">
+        <label for="t-fecha">Fecha</label>
+        <input id="t-fecha" name="fecha" type="date"/>
+      </div>
+      <button type="submit" class="bb-btn">Agendar</button>
+    </form>
+    <p class="form-ok" role="status">✓ ¡Solicitud enviada! Te confirmamos el turno por WhatsApp.</p>
+    <p class="booking-note">Sin pago online. Confirmamos tu turno por WhatsApp en el día.</p>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="wrap">
+    <div><div class="stat-n">14+</div><div class="stat-l">años de experiencia</div></div>
+    <div><div class="stat-n">3.000+</div><div class="stat-l">pacientes atendidos</div></div>
+    <div><div class="stat-n">6</div><div class="stat-l">cuotas sin recargo</div></div>
+    <div><div class="stat-n">3</div><div class="stat-l">odontólogos especialistas</div></div>
+  </div>
+</div>
+
+<section id="servicios" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="overline">Tratamientos</span>
+      <h2>Todo lo que tu sonrisa necesita</h2>
+      <p>Desde el control de rutina hasta la rehabilitación completa.</p>
+    </div>
+    <div class="serv-list">
+      <div class="serv-row">
+        <span class="serv-num">01</span>
+        <h3>Limpieza y control</h3>
+        <p>Prevención de caries y sarro con limpieza profesional periódica.</p>
+        <span class="serv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </div>
+      <div class="serv-row">
+        <span class="serv-num">02</span>
+        <h3>Blanqueamiento</h3>
+        <p>Resultados visibles desde la primera sesión, sin dañar el esmalte.</p>
+        <span class="serv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </div>
+      <div class="serv-row">
+        <span class="serv-num">03</span>
+        <h3>Ortodoncia invisible</h3>
+        <p>Alineadores transparentes casi imperceptibles, a tu ritmo.</p>
+        <span class="serv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </div>
+      <div class="serv-row">
+        <span class="serv-num">04</span>
+        <h3>Implantes dentales</h3>
+        <p>Reemplazo fijo y natural para piezas perdidas, con garantía.</p>
+        <span class="serv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </div>
+      <div class="serv-row">
+        <span class="serv-num">05</span>
+        <h3>Endodoncia</h3>
+        <p>Tratamiento de conducto sin dolor, con anestesia moderna.</p>
+        <span class="serv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </div>
+      <div class="serv-row">
+        <span class="serv-num">06</span>
+        <h3>Urgencias</h3>
+        <p>Dolor, roturas o traumatismos: turno prioritario en el día.</p>
+        <span class="serv-arrow"><svg viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="visita" class="sec pasos">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="overline">Primera visita</span>
+      <h2>Así de simple es empezar</h2>
+    </div>
+    <div class="pasos-grid">
+      <div class="paso">
+        <span class="p-num">Paso 1</span>
+        <h3>Agendá online</h3>
+        <p>Elegí día y motivo en un minuto. Te confirmamos por WhatsApp sin que tengas que llamar.</p>
+      </div>
+      <div class="paso">
+        <span class="p-num">Paso 2</span>
+        <h3>Diagnóstico y plan</h3>
+        <p>Revisamos tu caso y te explicamos las opciones con costos claros antes de empezar cualquier tratamiento.</p>
+      </div>
+      <div class="paso">
+        <span class="p-num">Paso 3</span>
+        <h3>Tratamiento a tu ritmo</h3>
+        <p>Coordinamos las sesiones según tu agenda y podés financiar en cuotas sin recargo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="precios" class="sec">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="overline">Precios transparentes</span>
+      <h2>Sabés cuánto cuesta antes de sentarte en el sillón</h2>
+    </div>
+    <div class="precios-grid">
+      <div>
+        <div class="precio-row"><b>Consulta de diagnóstico</b><span class="dots"></span><span class="monto">$ 900</span></div>
+        <div class="precio-row"><b>Limpieza profesional</b><span class="dots"></span><span class="monto">$ 1.400</span></div>
+        <div class="precio-row"><b>Blanqueamiento</b><span class="dots"></span><span class="monto">desde $ 6.500</span></div>
+        <div class="precio-row"><b>Ortodoncia invisible</b><span class="dots"></span><span class="monto">consultar</span></div>
+        <div class="precio-row"><b>Implante unitario</b><span class="dots"></span><span class="monto">desde $ 28.000</span></div>
+        <p class="precios-nota">* Precios de referencia en pesos uruguayos. El presupuesto final se confirma en la consulta de diagnóstico.</p>
+      </div>
+      <div class="cuotas-card">
+        <h3>Financiación en cuotas</h3>
+        <p>Los tratamientos largos no tienen por qué pagarse de una vez.</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Hasta 6 cuotas sin recargo</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Presupuesto por escrito antes de empezar</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Sin costos ocultos ni letra chica</li>
+          <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg> Convenios con sociedades médicas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipo" class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="overline">Equipo</span>
+      <h2>Quiénes te atienden</h2>
+    </div>
+    <div class="equipo-grid">
+      <div class="member"><div class="member-av">MB</div><h3>Dra. Mariana Bianchi</h3><div class="role">Directora · Rehabilitación</div><p>20 años de ejercicio. Especialista en implantes y prótesis.</p></div>
+      <div class="member"><div class="member-av">FS</div><h3>Dr. Federico Soto</h3><div class="role">Ortodoncia</div><p>Especialista en alineadores invisibles y ortodoncia en adultos.</p></div>
+      <div class="member"><div class="member-av">PL</div><h3>Dra. Paula Lima</h3><div class="role">Odontopediatría</div><p>Atención de niños con paciencia y sin miedo al dentista.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head center">
+      <span class="overline">Preguntas frecuentes</span>
+      <h2>Lo que todos preguntan</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>¿El tratamiento de conducto duele? <span class="fx" aria-hidden="true">+</span></summary>
+        <p>No. Con la anestesia y las técnicas actuales, la endodoncia es un procedimiento prácticamente indoloro. La mayoría de los pacientes se sorprende de lo simple que fue.</p>
+      </details>
+      <details>
+        <summary>¿Atienden urgencias sin turno previo? <span class="fx" aria-hidden="true">+</span></summary>
+        <p>Sí. Si tenés dolor agudo, una rotura o un traumatismo, escribinos por WhatsApp y te damos un turno prioritario en el día.</p>
+      </details>
+      <details>
+        <summary>¿Trabajan con sociedades médicas? <span class="fx" aria-hidden="true">+</span></summary>
+        <p>Tenemos convenios con las principales sociedades de la zona. Consultanos por la tuya y te confirmamos la cobertura antes del turno.</p>
+      </details>
+      <details>
+        <summary>¿Cuánto dura la ortodoncia invisible? <span class="fx" aria-hidden="true">+</span></summary>
+        <p>Depende de cada caso, pero la mayoría de los tratamientos lleva entre 8 y 18 meses. En la primera consulta te damos un plazo estimado con tu plan personalizado.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <h2 class="serif">Tu próxima sonrisa empieza con un turno</h2>
+    <p>Agendá online o escribinos por WhatsApp. Te respondemos en el día.</p>
+    <a href="https://wa.me/59899492918" target="_blank" rel="noopener" class="btn-white">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Escribir por WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-in">
+    <div>
+      <div class="serif" style="font-size:1.15rem">Bianchi Odontología</div>
+      <div class="foot-copy">18 de Julio 845, Melo · Lun a Vie 9–19 hs · Sáb 9–13 hs</div>
+    </div>
+    <div><a href="https://wa.me/59899492918">099 492 918</a></div>
+    <div class="foot-copy">© 2026 Bianchi Odontología · Melo, Uruguay</div>
+  </div>
+</footer>
+
+<a href="../index.html" class="demo-badge">◣ Demo creada por Vértice</a>
+
+<script>
+  var tg=document.querySelector('.nav-toggle'),nl=document.querySelector('.nav-links');
+  tg.addEventListener('click',function(){
+    var open=nl.classList.toggle('open');
+    tg.setAttribute('aria-expanded',open?'true':'false');
+  });
+  nl.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){nl.classList.remove('open');tg.setAttribute('aria-expanded','false')});
+  });
+  var f=document.getElementById('turnoForm');
+  if(f){f.addEventListener('submit',function(e){e.preventDefault();document.querySelector('.form-ok').classList.add('show')});}
+</script>
+
+</body>
+</html>
