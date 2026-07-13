@@ -60,9 +60,10 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(15,23,42,.88);ba
 .hs .l{font-size:.85rem;color:var(--muted)}
 
 .marquee{border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;padding:.95rem 0;background:var(--panel)}
-.marquee-track{display:flex;gap:2.5rem;width:max-content;animation:marquee 26s linear infinite;font-family:'Righteous',sans-serif;text-transform:uppercase;font-size:.95rem;letter-spacing:.15em;color:var(--muted);white-space:nowrap}
-.marquee-track span b{color:var(--naranja);font-weight:400;margin-right:2.5rem}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.marquee-track{display:flex;width:max-content;animation:marquee 26s linear infinite;will-change:transform;backface-visibility:hidden;transform:translate3d(0,0,0);font-family:'Righteous',sans-serif;text-transform:uppercase;font-size:.95rem;letter-spacing:.15em;color:var(--muted);white-space:nowrap}
+.marquee-track span{display:inline-flex}
+.marquee-track span b{color:var(--naranja);font-weight:400;padding-right:2.5rem}
+@keyframes marquee{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
 .sec{padding:5.5rem 0}
 .sec-head{max-width:640px;margin-bottom:3rem}
