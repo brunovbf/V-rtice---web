@@ -40,7 +40,7 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(13,11,26,0.85);b
 .logo-nav{display:flex;align-items:center;gap:10px}
 .logo-name{font-weight:700;font-size:1.2rem;color:var(--v4)}
 .nav-links{display:flex;gap:2rem;align-items:center}
-.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:.9rem;transition:color .2s;white-space:nowrap}
 .nav-links a:hover{color:var(--v4)}
 .nav-right{display:flex;align-items:center;gap:1rem}
 .nav-cta{background:var(--v2);color:var(--v4);border:none;padding:.5rem 1.2rem;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;text-decoration:none;transition:background .2s;white-space:nowrap}
@@ -71,13 +71,14 @@ nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(13,11,26,0.85);b
 
 section{padding:5rem 2rem}
 .container{max-width:1100px;margin:0 auto}
-.section-label{color:var(--v5);font-size:.8rem;letter-spacing:.15em;font-weight:600;text-transform:uppercase;margin-bottom:.75rem}
-.section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:1rem;color:var(--v4)}
-.section-sub{color:var(--muted);font-size:1.05rem;max-width:540px}
+.section-label{color:var(--v5);font-size:.8rem;letter-spacing:.15em;font-weight:600;text-transform:uppercase;margin-bottom:.75rem;text-align:center}
+.section-title{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:1rem;color:var(--v4);text-align:center}
+.section-sub{color:var(--muted);font-size:1.05rem;max-width:540px;margin-left:auto;margin-right:auto;text-align:center}
 
 .launch-banner{max-width:680px;margin:1.5rem auto 0;background:linear-gradient(135deg,rgba(127,119,221,0.15),rgba(83,74,183,0.1));border:1px solid rgba(127,119,221,0.35);border-radius:12px;padding:.9rem 1.5rem;text-align:center;font-size:.92rem;color:var(--v4)}
 .launch-banner strong{color:var(--v5)}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3.5rem;overflow:visible}
+.services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;margin-top:3.5rem;overflow:visible}
+@media(max-width:720px){.services-grid{grid-template-columns:1fr}}
 .service-card{background:var(--dark2);border:1px solid rgba(127,119,221,0.2);border-radius:16px;padding:2rem;transition:all .3s;position:relative;overflow:hidden;display:flex;flex-direction:column}
 .service-features{list-style:none;margin-top:1rem;flex-grow:1}
 .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--v3),var(--v),var(--v5));opacity:0;transition:opacity .3s}
@@ -179,10 +180,12 @@ footer{background:var(--dark2);border-top:1px solid rgba(127,119,221,0.15);paddi
 footer p{color:var(--muted);font-size:.9rem}
 footer a{color:var(--v5);text-decoration:none}
 
-@media(max-width:640px){
+@media(max-width:840px){
   .nav-toggle{display:block}
   .nav-links{position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:flex-start;gap:1.1rem;background:rgba(13,11,26,0.98);backdrop-filter:blur(12px);border-bottom:1px solid rgba(127,119,221,0.15);padding:1.25rem 2rem;transform:translateY(-160%);opacity:0;pointer-events:none;transition:transform .3s ease,opacity .3s ease}
   .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
+}
+@media(max-width:640px){
   .hero h1{font-size:2.2rem}
   .hero-btns{flex-direction:column;align-items:center}
   .sobre-inner{grid-template-columns:1fr}
@@ -261,9 +264,9 @@ footer a{color:var(--v5);text-decoration:none}
 
 <section id="caminos">
   <div class="container">
-    <div class="section-label" style="text-align:center">Por dónde empezar</div>
-    <h2 class="section-title" style="text-align:center">¿Qué necesitás?</h2>
-    <p class="section-sub" style="margin:0 auto;text-align:center">Elegí tu camino y te llevo directo a lo tuyo.</p>
+    <div class="section-label">Por dónde empezar</div>
+    <h2 class="section-title">¿Qué necesitás?</h2>
+    <p class="section-sub">Elegí tu camino y te llevo directo a lo tuyo.</p>
     <div class="caminos-grid">
       <a href="#servicios" class="camino-card">
         <div class="camino-icon">
@@ -355,9 +358,9 @@ footer a{color:var(--v5);text-decoration:none}
 
     <!-- PACKS POR RUBRO -->
     <div id="packs" style="margin-top:4rem;text-align:center;scroll-margin-top:90px">
-      <div class="section-label" style="text-align:center">Lo más vendido</div>
+      <div class="section-label">Lo más vendido</div>
       <h2 class="section-title">Packs de planillas por rubro</h2>
-      <p class="section-sub" style="margin:0 auto">Un sistema completo de gestión para tu negocio, adaptado a tu rubro. Pago único, sin suscripciones.</p>
+      <p class="section-sub">Un sistema completo de gestión para tu negocio, adaptado a tu rubro. Pago único, sin suscripciones.</p>
     </div>
     <div class="packs-grid">
       <div class="pack-card">
