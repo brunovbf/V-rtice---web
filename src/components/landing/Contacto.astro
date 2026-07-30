@@ -1,0 +1,364 @@
+---
+import Chevron from '../icons/Chevron.astro';
+import Check from '../icons/Check.astro';
+import Arrow from '../icons/Arrow.astro';
+import WhatsApp from '../icons/WhatsApp.astro';
+import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, wa } from '../../config/site';
+import { necesidades } from '../../data/landing';
+
+const garantias = [
+  'Respuesta el mismo día',
+  'Precio fijo, sin sorpresas',
+  'Capacitación y soporte incluidos',
+];
+---
+
+<section id="contacto" class="contact container">
+  <div class="reveal contact__head">
+    <p class="eyebrow">
+      <Chevron size={16} />
+      Hablemos
+    </p>
+    <h2 class="t-h2 contact__title">Contame qué necesitás y te paso un presupuesto</h2>
+  </div>
+
+  <div class="reveal contact__card">
+    <div class="contact__aside">
+      <div>
+        <p class="contact__pitch">Sin compromiso y con precio fijo cerrado.</p>
+        <p class="contact__sub">
+          Te respondo el mismo día con una idea concreta para tu negocio.
+        </p>
+      </div>
+
+      <div class="contact__guarantee">
+        <p class="contact__guarantee-title">Trabajás tranquilo</p>
+        {
+          garantias.map((g) => (
+            <div class="check contact__check">
+              <span class="check__box">
+                <Check />
+              </span>
+              {g}
+            </div>
+          ))
+        }
+      </div>
+
+      <a class="contact__direct" href={wa('Hola Bruno, quiero consultarte por un proyecto')}>
+        <span class="contact__direct-icon">
+          <WhatsApp size={21} />
+        </span>
+        <span>
+          <span class="contact__direct-label">O escribime directo</span>
+          <span class="contact__direct-num">{WHATSAPP_DISPLAY}</span>
+        </span>
+      </a>
+    </div>
+
+    <div class="contact__formwrap">
+      <form
+        class="contact__form"
+        data-wa-form
+        data-wa-number={WHATSAPP_NUMBER}
+        data-wa-intro="Hola Bruno, te escribo desde la web de Vértice."
+      >
+        <div class="contact__row">
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Tu nombre"
+            aria-label="Tu nombre"
+            data-wa-label="Nombre"
+            required
+          />
+          <input
+            type="tel"
+            name="whatsapp"
+            placeholder="WhatsApp"
+            aria-label="Tu WhatsApp"
+            data-wa-label="WhatsApp"
+            required
+          />
+        </div>
+
+        <select name="necesidad" aria-label="Qué necesitás" data-wa-label="Necesita" data-wa-skip="">
+          <option value="">¿Qué necesitás?</option>
+          {necesidades.map((n) => <option value={n}>{n}</option>)}
+        </select>
+
+        <textarea
+          name="mensaje"
+          rows="3"
+          placeholder="Contame un poco de tu negocio (opcional)"
+          aria-label="Contame un poco de tu negocio"
+          data-wa-label="Mensaje"></textarea>
+
+        <button type="submit" class="contact__submit">
+          <WhatsApp size={19} color="#0D0B1A" />
+          Enviar y recibir presupuesto
+          <Arrow size={17} color="#0D0B1A" />
+        </button>
+
+        <p class="contact__note">Te respondo por WhatsApp al número que dejes.</p>
+      </form>
+
+      <div class="contact__sent" data-wa-sent hidden role="status">
+        <span class="contact__sent-icon">
+          <Check size={22} color="#5BE3A7" />
+        </span>
+        <p class="contact__sent-title">¡Listo! Te abrí el chat</p>
+        <p class="contact__sent-text">
+          Si no se abrió solo, escribime al {WHATSAPP_DISPLAY} y te respondo el mismo día.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .contact {
+    margin-top: 80px;
+  }
+
+  .contact__head {
+    margin-bottom: 40px;
+  }
+
+  .contact__title {
+    max-width: 640px;
+  }
+
+  .contact__card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-form);
+    padding: 52px 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 48px;
+    align-items: stretch;
+    box-shadow: 0 40px 90px -40px rgba(124, 92, 255, 0.4);
+  }
+
+  .contact__aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .contact__pitch {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.35;
+    margin-bottom: 12px;
+    text-wrap: pretty;
+  }
+
+  .contact__sub {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text-dim);
+  }
+
+  .contact__guarantee {
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    padding: 24px;
+    border-radius: var(--r-mock);
+    background: rgba(91, 227, 167, 0.06);
+    border: 1px solid rgba(91, 227, 167, 0.2);
+  }
+
+  .contact__guarantee-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12.5px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 2px;
+  }
+
+  .contact__check {
+    font-size: 15px;
+    color: var(--text-soft);
+    gap: 10px;
+  }
+
+  .contact__direct {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding-top: 22px;
+    border-top: 1px solid var(--border);
+  }
+
+  .contact__direct-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--r-md);
+    background: rgba(91, 227, 167, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+
+  .contact__direct-label {
+    display: block;
+    font-size: 12.5px;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+
+  .contact__direct-num {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
+    line-height: 1.3;
+  }
+
+  .contact__form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .contact__row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .contact__form input,
+  .contact__form select,
+  .contact__form textarea {
+    background: var(--bg);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--r-md);
+    padding: 14px 16px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: var(--font-body);
+    outline: none;
+    width: 100%;
+    transition: border-color var(--t);
+  }
+
+  .contact__form select {
+    color: var(--text-dim);
+  }
+
+  .contact__form textarea {
+    resize: vertical;
+  }
+
+  .contact__form input:focus,
+  .contact__form select:focus,
+  .contact__form textarea:focus {
+    border-color: var(--border-violet-mid);
+  }
+
+  .contact__form ::placeholder {
+    color: var(--text-faint);
+  }
+
+  .contact__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--green);
+    color: var(--bg);
+    border: none;
+    padding: 16px;
+    border-radius: var(--r-btn);
+    font-weight: 700;
+    font-size: 16px;
+    font-family: var(--font-display);
+    cursor: pointer;
+    box-shadow: 0 12px 30px -8px rgba(91, 227, 167, 0.5);
+    transition:
+      transform var(--t),
+      box-shadow var(--t);
+  }
+
+  .contact__submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px -8px rgba(91, 227, 167, 0.65);
+  }
+
+  .contact__note {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-faint);
+    margin-top: 2px;
+  }
+
+  /* Estado `sent`. */
+  .contact__sent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 100%;
+    min-height: 260px;
+    text-align: center;
+    padding: 32px 24px;
+    border-radius: var(--r-mock);
+    background: rgba(91, 227, 167, 0.06);
+    border: 1px solid rgba(91, 227, 167, 0.2);
+  }
+
+  .contact__sent[hidden] {
+    display: none;
+  }
+
+  .contact__sent-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--r-btn);
+    background: var(--green-wash);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact__sent-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .contact__sent-text {
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    max-width: 320px;
+  }
+
+  @media (max-width: 1024px) {
+    .contact__card {
+      grid-template-columns: 1fr;
+      gap: 34px;
+      padding: 40px 34px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .contact__card {
+      padding: 30px 24px;
+    }
+
+    .contact__row {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

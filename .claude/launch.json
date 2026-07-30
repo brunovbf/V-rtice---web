@@ -2,10 +2,16 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "vertice-static",
-      "runtimeExecutable": "npx",
-      "runtimeArgs": ["--yes", "serve", "-l", "5173", "."],
-      "port": 5173
+      "name": "vertice-astro",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--", "--port", "4321"],
+      "port": 4321
+    },
+    {
+      "name": "vertice-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "preview", "--", "--port", "4322"],
+      "port": 4322
     }
   ]
 }

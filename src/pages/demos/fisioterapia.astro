@@ -1,0 +1,1312 @@
+---
+/**
+ * Demo Kinesis — fisioterapia. Personalidad atletica y energetica.
+ * Archivo Black en mayusculas con tracking muy negativo + Archivo para cuerpo,
+ * lima electrico sobre carbon, recorte en arco en la foto del hero, marquee
+ * infinito y una unica franja clara (el bloque de proceso).
+ * Breakpoints propios: 1024 / 720 / 520.
+ */
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VerticeSeal from '../../components/VerticeSeal.astro';
+import WhatsApp from '../../components/icons/WhatsApp.astro';
+import Arrow from '../../components/icons/Arrow.astro';
+import Check from '../../components/icons/Check.astro';
+import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, wa } from '../../config/site';
+import {
+  especialidades,
+  stats,
+  destacado,
+  rpg,
+  servicios,
+  pasos,
+  datos,
+  motivos,
+  testimonios,
+} from '../../data/demos/fisioterapia';
+import fotoHero from '../../assets/fisio-sesion.jpg';
+
+const fonts =
+  'https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&display=swap';
+
+const waLink = wa('Hola Kinesis, quiero coordinar una evaluación inicial');
+
+// La lista se duplica para que el marquee cierre el loop sin salto.
+const marquee = [...especialidades, ...especialidades];
+---
+
+<BaseLayout
+  title="Kinesis — Centro de fisioterapia en Melo | Demo de Vértice"
+  description="Demo de sitio para centro de fisioterapia: rehabilitación deportiva, RPG y kinesiología con planes a medida. Ejemplo de diseño a medida hecho por Vértice."
+  fonts={fonts}
+  themeColor="#0E1110"
+  noindex
+>
+  <div class="kx">
+    <!-- NAV -->
+    <header class="pad nav">
+      <a class="brand" href="#top">
+        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <path
+            d="M4 24 L12 12 L18 19 L28 6"
+            stroke="#C6F24E"
+            stroke-width="4"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </svg>
+        <span class="brand__name">Kinesis</span>
+      </a>
+      <nav class="nav__links" aria-label="Navegación principal">
+        <a href="#servicios">Servicios</a>
+        <a href="#proceso">Cómo trabajamos</a>
+        <a href="#turnos">Turnos</a>
+        <a href="#testimonios">Pacientes</a>
+        <a class="nav__cta" href="#turnos">Reservar turno</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="top" class="pad hero-block">
+      <div class="g-hero">
+        <div>
+          <p class="kicker">
+            <span class="kicker__dot"></span>
+            Centro de fisioterapia · Melo
+          </p>
+          <h1 class="t-h1">Volvé a moverte <span class="lime">más fuerte</span> que antes</h1>
+          <p class="hero__lead">
+            Rehabilitación deportiva, RPG y kinesiología con planes a medida. Sin dolor no significa
+            sin desafío: te acompañamos hasta el alta.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--lime btn-w" href="#turnos">
+              Reservar turno
+              <Arrow size={16} />
+            </a>
+            <a class="btn btn--outline btn-w" href="#servicios">Ver servicios</a>
+          </div>
+        </div>
+
+        <div class="hero__media">
+          <div class="hero__arc" aria-hidden="true"></div>
+          <figure class="shot">
+            <Image
+              src={fotoHero}
+              alt="Sesión de fisioterapia en Kinesis"
+              widths={[420, 640, 900]}
+              sizes="(max-width: 1024px) 100vw, 480px"
+              class="shot__img"
+            />
+            <figcaption class="shot__credit">
+              <a href="https://unsplash.com/@risenwang" target="_blank" rel="noopener nofollow">
+                Photo by Risen Wang on Unsplash
+              </a>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="g-stats">
+        {
+          stats.map((st) => (
+            <div class="stat-cell">
+              <div class="stat__n">{st.n}</div>
+              <div class="stat__label">{st.label}</div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee">
+      <div class="kx-track" aria-hidden="true">
+        {
+          marquee.map((m) => (
+            <span class="marquee__item">
+              {m}
+              <span class="marquee__dot" />
+            </span>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- SERVICIOS -->
+    <section id="servicios" class="pad block">
+      <div class="rv split">
+        <div>
+          <p class="kicker kicker--plain">Servicios</p>
+          <h2 class="t-h2">Entrená tu recuperación</h2>
+        </div>
+        <p class="split__aside">Cada lesión es distinta. Cada plan también.</p>
+      </div>
+
+      <div class="g-serv">
+        <!-- Destacada: 2 columnas, lima solido -->
+        <article class="rv scard scard--feat card-pad">
+          <div>
+            <p class="scard__badge">{destacado.badge}</p>
+            <h3 class="scard__title-lg">{destacado.title}</h3>
+            <p class="scard__desc-lg">{destacado.desc}</p>
+          </div>
+          <a class="scard__link" href="#turnos">
+            {destacado.cta}
+            <Arrow size={16} />
+          </a>
+        </article>
+
+        <article class="rv scard scard--dark card-pad">
+          <div>
+            <h3 class="scard__title-md">{rpg.title}</h3>
+            <p class="scard__desc">{rpg.desc}</p>
+          </div>
+        </article>
+
+        {
+          servicios.map((s) => (
+            <article class="rv scard scard--dark scard--sm card-pad">
+              <div class="scard__meta">
+                <span class="scard__rule" />
+                <span class="scard__tag">{s.n}</span>
+              </div>
+              <h3 class="scard__title">{s.title}</h3>
+              <p class="scard__desc">{s.desc}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- PROCESO: unica franja clara de la pagina -->
+    <section id="proceso" class="light">
+      <div class="pad block">
+        <div class="rv proceso__head">
+          <p class="kicker kicker--olive">Cómo trabajamos</p>
+          <h2 class="t-h2">Tu plan de recuperación</h2>
+        </div>
+        <div class="g-pasos">
+          {
+            pasos.map((p) => (
+              <div class="rv paso">
+                <div class="paso__n">{p.n}</div>
+                <h3 class="paso__title">{p.title}</h3>
+                <p class="paso__desc">{p.desc}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- TURNOS -->
+    <section id="turnos" class="pad block">
+      <div class="rv g-turnos">
+        <div>
+          <p class="kicker kicker--plain">Turnos</p>
+          <h2 class="t-h2 turnos__title">Reservá tu lugar</h2>
+          <p class="turnos__lead">
+            Dejanos tus datos y coordinamos la evaluación inicial. Te confirmamos por WhatsApp en el
+            día.
+          </p>
+          <div class="datos">
+            {
+              datos.map((d) => (
+                <div class="dato">
+                  <p class="dato__k">{d.k}</p>
+                  <p class="dato__v">{d.v}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <div class="formcard card-pad">
+          <p class="formcard__title">Datos del turno</p>
+
+          <form
+            class="form"
+            data-wa-form
+            data-wa-number={WHATSAPP_NUMBER}
+            data-wa-intro="Hola Kinesis, quiero solicitar un turno."
+          >
+            <div class="g-inputs">
+              <label>
+                Tu nombre *
+                <input
+                  type="text"
+                  name="nombre"
+                  placeholder="Ej. Matías Pereira"
+                  data-wa-label="Nombre"
+                  required
+                />
+              </label>
+              <label>
+                Teléfono *
+                <input
+                  type="tel"
+                  name="telefono"
+                  placeholder="099 123 456"
+                  data-wa-label="Teléfono"
+                  required
+                />
+              </label>
+            </div>
+
+            <label>
+              Motivo de la consulta
+              <select name="motivo" data-wa-label="Motivo">
+                {motivos.map((m) => <option value={m}>{m}</option>)}
+              </select>
+            </label>
+
+            <div class="g-inputs">
+              <label>
+                ¿Tenés indicación médica?
+                <select name="indicacion" data-wa-label="Indicación médica">
+                  <option value="Sí">Sí</option>
+                  <option value="No">No</option>
+                </select>
+              </label>
+              <label>
+                Fecha preferida
+                <input type="date" name="fecha" data-wa-label="Fecha" />
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn--lime form__submit">
+              Solicitar turno
+              <Arrow size={16} />
+            </button>
+          </form>
+
+          <div class="form__sent" data-wa-sent hidden role="status">
+            <Check size={17} color="#C6F24E" width={2.8} />
+            ¡Solicitud enviada! Te confirmamos el turno por WhatsApp.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section id="testimonios" class="tests">
+      <div class="pad tests__inner">
+        <div class="rv tests__head">
+          <p class="kicker kicker--plain">Pacientes</p>
+          <h2 class="t-h2 tests__title">Historias de vuelta al juego</h2>
+        </div>
+        <div class="g-test">
+          {
+            testimonios.map((t) => (
+              <figure class="rv tcard card-pad">
+                <span class="tcard__mark" aria-hidden="true">
+                  “
+                </span>
+                <blockquote class="tcard__text">{t.text}</blockquote>
+                <figcaption class="tcard__author">
+                  <span class="tcard__avatar">{t.ini}</span>
+                  <span>
+                    <span class="tcard__name">{t.name}</span>
+                    <span class="tcard__tag">{t.tag}</span>
+                  </span>
+                </figcaption>
+              </figure>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="pad cta-wrap">
+      <div class="rv cta card-pad">
+        <div>
+          <h2 class="t-h2 cta__title">¿Listo para empezar?</h2>
+          <p class="cta__lead">Escribinos por WhatsApp y coordinamos tu evaluación inicial.</p>
+        </div>
+        <a class="btn btn--dark btn-w" href={waLink}>
+          <WhatsApp size={19} color="currentColor" />
+          Escribir por WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="foot">
+      <div class="pad foot__inner">
+        <div class="foot__brand">
+          <svg width="20" height="20" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path
+              d="M4 24 L12 12 L18 19 L28 6"
+              stroke="#C6F24E"
+              stroke-width="4.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+          <span class="foot__name">Kinesis</span>
+          <span>· Rincón 512, Melo</span>
+        </div>
+        <a href={waLink}>{WHATSAPP_DISPLAY}</a>
+        <span>© 2026 Kinesis · Melo, Uruguay</span>
+        <VerticeSeal color="#C6F24E" textColor="rgba(242,244,241,.5)" />
+      </div>
+    </footer>
+  </div>
+</BaseLayout>
+
+<style>
+  /* ---------- Tokens propios de Kinesis ---------- */
+  .kx {
+    --carbon: #0e1110;
+    --surface: #171b19;
+    --lime: #c6f24e;
+    --lime-hover: #d9ff6e;
+    --olive: #5c7a1e;
+    --bone: #f2f4f1;
+
+    background: var(--carbon);
+    color: var(--bone);
+    font-family: Archivo, sans-serif;
+    overflow-x: clip;
+  }
+
+  .kx :global(a:hover) {
+    color: var(--lime);
+  }
+
+  .pad {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .block {
+    padding-top: 84px;
+    padding-bottom: 84px;
+  }
+
+  /* ---------- Tipografia: Archivo Black en mayusculas ---------- */
+  .t-h1 {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 400;
+    font-size: 76px;
+    line-height: 0.94;
+    letter-spacing: -2.6px;
+    text-transform: uppercase;
+    margin-bottom: 26px;
+    text-wrap: balance;
+  }
+
+  .t-h2 {
+    font-family: 'Archivo Black', sans-serif;
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 1;
+    letter-spacing: -1.8px;
+    text-transform: uppercase;
+  }
+
+  .lime {
+    color: var(--lime);
+  }
+
+  .kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 24px;
+  }
+
+  .kicker--plain {
+    margin-bottom: 14px;
+  }
+
+  .kicker--olive {
+    color: var(--olive);
+    margin-bottom: 14px;
+  }
+
+  .kicker__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--lime);
+  }
+
+  /* ---------- Botones (pastilla) ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 999px;
+    font-family: Archivo, sans-serif;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    transition:
+      transform 0.16s ease,
+      background 0.16s ease,
+      border-color 0.16s ease,
+      color 0.16s ease;
+  }
+
+  .btn--lime {
+    background: var(--lime);
+    color: var(--carbon);
+    padding: 16px 28px;
+    font-size: 15.5px;
+  }
+
+  .btn--lime:hover {
+    background: var(--lime-hover);
+    color: var(--carbon);
+    transform: translateY(-2px);
+  }
+
+  .btn--outline {
+    padding: 16px 26px;
+    border: 1px solid rgba(242, 244, 241, 0.24);
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--bone);
+  }
+
+  .btn--outline:hover {
+    border-color: var(--lime);
+    color: var(--lime);
+  }
+
+  .btn--dark {
+    background: var(--carbon);
+    color: var(--lime);
+    padding: 17px 30px;
+    font-size: 16px;
+    gap: 11px;
+  }
+
+  .btn--dark:hover {
+    color: var(--lime);
+    transform: translateY(-2px);
+  }
+
+  /* ---------- Nav ---------- */
+  .nav {
+    padding-top: 22px;
+    padding-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .brand__name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 21px;
+    letter-spacing: -0.6px;
+    text-transform: uppercase;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    font-size: 13.5px;
+    font-weight: 500;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    color: rgba(242, 244, 241, 0.65);
+  }
+
+  .nav__cta {
+    background: var(--lime);
+    color: var(--carbon);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    transition:
+      transform 0.16s ease,
+      background 0.16s ease;
+  }
+
+  .nav__cta:hover {
+    background: var(--lime-hover);
+    color: var(--carbon);
+    transform: translateY(-1px);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero-block {
+    padding-top: 56px;
+  }
+
+  .g-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: 56px;
+    align-items: center;
+  }
+
+  .hero__lead {
+    font-size: 18px;
+    line-height: 1.65;
+    color: rgba(242, 244, 241, 0.66);
+    margin-bottom: 34px;
+    max-width: 520px;
+    text-wrap: pretty;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 13px;
+    flex-wrap: wrap;
+  }
+
+  .hero__media {
+    position: relative;
+  }
+
+  /* Eco del recorte en arco, detras de la foto. */
+  .hero__arc {
+    position: absolute;
+    inset: auto -14px -14px auto;
+    width: 70%;
+    height: 60%;
+    background: var(--lime);
+    border-radius: 200px 24px 24px 24px;
+    opacity: 0.16;
+  }
+
+  .shot {
+    position: relative;
+    margin: 0;
+    border-radius: 220px 24px 24px 24px;
+    overflow: hidden;
+  }
+
+  .shot :global(.shot__img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+  }
+
+  .shot__credit {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 10px;
+    line-height: 1;
+    padding: 6px 9px;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(14, 17, 16, 0.6);
+  }
+
+  /* ---------- Stats ---------- */
+  .g-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 52px;
+  }
+
+  .stat-cell {
+    padding-left: 26px;
+    border-left: 1px solid rgba(242, 244, 241, 0.14);
+  }
+
+  .stat__n {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 52px;
+    line-height: 1;
+    letter-spacing: -2px;
+    color: var(--lime);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 6px;
+  }
+
+  .stat__label {
+    font-size: 13.5px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: rgba(242, 244, 241, 0.5);
+  }
+
+  /* ---------- Marquee infinito ---------- */
+  .marquee {
+    margin-top: 56px;
+    border-top: 1px solid rgba(242, 244, 241, 0.12);
+    border-bottom: 1px solid rgba(242, 244, 241, 0.12);
+    overflow: hidden;
+    padding: 16px 0;
+  }
+
+  @keyframes kx-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .kx-track {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+    width: max-content;
+    white-space: nowrap;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+    letter-spacing: -0.6px;
+    text-transform: uppercase;
+    color: rgba(242, 244, 241, 0.28);
+    animation: kx-marquee 26s linear infinite;
+  }
+
+  .marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 34px;
+  }
+
+  .marquee__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--lime);
+    flex: none;
+  }
+
+  @media print {
+    .kx-track {
+      animation: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .kx-track {
+      animation: none;
+    }
+  }
+
+  /* ---------- Servicios: grilla asimetrica ---------- */
+  .split {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 28px;
+    flex-wrap: wrap;
+    margin-bottom: 42px;
+  }
+
+  .split__aside {
+    font-size: 16.5px;
+    line-height: 1.6;
+    color: rgba(242, 244, 241, 0.6);
+    max-width: 300px;
+    text-wrap: pretty;
+  }
+
+  .g-serv {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .scard {
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .scard--feat {
+    grid-column: span 2;
+    background: var(--lime);
+    color: var(--carbon);
+    padding: 38px 36px;
+    justify-content: space-between;
+    min-height: 250px;
+  }
+
+  .scard--dark {
+    background: var(--surface);
+    border: 1px solid rgba(242, 244, 241, 0.09);
+    padding: 34px 30px;
+    justify-content: space-between;
+    min-height: 250px;
+    transition: border-color 0.2s ease;
+  }
+
+  .scard--dark:hover {
+    border-color: rgba(198, 242, 78, 0.45);
+  }
+
+  .scard--sm {
+    padding: 30px 28px;
+    min-height: 0;
+  }
+
+  .scard__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(14, 17, 16, 0.14);
+    padding: 6px 13px;
+    border-radius: 999px;
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  .scard__title-lg {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 34px;
+    line-height: 1.02;
+    letter-spacing: -1.2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    max-width: 440px;
+  }
+
+  .scard__desc-lg {
+    font-size: 16.5px;
+    line-height: 1.6;
+    max-width: 520px;
+    color: rgba(14, 17, 16, 0.78);
+    text-wrap: pretty;
+  }
+
+  .scard__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: 26px;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--carbon);
+    transition: gap 0.16s ease;
+  }
+
+  .scard__link:hover {
+    color: var(--carbon);
+    gap: 14px;
+  }
+
+  .scard__title-md {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 24px;
+    line-height: 1.05;
+    letter-spacing: -0.8px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .scard__meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .scard__rule {
+    width: 22px;
+    height: 2px;
+    background: var(--lime);
+  }
+
+  .scard__tag {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: rgba(242, 244, 241, 0.4);
+  }
+
+  .scard__title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 21px;
+    line-height: 1.06;
+    letter-spacing: -0.7px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .scard__desc {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(242, 244, 241, 0.58);
+    text-wrap: pretty;
+  }
+
+  .scard--dark .scard__desc {
+    font-size: 15.5px;
+    color: rgba(242, 244, 241, 0.6);
+  }
+
+  /* ---------- Proceso: franja clara ---------- */
+  .light {
+    background: var(--bone);
+    color: var(--carbon);
+  }
+
+  .proceso__head {
+    max-width: 600px;
+    margin-bottom: 46px;
+  }
+
+  .g-pasos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    column-gap: 26px;
+    row-gap: 36px;
+  }
+
+  .paso {
+    border-top: 3px solid var(--carbon);
+    padding-top: 22px;
+  }
+
+  .paso__n {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: var(--olive);
+    margin-bottom: 14px;
+  }
+
+  .paso__title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 21px;
+    line-height: 1.08;
+    letter-spacing: -0.7px;
+    text-transform: uppercase;
+    margin-bottom: 11px;
+  }
+
+  .paso__desc {
+    font-size: 15.5px;
+    line-height: 1.62;
+    color: rgba(14, 17, 16, 0.66);
+    text-wrap: pretty;
+  }
+
+  /* ---------- Turnos ---------- */
+  .g-turnos {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 52px;
+    align-items: start;
+  }
+
+  .turnos__title {
+    margin-bottom: 18px;
+  }
+
+  .turnos__lead {
+    font-size: 17px;
+    line-height: 1.65;
+    color: rgba(242, 244, 241, 0.62);
+    margin-bottom: 32px;
+    max-width: 420px;
+    text-wrap: pretty;
+  }
+
+  .datos {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .dato {
+    padding: 20px 0;
+    border-top: 1px solid rgba(242, 244, 241, 0.13);
+  }
+
+  .dato__k {
+    font-size: 11.5px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 7px;
+  }
+
+  .dato__v {
+    font-size: 16px;
+    color: rgba(242, 244, 241, 0.86);
+  }
+
+  .formcard {
+    background: var(--surface);
+    border: 1px solid rgba(242, 244, 241, 0.1);
+    border-radius: 24px;
+    padding: 36px 34px;
+  }
+
+  .formcard__title {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 22px;
+    letter-spacing: -0.7px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form[hidden] {
+    display: none;
+  }
+
+  .g-inputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form label {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: rgba(242, 244, 241, 0.5);
+  }
+
+  .form input,
+  .form select {
+    background: var(--carbon);
+    border: 1px solid rgba(242, 244, 241, 0.14);
+    border-radius: 12px;
+    padding: 13px 15px;
+    font-size: 15px;
+    font-family: Archivo, sans-serif;
+    font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--bone);
+    outline: none;
+    width: 100%;
+    color-scheme: dark;
+    transition: border-color 0.16s ease;
+  }
+
+  .form input:focus,
+  .form select:focus {
+    border-color: var(--lime);
+  }
+
+  .form__submit {
+    padding: 16px;
+  }
+
+  .form__sent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(198, 242, 78, 0.1);
+    border: 1px solid rgba(198, 242, 78, 0.35);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 14.5px;
+    color: var(--lime);
+    margin-top: 16px;
+  }
+
+  .form__sent[hidden] {
+    display: none;
+  }
+
+  /* ---------- Testimonios ---------- */
+  .tests {
+    border-top: 1px solid rgba(242, 244, 241, 0.1);
+  }
+
+  .tests__inner {
+    padding-top: 78px;
+    padding-bottom: 78px;
+  }
+
+  .tests__head {
+    margin-bottom: 40px;
+  }
+
+  .tests__title {
+    font-size: 44px;
+    letter-spacing: -1.6px;
+  }
+
+  .g-test {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .tcard {
+    background: var(--surface);
+    border: 1px solid rgba(242, 244, 241, 0.09);
+    border-radius: 22px;
+    padding: 34px 32px;
+    margin: 0;
+  }
+
+  .tcard__mark {
+    display: block;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 38px;
+    line-height: 0.6;
+    color: var(--lime);
+    margin-bottom: 18px;
+  }
+
+  .tcard__text {
+    font-size: 18px;
+    line-height: 1.6;
+    margin: 0 0 24px;
+    color: rgba(242, 244, 241, 0.9);
+    text-wrap: pretty;
+  }
+
+  .tcard__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 18px;
+    border-top: 1px solid rgba(242, 244, 241, 0.11);
+  }
+
+  .tcard__avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--lime);
+    color: var(--carbon);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 14px;
+    flex: none;
+  }
+
+  .tcard__name {
+    display: block;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+
+  .tcard__tag {
+    display: block;
+    font-size: 13px;
+    color: rgba(242, 244, 241, 0.5);
+    line-height: 1.35;
+  }
+
+  /* ---------- CTA ---------- */
+  .cta-wrap {
+    padding-bottom: 84px;
+  }
+
+  .cta {
+    background: var(--lime);
+    color: var(--carbon);
+    border-radius: 26px;
+    padding: 52px 46px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .cta__title {
+    font-size: 42px;
+    letter-spacing: -1.6px;
+    margin-bottom: 10px;
+  }
+
+  .cta__lead {
+    font-size: 17px;
+    line-height: 1.55;
+    color: rgba(14, 17, 16, 0.72);
+    max-width: 460px;
+    text-wrap: pretty;
+  }
+
+  /* ---------- Footer ---------- */
+  .foot {
+    border-top: 1px solid rgba(242, 244, 241, 0.1);
+  }
+
+  .foot__inner {
+    padding-top: 34px;
+    padding-bottom: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 14px;
+    color: rgba(242, 244, 241, 0.5);
+  }
+
+  .foot__brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+  }
+
+  .foot__name {
+    font-family: 'Archivo Black', sans-serif;
+    font-size: 15px;
+    color: var(--bone);
+    text-transform: uppercase;
+    letter-spacing: -0.3px;
+  }
+
+  /* ---------- Breakpoints propios: 1024 / 720 / 520 ---------- */
+  @media (max-width: 1024px) {
+    .pad {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+
+    .t-h1 {
+      font-size: 64px;
+    }
+
+    .t-h2 {
+      font-size: 40px;
+    }
+
+    .g-hero {
+      grid-template-columns: 1fr;
+      gap: 44px;
+    }
+
+    .hero__media {
+      max-width: 560px;
+    }
+
+    .g-serv {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .scard--feat {
+      grid-column: span 2;
+    }
+
+    .g-pasos {
+      grid-template-columns: 1fr 1fr;
+      row-gap: 36px;
+    }
+
+    .g-turnos {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .g-test {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .t-h1 {
+      font-size: 46px;
+    }
+
+    .t-h2 {
+      font-size: 32px;
+    }
+
+    .g-serv {
+      grid-template-columns: 1fr;
+    }
+
+    .scard--feat {
+      grid-column: span 1;
+    }
+
+    .g-pasos {
+      grid-template-columns: 1fr;
+      row-gap: 30px;
+    }
+
+    .g-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .stat-cell {
+      border-left: 0;
+      padding: 22px 0 0 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .stat-cell:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .nav__links a:not(.nav__cta) {
+      display: none;
+    }
+
+    .card-pad {
+      padding: 28px 22px;
+    }
+
+    .cta {
+      padding: 36px 24px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .pad {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+
+    .g-inputs {
+      grid-template-columns: 1fr;
+    }
+
+    .btn-w {
+      width: 100%;
+    }
+
+    .t-h1 {
+      font-size: 38px;
+    }
+  }
+</style>
+
+<script>
+  import { initReveal } from '../../scripts/reveal';
+  import { initWaForm } from '../../scripts/waForm';
+
+  initReveal('.rv');
+  initWaForm();
+</script>

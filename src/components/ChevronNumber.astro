@@ -1,0 +1,24 @@
+---
+/**
+ * Gesto de identidad: el numero apoyado dentro de la V.
+ * El margin-top del numero es lo que lo hace descansar en el vertice.
+ */
+interface Props {
+  num: string;
+  size?: number;
+  fontSize?: number;
+}
+const { num, size = 52, fontSize = 16 } = Astro.props;
+---
+
+<div class="chev-num" style={`width:${size}px;height:${size}px`}>
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden="true">
+    <polyline
+      points="3 27 16 6 29 27"
+      stroke="rgba(124,92,255,.75)"
+      stroke-width="2.6"
+      stroke-linecap="round"
+      stroke-linejoin="round"></polyline>
+  </svg>
+  <span style={`font-size:${fontSize}px`}>{num}</span>
+</div>

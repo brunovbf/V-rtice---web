@@ -1,0 +1,53 @@
+/*
+ * Patron de reveal al scrollear. Compartido por la landing (.reveal) y las
+ * 4 demos (.rv).
+ *
+ * DETALLE CRITICO: los elementos NO nacen con opacity:0. Nacen visibles y el
+ * JS les agrega .armed recien cuando confirma que existe IntersectionObserver
+ * y que el usuario no pidio movimiento reducido. Si el observer nunca dispara
+ * (pestana en segundo plano, impresion, export a PDF, bot de SEO) el contenido
+ * igual se ve. Ver src/scripts/reveal.ts para la red de seguridad a 2.5s.
+ */
+.reveal,
+.rv {
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.armed {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+.rv.armed {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.reveal.armed.in,
+.rv.armed.in {
+  opacity: 1;
+  transform: none;
+}
+
+@media print {
+  .reveal,
+  .reveal.armed,
+  .rv,
+  .rv.armed {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.armed,
+  .rv,
+  .rv.armed {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

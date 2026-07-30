@@ -1,0 +1,143 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import '../styles/tokens.css';
+import '../styles/landing.css';
+
+import Auroras from '../components/landing/Auroras.astro';
+import Nav from '../components/landing/Nav.astro';
+import Hero from '../components/landing/Hero.astro';
+import RubrosStrip from '../components/landing/RubrosStrip.astro';
+import ChevronDivider from '../components/landing/ChevronDivider.astro';
+import ServicioEstrella from '../components/landing/ServicioEstrella.astro';
+import ServiciosSecundarios from '../components/landing/ServiciosSecundarios.astro';
+import Packs from '../components/landing/Packs.astro';
+import Demos from '../components/landing/Demos.astro';
+import Testimonios from '../components/landing/Testimonios.astro';
+import SobreMi from '../components/landing/SobreMi.astro';
+import Pasos from '../components/landing/Pasos.astro';
+import Contacto from '../components/landing/Contacto.astro';
+import Footer from '../components/landing/Footer.astro';
+import ServiceModal from '../components/landing/ServiceModal.astro';
+import WhatsAppFab from '../components/landing/WhatsAppFab.astro';
+import { mostrarTestimonios } from '../data/landing';
+
+const fonts =
+  'https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap';
+---
+
+<BaseLayout
+  title="Vértice — Que tu negocio se vea profesional y funcione mejor"
+  description="Sitios web profesionales y planillas de gestión a medida para comercios y profesionales de Uruguay. Precio fijo, entrega en 7 días y sin suscripciones mensuales."
+  fonts={fonts}
+>
+  <div class="page">
+    <Auroras />
+
+    <div class="page__content">
+      <Nav />
+      <Hero />
+      <RubrosStrip />
+
+      <ChevronDivider />
+
+      <section class="band">
+        <div id="servicios" class="container svc-section">
+          <div class="reveal sec-mark svc-section__mark">
+            <span class="sec-mark__title">Servicios</span>
+            <span class="sec-mark__rule"></span>
+            <span class="sec-mark__note">Pago único · sin mensualidades</span>
+          </div>
+
+          <ServicioEstrella />
+          <ServiciosSecundarios />
+          <Packs />
+        </div>
+      </section>
+
+      <Demos />
+      {/* Apagada hasta tener testimonios reales. Ver `mostrarTestimonios`. */}
+      {mostrarTestimonios && <Testimonios />}
+      <SobreMi />
+      <Pasos />
+      <Contacto />
+      <Footer />
+    </div>
+  </div>
+
+  <ServiceModal />
+  <WhatsAppFab />
+</BaseLayout>
+
+<style>
+  .page {
+    position: relative;
+    /*
+     * Los glows y las auroras sobresalen a proposito unos px del ancho de la
+     * pagina. `clip` los recorta sin crear un contenedor de scroll, asi que no
+     * aparece scroll horizontal y el nav sticky sigue funcionando (con
+     * `overflow:hidden` se rompe).
+     */
+    overflow-x: clip;
+  }
+
+  .page__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .svc-section {
+    padding-top: 74px;
+    padding-bottom: 74px;
+  }
+
+  .svc-section__mark {
+    margin-bottom: 46px;
+  }
+</style>
+
+<script>
+  import { initReveal } from '../scripts/reveal';
+  import { initLogoDraw } from '../scripts/logoDraw';
+  import { initServiceModal } from '../scripts/serviceModal';
+  import { initWaForm } from '../scripts/waForm';
+  import { initWhatsAppFab } from '../scripts/whatsappFab';
+  import { initNavMenu } from '../scripts/navMenu';
+
+  initReveal('.reveal');
+  initLogoDraw();
+  initServiceModal();
+  initWaForm();
+  initWhatsAppFab();
+  initNavMenu();
+
+  // Fondo blureado del nav al scrollear. La clase solo tiene efecto <=860px.
+  const nav = document.getElementById('nav');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /*
+   * Las demos abren en pestaña nueva para no perder la landing... pero solo en
+   * escritorio. En pantallas tactiles la pestaña nueva es peor: el boton atras
+   * queda sin historial y el visitante queda varado en la demo. En la misma
+   * pestaña, atras lo devuelve aca.
+   *
+   * `hover:none` + `pointer:coarse` es la consulta de "dispositivo solo tactil".
+   * Con `pointer:coarse` solo, una notebook con pantalla tactil caia del lado
+   * del celular aunque la persona estuviera usando el mouse.
+   */
+  if (window.matchMedia('(hover: none) and (pointer: coarse)').matches) {
+    document
+      .querySelectorAll<HTMLAnchorElement>('a[href^="/demos"][target="_blank"]')
+      .forEach((a) => {
+        a.removeAttribute('target');
+        a.removeAttribute('rel');
+        const label = a.getAttribute('aria-label');
+        if (label) {
+          a.setAttribute('aria-label', label.replace(' (se abre en una pestaña nueva)', ''));
+        }
+      });
+  }
+</script>

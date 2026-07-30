@@ -1,0 +1,450 @@
+/*
+ * Estilos base y utilidades compartidas por las secciones de la landing.
+ * Lo que es propio de una seccion vive en el <style> de su componente.
+ */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+a:hover {
+  color: var(--lavender);
+}
+
+/* ---------- Layout ---------- */
+
+.container {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding-left: var(--pad);
+  padding-right: var(--pad);
+}
+
+/* Franja con el patron de chevrones (Servicios y Testimonios). */
+.band {
+  position: relative;
+  background: rgba(22, 18, 43, 0.35);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  overflow: hidden;
+}
+
+.band::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: var(--chevron-pattern);
+  background-size: 60px 60px;
+}
+
+.band > * {
+  position: relative;
+}
+
+/* ---------- Tipografia responsive ---------- */
+
+.t-h1 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 62px;
+  line-height: 1.02;
+  letter-spacing: -2px;
+  text-wrap: balance;
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 44px;
+  line-height: 1.02;
+  letter-spacing: -1.4px;
+  text-wrap: balance;
+}
+
+.t-h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 34px;
+  line-height: 1.08;
+  letter-spacing: -1px;
+  text-wrap: balance;
+}
+
+.t-lead {
+  font-size: 19px;
+  line-height: 1.6;
+  color: var(--text-dim);
+  text-wrap: pretty;
+}
+
+.t-price {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 52px;
+  letter-spacing: -2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.t-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 130px;
+  line-height: 1;
+  letter-spacing: -6px;
+  background: linear-gradient(160deg, var(--violet-light), var(--violet) 60%, rgba(124, 92, 255, 0.25));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Tramo de titulo con degradado violeta. */
+.grad {
+  background: linear-gradient(120deg, var(--violet-light), var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Eyebrow: chevron + etiqueta ---------- */
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--lavender);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* ---------- Marca de seccion: titulo + hilo + nota ---------- */
+
+.sec-mark {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.sec-mark__title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.sec-mark__title--sub {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  color: var(--text-muted);
+}
+
+.sec-mark__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(124, 92, 255, 0.55), rgba(124, 92, 255, 0.08));
+}
+
+.sec-mark__rule--neutral {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.14), transparent);
+}
+
+.sec-mark__note {
+  font-size: 14px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ---------- Botones ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--r-btn);
+  font-weight: 700;
+  transition:
+    transform var(--t),
+    box-shadow var(--t),
+    background var(--t),
+    border-color var(--t);
+}
+
+.btn--violet {
+  background: var(--violet);
+  color: #fff;
+  padding: 18px 34px;
+  font-size: 17px;
+  box-shadow: var(--sh-cta-violet);
+}
+
+.btn--violet:hover {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--sh-cta-violet-hover);
+}
+
+.btn--green {
+  background: var(--green);
+  color: var(--bg);
+  padding: 16px 30px;
+  font-size: 16px;
+  box-shadow: var(--sh-cta);
+}
+
+.btn--green:hover {
+  color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: var(--sh-cta-hover);
+}
+
+.btn--outline {
+  padding: 18px 30px;
+  border: 1px solid var(--border-max);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.btn--outline:hover {
+  color: var(--text);
+  border-color: var(--border-violet-hover);
+  background: rgba(124, 92, 255, 0.08);
+}
+
+.btn--soft {
+  background: var(--violet-fill);
+  border: 1px solid var(--border-violet-mid);
+  color: var(--text);
+  padding: 15px 26px;
+  font-size: 15.5px;
+}
+
+.btn--soft:hover {
+  background: var(--violet-fill-hover);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ---------- Checklist con tilde verde ---------- */
+
+.checks {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 15.5px;
+  color: var(--text);
+}
+
+.check__box {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--r-icon);
+  background: var(--green-wash);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+/* ---------- Numero apoyado dentro del chevron ---------- */
+
+.chev-num {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+
+.chev-num > svg {
+  position: absolute;
+  inset: 0;
+}
+
+.chev-num > span {
+  position: relative;
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--lavender);
+}
+
+/* ---------- Chips ---------- */
+
+.chip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 7px 15px;
+  border-radius: var(--r-pill);
+}
+
+/* ---------- Animaciones de fondo ---------- */
+
+@keyframes floatA {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate(90px, 60px) scale(1.18);
+    opacity: 1;
+  }
+}
+
+@keyframes floatB {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate(-110px, 80px) scale(1.22);
+    opacity: 0.95;
+  }
+}
+
+@keyframes floatC {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translate(80px, -90px) scale(1.15);
+    opacity: 1;
+  }
+}
+
+@keyframes heroDrift {
+  0% {
+    transform: translate(300px, 250px) scale(1);
+  }
+  25% {
+    transform: translate(560px, 180px) scale(1.15);
+  }
+  50% {
+    transform: translate(780px, 320px) scale(1.05);
+  }
+  75% {
+    transform: translate(420px, 380px) scale(1.12);
+  }
+  100% {
+    transform: translate(300px, 250px) scale(1);
+  }
+}
+
+/* Firma de la marca: la V se dibuja sola al cargar. */
+@keyframes drawV {
+  from {
+    stroke-dashoffset: 44;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+#navLogoV {
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+  animation: drawV 1s ease 0.2s forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #navLogoV {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .aurora,
+  #heroGlow {
+    animation: none !important;
+  }
+}
+
+/* ---------- Breakpoints ---------- */
+
+@media (max-width: 1024px) {
+  .container {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .t-h1 {
+    font-size: 48px;
+    letter-spacing: -1.4px;
+  }
+  .t-h2 {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+  .t-h3 {
+    font-size: 28px;
+  }
+  .t-num {
+    font-size: 96px;
+    letter-spacing: -4px;
+  }
+  .t-price {
+    font-size: 44px;
+  }
+}
+
+@media (max-width: 860px) {
+  .t-h1 {
+    font-size: 38px;
+    letter-spacing: -1.1px;
+  }
+  .t-h2 {
+    font-size: 30px;
+    letter-spacing: -0.7px;
+  }
+  .t-num {
+    font-size: 64px;
+    letter-spacing: -2.5px;
+  }
+  .t-price {
+    font-size: 38px;
+  }
+  .t-lead {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+  .t-h1 {
+    font-size: 32px;
+  }
+  .t-h2 {
+    font-size: 26px;
+  }
+  .sec-mark {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .sec-mark__rule {
+    display: none;
+  }
+  .btn--wide {
+    width: 100%;
+    justify-content: center;
+  }
+}

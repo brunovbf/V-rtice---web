@@ -1,0 +1,175 @@
+---
+import Chevron from '../icons/Chevron.astro';
+import Check from '../icons/Check.astro';
+import { sobreMi } from '../../data/landing';
+
+/**
+ * PENDIENTE ANTES DE PUBLICAR: no hay foto de Bruno todavia.
+ * Cuando este, guardarla en src/assets/bruno.jpg (vertical, 4/5) y cambiar el
+ * bloque .about__ph por:
+ *    <Image src={bruno} alt="Bruno, de Vértice" widths={[340,520]} class="about__img" />
+ */
+---
+
+<section id="sobre" class="about container">
+  <div class="reveal about__grid">
+    <div class="about__media">
+      <div class="about__glow" aria-hidden="true"></div>
+      <div class="about__frame">
+        <div class="about__ph">
+          <img src="/assets/vertice-isotipo.svg" alt="" width="64" height="64" />
+          <span>Foto de Bruno</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow">
+        <Chevron size={16} />
+        Sobre mí
+      </p>
+      <h2 class="t-h2 about__title">Hola, soy <span class="grad">Bruno</span></h2>
+
+      <p class="about__p">
+        Trabajo en administración y análisis de datos en el sector empresarial uruguayo. Esa
+        experiencia me enseñó qué necesitan los negocios: soluciones que funcionen, fáciles de usar
+        y que ahorren tiempo real.
+      </p>
+      <p class="about__p">
+        Con Vértice llevo esas herramientas a comercios y profesionales que quieren dar el salto
+        digital. Cada proyecto lo trabajo yo, de principio a fin: hablás siempre conmigo y sabés
+        exactamente qué recibís.
+      </p>
+
+      <ul class="about__bullets">
+        {
+          sobreMi.map((s) => (
+            <li>
+              <span class="check__box">
+                <Check />
+              </span>
+              {s}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about {
+    margin-top: 80px;
+  }
+
+  .about__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 52px;
+    align-items: center;
+  }
+
+  .about__media {
+    position: relative;
+  }
+
+  .about__glow {
+    position: absolute;
+    inset: -30px;
+    background: radial-gradient(circle at 40% 40%, rgba(124, 92, 255, 0.32), transparent 62%);
+    filter: blur(28px);
+    pointer-events: none;
+  }
+
+  .about__frame {
+    position: relative;
+    border-radius: var(--r-pack);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 34px 74px -30px rgba(124, 92, 255, 0.5);
+    transform: rotate(-2deg);
+  }
+
+  .about__frame :global(.about__img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+  }
+
+  /* Placeholder hasta que haya foto. */
+  .about__ph {
+    aspect-ratio: 4/5;
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    color: var(--text-faint);
+    font-size: 14px;
+  }
+
+  .about__ph img {
+    opacity: 0.5;
+  }
+
+  .about__title {
+    font-size: 40px;
+    line-height: 1.05;
+    letter-spacing: -1.2px;
+    margin-bottom: 22px;
+  }
+
+  .about__p {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text-dim);
+    margin-bottom: 18px;
+    max-width: 560px;
+    text-wrap: pretty;
+  }
+
+  .about__p:last-of-type {
+    margin-bottom: 28px;
+  }
+
+  .about__bullets {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .about__bullets li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--text-soft);
+  }
+
+  @media (max-width: 1024px) {
+    .about__grid {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+
+    .about__media {
+      max-width: 340px;
+    }
+
+    .about__title {
+      font-size: 34px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .about__title {
+      font-size: 28px;
+    }
+  }
+</style>

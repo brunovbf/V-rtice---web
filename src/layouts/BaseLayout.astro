@@ -1,0 +1,70 @@
+---
+/**
+ * Layout base de las 5 paginas: head, SEO, Open Graph y favicon.
+ * No impone paleta ni tipografia: eso lo define cada pagina, porque las demos
+ * tienen identidad propia.
+ */
+import { SITE_NAME, SITE_URL } from '../config/site';
+import '../styles/reset.css';
+import '../styles/reveal.css';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Google Fonts que necesita la pagina, ya armado. */
+  fonts?: string;
+  /** Color de la barra del navegador en mobile. */
+  themeColor?: string;
+  /** Las demos no se indexan como contenido propio de Vertice. */
+  noindex?: boolean;
+}
+
+const { title, description, fonts, themeColor = '#0D0B1A', noindex = false } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE_URL).href;
+const ogImage = new URL('/og-image.png', SITE_URL).href;
+
+// Favicon con la V de la marca, inline para no pedir un request extra.
+const favicon =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%237C5CFF'/%3E%3Cpolyline points='7 21 16 10 25 21' fill='none' stroke='%230D0B1A' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Bruno — Vértice" />
+    <meta name="theme-color" content={themeColor} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_UY" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href={favicon} />
+
+    {
+      fonts && (
+        <>
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+          <link href={fonts} rel="stylesheet" />
+        </>
+      )
+    }
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

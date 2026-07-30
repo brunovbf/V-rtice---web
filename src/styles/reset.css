@@ -1,0 +1,79 @@
+/* Reset minimo compartido por la landing y las 4 demos. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img,
+svg,
+picture,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/*
+ * En escritorio ningun nav es fijo, asi que las anclas dejan la seccion pegada
+ * al borde superior. Abajo de 860px el nav de la landing SI es sticky (90px de
+ * alto: 46 del logo + 22 de padding arriba y abajo), asi que ahi hay que
+ * compensar o la seccion queda tapada al saltar desde el menu.
+ */
+@media (max-width: 860px) {
+  [id] {
+    scroll-margin-top: 90px;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+/*
+ * iOS Safari hace zoom al enfocar un campo con font-size < 16px, y despues NO
+ * vuelve solo: el visitante queda con la pagina ampliada justo cuando iba a
+ * dejar sus datos. El diseno usa 15px, asi que subimos a 16 unicamente en
+ * tactil; en escritorio queda como el prototipo.
+ *
+ * Va con !important a proposito: cada pagina define sus campos con selectores
+ * scopeados mas especificos que este, y es un override de plataforma, no una
+ * decision de diseno.
+ */
+@media (hover: none) and (pointer: coarse) {
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
+  }
+}

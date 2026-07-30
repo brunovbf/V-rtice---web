@@ -1,0 +1,107 @@
+/*
+ * Design tokens de la LANDING de Vertice.
+ *
+ * Las 4 demos de rubro NO cargan este archivo: cada una define su propia
+ * paleta y tipografia en su pagina, porque el punto de las demos es demostrar
+ * diseno a medida. Ver src/pages/demos/*.astro.
+ *
+ * BREAKPOINTS (van como literales: @media no acepta custom properties)
+ *   <= 1024px  hero, estrella, sobre-mi y demos a 1 columna; secundarios a 2
+ *   <=  860px  todo a 1 columna; formularios apilados; modal con menos padding
+ *   <=  560px  padding lateral 18px; H1 32px; botones a ancho completo
+ */
+:root {
+  /* ---- Colores ---- */
+  --bg: #0d0b1a;
+  --surface: #16122b;
+  --surface-raised: linear-gradient(150deg, #1c1638, #241a4d);
+
+  --violet: #7c5cff;
+  --violet-hover: #8f72ff;
+  --violet-light: #b98cff;
+  --lavender: #c9b8ff;
+  --lavender-hover: #d4bfff;
+  --green: #5be3a7;
+  --gold: #ffc85b;
+
+  --text: #ede9fb;
+  --text-quote: #d8d2ee;
+  --text-soft: #c4bde0;
+  --text-dim: #b6afd4;
+  --text-muted: #9c95bd;
+  --text-faint: #7d769b;
+  --text-min: #6f6890;
+
+  /* ---- Bordes ---- */
+  --border-soft: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-max: rgba(255, 255, 255, 0.16);
+  --border-violet: rgba(124, 92, 255, 0.35);
+  --border-violet-mid: rgba(124, 92, 255, 0.5);
+  --border-violet-strong: rgba(124, 92, 255, 0.55);
+  --border-violet-hover: rgba(124, 92, 255, 0.6);
+
+  /* ---- Rellenos translucidos recurrentes ---- */
+  --violet-wash: rgba(124, 92, 255, 0.13);
+  --violet-fill: rgba(124, 92, 255, 0.16);
+  --violet-fill-hover: rgba(124, 92, 255, 0.3);
+  --green-wash: rgba(91, 227, 167, 0.16);
+
+  /* ---- Tipografia ---- */
+  --font-display: Sora, system-ui, sans-serif;
+  --font-body: Inter, system-ui, -apple-system, sans-serif;
+
+  /* ---- Radios ---- */
+  --r-icon: 7px;
+  --r-sm: 9px;
+  --r-md: 11px;
+  --r-btn: 12px;
+  /* Tarjeta flotante del hero y mockups anidados. El logo del nav NO: va 12px. */
+  --r-inner: 14px;
+  --r-mock: 16px;
+  --r-card: 18px;
+  --r-pack: 20px;
+  --r-form: 22px;
+  --r-block: 26px;
+  --r-pill: 100px;
+
+  /* ---- Sombras ---- */
+  --sh-card: 0 24px 54px -30px rgba(124, 92, 255, 0.4);
+  --sh-card-hover: 0 26px 54px -22px rgba(124, 92, 255, 0.6);
+  --sh-star: 0 50px 110px -34px rgba(124, 92, 255, 0.6);
+  --sh-modal: 0 60px 130px -40px rgba(124, 92, 255, 0.7);
+  --sh-cta: 0 14px 32px -10px rgba(91, 227, 167, 0.6);
+  --sh-cta-hover: 0 18px 40px -10px rgba(91, 227, 167, 0.75);
+  --sh-cta-violet: 0 14px 34px -8px rgba(124, 92, 255, 0.7);
+  --sh-cta-violet-hover: 0 20px 44px -8px rgba(124, 92, 255, 0.85);
+  --sh-mock: 0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  --sh-mock-hero: 0 40px 90px -30px rgba(124, 92, 255, 0.5), 0 20px 50px -20px rgba(0, 0, 0, 0.7);
+  --sh-logo: 0 8px 22px -6px rgba(124, 92, 255, 0.6);
+  --sh-float: 0 20px 44px -16px rgba(0, 0, 0, 0.8);
+
+  /* ---- Escala de espaciado ---- */
+  --s-1: 6px;
+  --s-2: 10px;
+  --s-3: 14px;
+  --s-4: 18px;
+  --s-5: 22px;
+  --s-6: 26px;
+  --s-7: 34px;
+  --s-8: 46px;
+  --s-9: 52px;
+  --s-10: 74px;
+  --s-11: 96px;
+
+  /* ---- Layout ---- */
+  --maxw: 1180px;
+  --pad: 28px;
+
+  /* ---- Transicion base de hovers ---- */
+  --t: 0.18s ease;
+}
+
+/* Patron de chevrones de 60x60 usado en Servicios y Testimonios. */
+:root {
+  --chevron-pattern: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2260%22%20height%3D%2260%22%20viewBox%3D%220%200%2060%2060%22%3E%3Cpolyline%20points%3D%2212%2040%2030%2018%2048%2040%22%20fill%3D%22none%22%20stroke%3D%22%23B98CFF%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+}

@@ -1,0 +1,122 @@
+---
+import Chevron from '../icons/Chevron.astro';
+import { WHATSAPP_DISPLAY, SITE_LOCATION, wa } from '../../config/site';
+
+const year = new Date().getFullYear();
+const waLink = wa('Hola Bruno, quiero saber más sobre Vértice');
+---
+
+<footer class="foot">
+  <div class="container foot__top">
+    <div class="foot__brand">
+      <div class="foot__logo-row">
+        <span class="foot__logo">
+          <Chevron size={19} color="#0D0B1A" width={4} double />
+        </span>
+        <span class="foot__name">Vértice</span>
+      </div>
+      <p class="foot__desc">
+        Sitios web profesionales y planillas de gestión a medida para comercios y profesionales de
+        Uruguay.
+      </p>
+    </div>
+
+    <div class="foot__cols">
+      <div class="foot__col">
+        <p class="foot__col-title">Vértice</p>
+        <a href="#servicios">Servicios</a>
+        <a href="#casos">Demos</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <div class="foot__col">
+        <p class="foot__col-title">Contacto</p>
+        <a href={waLink}>{WHATSAPP_DISPLAY}</a>
+        <a href={waLink}>WhatsApp</a>
+        <span>{SITE_LOCATION}</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="container foot__legal">© {year} Vértice. Todos los derechos reservados.</p>
+</footer>
+
+<style>
+  .foot {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    margin-top: 20px;
+  }
+
+  .foot__top {
+    padding-top: 44px;
+    padding-bottom: 40px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .foot__brand {
+    max-width: 300px;
+  }
+
+  .foot__logo-row {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    margin-bottom: 14px;
+  }
+
+  .foot__logo {
+    width: 34px;
+    height: 34px;
+    border-radius: var(--r-sm);
+    background: linear-gradient(135deg, var(--violet), var(--violet-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+  }
+
+  .foot__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.3px;
+  }
+
+  .foot__desc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  .foot__cols {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+
+  .foot__col {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    font-size: 14.5px;
+    color: var(--text-muted);
+  }
+
+  .foot__col-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+
+  .foot__legal {
+    padding-bottom: 34px;
+    font-size: 13px;
+    color: var(--text-min);
+  }
+</style>

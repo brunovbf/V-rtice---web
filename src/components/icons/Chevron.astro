@@ -1,0 +1,27 @@
+---
+/** La V de la marca. Aparece en el logo, en los eyebrow y en las promesas. */
+interface Props {
+  size?: number;
+  color?: string;
+  width?: number;
+  /** Segundo trazo tenue debajo, como en el logo del nav y del footer. */
+  double?: boolean;
+  id?: string;
+}
+const { size = 16, color = '#7C5CFF', width = 4, double = false, id } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 32 32"
+  fill="none"
+  stroke={color}
+  stroke-width={width}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <polyline id={id} points="6 20 16 9 26 20"></polyline>
+  {double && <polyline points="6 26 16 15 26 26" opacity=".4" />}
+</svg>

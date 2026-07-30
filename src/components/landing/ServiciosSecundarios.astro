@@ -1,0 +1,166 @@
+---
+/**
+ * Tarjetas 02/03/04. Cada una es un <a href="wa.me/..."> de verdad: el script
+ * intercepta el clic para abrir el modal, pero sin JS el link funciona igual.
+ */
+import Arrow from '../icons/Arrow.astro';
+import ChevronNumber from '../ChevronNumber.astro';
+import { secundarios } from '../../data/servicios';
+---
+
+<div class="reveal secs">
+  <div class="sec-mark secs__mark">
+    <span class="sec-mark__title sec-mark__title--sub">También podés sumar</span>
+    <span class="sec-mark__rule sec-mark__rule--neutral"></span>
+  </div>
+
+  <div class="secs__grid">
+    {
+      secundarios.map((o, i) => (
+        <a class="card" href={o.wa} data-svc-open={String(i)}>
+          <div class="card__head">
+            <ChevronNumber num={o.num} size={52} fontSize={16} />
+            <h3 class="card__title">{o.title}</h3>
+          </div>
+
+          <p class="card__desc">{o.desc}</p>
+
+          <div class="card__foot">
+            <div class="card__pricing">
+              <span class="card__price">{o.price}</span>
+              <span class="card__usd">{o.usd}</span>
+            </div>
+            <span class="card__more">
+              Ver detalle
+              <Arrow size={17} color="#B98CFF" width={2.4} />
+            </span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<p class="secs__note">Pago único · Sin mensualidades · El sitio y los archivos quedan tuyos</p>
+
+<style>
+  .secs {
+    margin-top: 52px;
+  }
+
+  .secs__mark {
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .secs__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 26px;
+    border-radius: var(--r-card);
+    border: 1px solid var(--border-violet);
+    background: var(--surface-raised);
+    box-shadow: var(--sh-card);
+    cursor: pointer;
+    transition:
+      transform var(--t),
+      border-color var(--t),
+      box-shadow var(--t);
+  }
+
+  .card:hover {
+    color: inherit;
+    transform: translateY(-4px);
+    border-color: var(--border-violet-hover);
+    box-shadow: var(--sh-card-hover);
+  }
+
+  .card__head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .card__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 19px;
+    line-height: 1.15;
+  }
+
+  .card__desc {
+    font-size: 14.5px;
+    color: var(--text-dim);
+    line-height: 1.55;
+    flex: 1;
+    text-wrap: pretty;
+  }
+
+  .card__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .card__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 7px;
+    flex-wrap: wrap;
+  }
+
+  .card__price {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 21px;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .card__usd {
+    font-size: 12.5px;
+    color: var(--text-faint);
+    white-space: nowrap;
+    flex: none;
+  }
+
+  .card__more {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--lavender);
+    white-space: nowrap;
+    flex: none;
+  }
+
+  .secs__note {
+    text-align: center;
+    margin-top: 28px;
+    font-size: 14px;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 1024px) {
+    .secs__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .secs__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

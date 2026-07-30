@@ -1,0 +1,256 @@
+---
+import { Image } from 'astro:assets';
+import Chevron from '../icons/Chevron.astro';
+import Arrow from '../icons/Arrow.astro';
+import BrowserMock from '../BrowserMock.astro';
+import { demoMain, demosRest } from '../../data/demos';
+---
+
+<section id="casos" class="demos container">
+  <div class="reveal demos__head">
+    <p class="eyebrow">
+      <Chevron size={16} />
+      Demos &amp; casos
+    </p>
+    <h2 class="t-h2 demos__title">Mirá cómo puede quedar tu negocio</h2>
+  </div>
+
+  <div class="reveal demos__feat">
+    <div>
+      <p class="demos__live">
+        <span class="demos__live-dot"></span>
+        EN VIVO
+      </p>
+      <p class="demos__rubro">{demoMain.rubro}</p>
+      <h3 class="t-h3 demos__feat-title">{demoMain.title}</h3>
+      <p class="demos__feat-desc">{demoMain.desc}</p>
+      <a
+        class="btn btn--soft btn--wide"
+        href={demoMain.link}
+        target="_blank"
+        rel="noopener"
+        aria-label={`Ver la demo de ${demoMain.title} (se abre en una pestaña nueva)`}
+      >
+        Ver esta demo
+        <Arrow size={16} color="#B98CFF" />
+      </a>
+    </div>
+
+    <div class="demos__visual">
+      <div class="demos__glow" aria-hidden="true"></div>
+      <BrowserMock
+        src={demoMain.src}
+        alt={demoMain.alt}
+        url={demoMain.url}
+        dot={10}
+        rotate
+        widths={[420, 640, 900, 1180]}
+        sizes="(max-width: 1024px) 100vw, 620px"
+      />
+    </div>
+  </div>
+
+  <div class="reveal sec-mark demos__mark">
+    <span class="sec-mark__title sec-mark__title--sub">Otros rubros</span>
+    <span class="sec-mark__rule sec-mark__rule--neutral"></span>
+  </div>
+
+  <div class="demos__grid">
+    {
+      demosRest.map((d) => (
+        <a
+          class="reveal dcard"
+          href={d.link}
+          target="_blank"
+          rel="noopener"
+          aria-label={`Ver la demo de ${d.title} (se abre en una pestaña nueva)`}
+        >
+          <Image
+            src={d.src}
+            alt={d.alt}
+            widths={[380, 560, 760]}
+            sizes="(max-width: 860px) 100vw, 360px"
+            class="dcard__img"
+          />
+          <div class="dcard__body">
+            <p class="dcard__rubro">{d.rubro}</p>
+            <h3 class="dcard__title">{d.title}</h3>
+            <span class="dcard__link">
+              Ver en vivo
+              <Arrow size={14} width={2.6} />
+            </span>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .demos {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  .demos__head {
+    margin-bottom: 48px;
+  }
+
+  .demos__title {
+    max-width: 620px;
+  }
+
+  .demos__feat {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 44px;
+    align-items: center;
+    margin-bottom: 56px;
+  }
+
+  .demos__live {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(91, 227, 167, 0.13);
+    border: 1px solid rgba(91, 227, 167, 0.3);
+    color: var(--green);
+    padding: 6px 13px;
+    border-radius: var(--r-pill);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+  }
+
+  .demos__live-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  .demos__rubro {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+
+  .demos__feat-title {
+    margin-bottom: 16px;
+  }
+
+  .demos__feat-desc {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--text-dim);
+    margin-bottom: 28px;
+    max-width: 440px;
+    text-wrap: pretty;
+  }
+
+  .demos__visual {
+    position: relative;
+  }
+
+  .demos__glow {
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle at 60% 40%, rgba(124, 92, 255, 0.34), transparent 62%);
+    filter: blur(30px);
+    pointer-events: none;
+  }
+
+  .demos__mark {
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+
+  .demos__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .dcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-mock);
+    overflow: hidden;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
+  }
+
+  .dcard:hover {
+    color: inherit;
+    border-color: var(--border-violet-mid);
+    transform: translateY(-5px);
+    box-shadow: 0 26px 54px -26px rgba(124, 92, 255, 0.55);
+  }
+
+  /*
+   * 16/10 y no el 16/11 del prototipo: las tres capturas son exactamente 16/10,
+   * asi que con 16/11 el `cover` recortaba los costados y partia el titular del
+   * hero de cada demo (se notaba sobre todo en Kinesis). Con 16/10 calzan justo
+   * y se ve la captura entera.
+   */
+  .dcard__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .dcard__body {
+    padding: 18px 20px;
+  }
+
+  .dcard__rubro {
+    font-size: 11.5px;
+    font-weight: 600;
+    letter-spacing: 1.1px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 6px;
+  }
+
+  .dcard__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  .dcard__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--violet-light);
+  }
+
+  .dcard:hover .dcard__link {
+    color: var(--lavender-hover);
+  }
+
+  @media (max-width: 1024px) {
+    .demos__feat {
+      grid-template-columns: 1fr;
+      gap: 34px;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .demos__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

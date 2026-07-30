@@ -1,0 +1,21 @@
+---
+/** Las 5 estrellas doradas de los testimonios. */
+const { count = 5 } = Astro.props;
+---
+
+<div class="stars" aria-label={`${count} de 5 estrellas`}>
+  {
+    Array.from({ length: count }).map(() => (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="#FFC85B" aria-hidden="true">
+        <polygon points="12 2 15 9 22 9.3 16.5 14 18.5 21 12 17 5.5 21 7.5 14 2 9.3 9 9" />
+      </svg>
+    ))
+  }
+</div>
+
+<style>
+  .stars {
+    display: flex;
+    gap: 3px;
+  }
+</style>

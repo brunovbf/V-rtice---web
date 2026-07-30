@@ -1,0 +1,65 @@
+---
+/**
+ * Boton flotante de WhatsApp, solo en mobile (<=860px).
+ *
+ * Aparece recien cuando el hero salio de pantalla —conviviendo con el CTA
+ * principal los dos pierden fuerza— y se esconde cuando la seccion de contacto
+ * esta a la vista, donde taparia el boton de enviar del formulario.
+ * Sin burbuja de texto ni badge: solo el icono.
+ */
+import WhatsApp from '../icons/WhatsApp.astro';
+import { wa } from '../../config/site';
+---
+
+<a
+  id="waFab"
+  class="wa-fab"
+  href={wa('Hola Bruno, me interesa conocer los servicios de Vértice')}
+  aria-label="Escribinos por WhatsApp"
+>
+  <WhatsApp size={28} color="#0D0B1A" />
+</a>
+
+<style>
+  /* En escritorio no existe: el CTA del hero y el del nav ya cubren. */
+  .wa-fab {
+    display: none;
+  }
+
+  @media (max-width: 860px) {
+    .wa-fab {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 10px 30px -8px rgba(91, 227, 167, 0.5);
+      /* Debajo del modal de servicios (z-index 90), que debe taparlo. */
+      z-index: 80;
+
+      opacity: 0;
+      transform: translateY(8px);
+      pointer-events: none;
+      transition:
+        opacity 0.18s ease,
+        transform 0.18s ease;
+    }
+
+    .wa-fab.is-visible {
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-fab {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,295 @@
+---
+/**
+ * Nav.
+ *
+ * En escritorio es un div plano que se va con el scroll, como el prototipo (el
+ * README lo describe sticky, pero la palabra "scroll" no aparece ni una vez en
+ * el .dc.html).
+ *
+ * Abajo de 860px si es sticky, con fondo blureado al scrollear: ahi los links
+ * se reemplazan por la hamburguesa, y un menu al que solo llegas volviendo al
+ * tope de la pagina no sirve de nada.
+ */
+import Chevron from '../icons/Chevron.astro';
+import { wa } from '../../config/site';
+
+const waLink = wa('Hola Bruno, quiero saber más sobre Vértice');
+---
+
+<header class="nav" id="nav">
+  <div class="nav__inner container">
+    <a class="nav__brand" id="navBrand" href="#hero" aria-label="Vértice — inicio">
+      <span class="nav__logo">
+        <Chevron size={26} color="#0D0B1A" width={4} double id="navLogoV" />
+      </span>
+      <span class="nav__wordmark">Vértice</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Navegación principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#servicios">Precios</a>
+      <a href="#casos">Demos</a>
+
+      <button
+        class="nav__burger"
+        id="navBurger"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="navMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <a class="nav__cta" href={waLink}>Escribime</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Panel a pantalla completa -->
+<div class="menu" id="navMenu" hidden>
+  <div class="menu__top">
+    <button class="menu__close" id="navMenuClose" type="button" aria-label="Cerrar menú">
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.6"
+        stroke-linecap="round"
+        aria-hidden="true"
+      >
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="menu__links" aria-label="Menú">
+    <a href="#servicios"><Chevron size={14} />Servicios</a>
+    <a href="#servicios"><Chevron size={14} />Precios</a>
+    <a href="#casos"><Chevron size={14} />Demos</a>
+    <a href="#sobre"><Chevron size={14} />Sobre mí</a>
+  </nav>
+
+  <a class="menu__cta" href={waLink}>Escribime</a>
+</div>
+
+<style>
+  .nav__inner {
+    padding-top: 22px;
+    padding-bottom: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav__brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    cursor: pointer;
+  }
+
+  .nav__brand:hover {
+    color: inherit;
+  }
+
+  .nav__logo {
+    width: 46px;
+    height: 46px;
+    /* 12px en el prototipo. No usar --r-inner (14px): es otro radio. */
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--violet), var(--violet-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--sh-logo);
+    flex: none;
+  }
+
+  .nav__wordmark {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: -0.5px;
+    line-height: 1;
+  }
+
+  .nav__links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: 15px;
+    color: var(--text-dim);
+  }
+
+  .nav__cta {
+    background: var(--violet);
+    color: #fff;
+    padding: 10px 20px;
+    /* 10px: el unico radio de 10 en toda la landing. */
+    border-radius: 10px;
+    font-weight: 600;
+    transition: background var(--t);
+  }
+
+  .nav__cta:hover {
+    background: var(--violet-hover);
+    color: #fff;
+  }
+
+  /* ---------- Hamburguesa ---------- */
+
+  .nav__burger {
+    display: none;
+    width: 44px;
+    height: 44px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .nav__burger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--text);
+  }
+
+  /* ---------- Panel del menu ---------- */
+
+  .menu {
+    position: fixed;
+    inset: 0;
+    /* Arriba del nav (50) y del boton flotante (80). */
+    z-index: 95;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    padding: 22px 22px 34px;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+  }
+
+  .menu[hidden] {
+    display: none;
+  }
+
+  .menu.is-open {
+    opacity: 1;
+  }
+
+  .menu__top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 44px;
+  }
+
+  .menu__close {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border-strong);
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+  }
+
+  .menu__links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  /*
+   * El chevron va chico (14px) y en violeta, igual que en los eyebrows de las
+   * secciones: los items del menu son links a esas mismas secciones, asi que es
+   * el mismo gesto. Mas grande o mas claro compite con el texto de 24/700.
+   */
+  .menu__links a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 24px;
+    color: var(--text);
+  }
+
+  .menu__cta {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--violet);
+    color: #fff;
+    padding: 16px;
+    border-radius: var(--r-btn);
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .menu__cta:hover {
+    color: #fff;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu {
+      transition: none;
+    }
+  }
+
+  /* ---------- Mobile ---------- */
+
+  @media (max-width: 860px) {
+    /* Sticky solo aca: la hamburguesa tiene que estar siempre al alcance. */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid transparent;
+      transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+    }
+
+    .nav.is-scrolled {
+      background: rgba(13, 11, 26, 0.72);
+      backdrop-filter: blur(10px);
+      border-bottom-color: var(--border-soft);
+    }
+
+    .nav__links a:not(.nav__cta) {
+      display: none;
+    }
+
+    .nav__links {
+      gap: 6px;
+    }
+
+    .nav__burger {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .menu {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+</style>

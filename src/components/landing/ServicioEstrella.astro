@@ -1,0 +1,198 @@
+---
+import Chevron from '../icons/Chevron.astro';
+import Check from '../icons/Check.astro';
+import Arrow from '../icons/Arrow.astro';
+import BrowserMock from '../BrowserMock.astro';
+import { estrella } from '../../data/servicios';
+---
+
+<div class="reveal num-head">
+  <div class="t-num">{estrella.num}</div>
+  <div class="num-head__text">
+    <p class="eyebrow">
+      <Chevron size={16} />
+      {estrella.eyebrow}
+    </p>
+    <h2 class="t-h2 num-head__title">{estrella.titulo}</h2>
+  </div>
+</div>
+
+<div class="reveal star">
+  <div class="star__body">
+    <p class="star__badge">{estrella.badge}</p>
+
+    <div class="star__pricing">
+      <span class="t-price">{estrella.price}</span>
+      <span class="star__usd">{estrella.usd}</span>
+    </div>
+
+    <p class="star__desc">{estrella.desc}</p>
+
+    <div class="checks star__checks">
+      {
+        estrella.items.map((i) => (
+          <div class="check">
+            <span class="check__box">
+              <Check />
+            </span>
+            {i}
+          </div>
+        ))
+      }
+    </div>
+
+    <a class="btn btn--green btn--wide" href={estrella.wa}>
+      {estrella.cta}
+      <Arrow size={17} color="#0D0B1A" />
+    </a>
+  </div>
+
+  <div class="star__visual">
+    <div class="star__glow" aria-hidden="true"></div>
+    <BrowserMock
+      src={estrella.mockup}
+      alt={estrella.mockupAlt}
+      dot={9}
+      rotate
+      radius="var(--r-inner)"
+      background="var(--bg)"
+      widths={[400, 620, 900]}
+      sizes="(max-width: 1024px) 100vw, 420px"
+      class="star__mock"
+    />
+  </div>
+</div>
+
+<style>
+  /* Encabezado: el 01 gigante al lado del titulo. */
+  .num-head {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 34px;
+    align-items: end;
+    margin-bottom: 32px;
+  }
+
+  .num-head .t-num {
+    padding-top: 8px;
+  }
+
+  .num-head__text {
+    padding-bottom: 12px;
+  }
+
+  .num-head__title {
+    max-width: 620px;
+  }
+
+  .eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .star {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    border-radius: var(--r-block);
+    overflow: hidden;
+    border: 1.5px solid var(--border-violet-strong);
+    box-shadow: var(--sh-star);
+  }
+
+  .star__body {
+    background: var(--surface-raised);
+    padding: 52px 48px;
+  }
+
+  .star__badge {
+    display: inline-flex;
+    align-items: center;
+    background: var(--green);
+    color: var(--bg);
+    padding: 6px 13px;
+    border-radius: var(--r-pill);
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    margin-bottom: 26px;
+  }
+
+  .star__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .star__usd {
+    color: var(--text-muted);
+    font-size: 16px;
+    white-space: nowrap;
+    flex: none;
+  }
+
+  .star__desc {
+    color: var(--text-soft);
+    font-size: 16.5px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 420px;
+    text-wrap: pretty;
+  }
+
+  .star__checks {
+    margin-bottom: 34px;
+  }
+
+  .star__visual {
+    background: var(--surface);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .star__glow {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(124, 92, 255, 0.35), transparent 65%);
+    filter: blur(30px);
+  }
+
+  .star__visual :global(.star__mock) {
+    position: relative;
+    width: 100%;
+    box-shadow: var(--sh-mock);
+  }
+
+  @media (max-width: 1024px) {
+    .star {
+      grid-template-columns: 1fr;
+    }
+
+    .star__body {
+      padding: 40px 34px;
+    }
+
+    /* El numero gigante no cabe al lado del titulo. */
+    .num-head {
+      grid-template-columns: 1fr;
+      gap: 6px;
+      align-items: start;
+    }
+
+    .num-head__text {
+      padding-bottom: 0;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .star__body {
+      padding: 32px 24px;
+    }
+  }
+</style>

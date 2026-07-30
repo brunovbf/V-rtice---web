@@ -1,0 +1,23 @@
+---
+/** Tilde verde de los checklists. */
+interface Props {
+  size?: number;
+  color?: string;
+  width?: number;
+}
+const { size = 13, color = '#5BE3A7', width = 3 } = Astro.props;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke={color}
+  stroke-width={width}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  aria-hidden="true"
+>
+  <polyline points="20 6 9 17 4 12"></polyline>
+</svg>

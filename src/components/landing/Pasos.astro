@@ -1,0 +1,91 @@
+---
+import { pasos } from '../../data/landing';
+---
+
+<div class="container steps-wrap">
+  <div class="reveal steps">
+    {
+      pasos.map((p) => (
+        <div class="step">
+          <span class="step__n">{p.n}</span>
+          <div>
+            <h3 class="step__title">{p.title}</h3>
+            <p class="step__desc">{p.desc}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<style>
+  .steps-wrap {
+    margin-top: 74px;
+  }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: var(--r-card);
+    overflow: hidden;
+    background: rgba(22, 18, 43, 0.5);
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 26px 28px;
+    border-right: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .step:last-child {
+    border-right: 0;
+  }
+
+  .step__n {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--bg);
+    background: linear-gradient(135deg, var(--violet), var(--violet-light));
+    width: 28px;
+    height: 28px;
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    margin-top: 1px;
+  }
+
+  .step__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 16.5px;
+    margin-bottom: 4px;
+  }
+
+  .step__desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--text-muted);
+    text-wrap: pretty;
+  }
+
+  @media (max-width: 860px) {
+    .steps {
+      grid-template-columns: 1fr;
+    }
+
+    .step {
+      border-right: 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .step:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

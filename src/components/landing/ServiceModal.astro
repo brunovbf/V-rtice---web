@@ -1,0 +1,258 @@
+---
+/**
+ * Un overlay por servicio secundario, renderizado en el HTML con [hidden].
+ * Mismo lenguaje visual que la tarjeta del servicio estrella: izquierda con
+ * numero en chevron, titulo, precio tabular, lead, checklist y CTA verde;
+ * derecha con el mockup rotado -2deg sobre superficie y glow violeta.
+ */
+import Check from '../icons/Check.astro';
+import Arrow from '../icons/Arrow.astro';
+import ChevronNumber from '../ChevronNumber.astro';
+import BrowserMock from '../BrowserMock.astro';
+import { secundarios } from '../../data/servicios';
+---
+
+{
+  secundarios.map((s, i) => (
+    <div
+      class="ov"
+      data-svc-overlay={String(i)}
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-label={s.title}
+    >
+      <div class="panel" data-svc-panel>
+        <button class="panel__close" data-svc-close type="button" aria-label="Cerrar">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <line x1="6" y1="6" x2="18" y2="18" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+          </svg>
+        </button>
+
+        <div class="panel__body">
+          <div class="panel__head">
+            <ChevronNumber num={s.num} size={52} fontSize={16} />
+            <h3 class="panel__title">{s.title}</h3>
+          </div>
+
+          <div class="panel__pricing">
+            <span class="t-price panel__price">{s.price}</span>
+            <span class="panel__usd">{s.usd}</span>
+          </div>
+
+          <p class="panel__lead">{s.lead}</p>
+
+          <div class="checks panel__checks">
+            {s.items.map((it) => (
+              <div class="check">
+                <span class="check__box">
+                  <Check />
+                </span>
+                {it}
+              </div>
+            ))}
+          </div>
+
+          <a class="btn btn--green btn--wide" href={s.wa}>
+            {s.cta}
+            <Arrow size={17} color="#0D0B1A" />
+          </a>
+        </div>
+
+        <div class="panel__visual">
+          <div class="panel__glow" aria-hidden="true" />
+          <BrowserMock
+            src={s.src}
+            alt={s.alt}
+            url={s.url}
+            dot={9}
+            rotate
+            radius="var(--r-inner)"
+            background="var(--bg)"
+            widths={[400, 620, 900]}
+            sizes="(max-width: 860px) 100vw, 420px"
+            credit={s.credit}
+            creditHref={s.creditHref}
+            class="panel__mock"
+          />
+        </div>
+      </div>
+    </div>
+  ))
+}
+
+<style>
+  .ov {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(6, 5, 12, 0.78);
+    backdrop-filter: blur(7px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+
+  .ov[hidden] {
+    display: none;
+  }
+
+  .panel {
+    position: relative;
+    width: 100%;
+    max-width: 1040px;
+    max-height: 88vh;
+    overflow: auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    border-radius: var(--r-block);
+    border: 1.5px solid var(--border-violet-strong);
+    box-shadow: var(--sh-modal);
+  }
+
+  .panel__close {
+    position: absolute;
+    top: 16px;
+    right: 18px;
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--r-md);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(13, 11, 26, 0.7);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background 0.16s ease,
+      border-color 0.16s ease;
+  }
+
+  .panel__close:hover {
+    background: rgba(124, 92, 255, 0.28);
+    border-color: var(--border-violet-hover);
+  }
+
+  .panel__body {
+    background: var(--surface-raised);
+    padding: 48px 44px;
+  }
+
+  .panel__head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .panel__title {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: -0.8px;
+    line-height: 1.1;
+    text-wrap: balance;
+  }
+
+  .panel__pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+
+  .panel__price {
+    font-size: 46px;
+    letter-spacing: -1.8px;
+  }
+
+  .panel__usd {
+    color: var(--text-muted);
+    font-size: 15.5px;
+    white-space: nowrap;
+    flex: none;
+  }
+
+  .panel__lead {
+    color: var(--text-soft);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 28px;
+    max-width: 430px;
+    text-wrap: pretty;
+  }
+
+  .panel__checks {
+    gap: 13px;
+    margin-bottom: 32px;
+  }
+
+  /*
+   * overflow:hidden es obligatorio: el glow sobresale 40px a la derecha y el
+   * panel es overflow:auto, asi que sin recortar aparece scroll horizontal.
+   */
+  .panel__visual {
+    background: var(--surface);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .panel__glow {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle, rgba(124, 92, 255, 0.35), transparent 65%);
+    filter: blur(30px);
+  }
+
+  .panel__visual :global(.panel__mock) {
+    position: relative;
+    width: 100%;
+    box-shadow: var(--sh-mock);
+  }
+
+  .panel__visual :global(.mock__url) {
+    font-size: 11.5px;
+    padding: 4px 10px;
+    background: var(--surface);
+  }
+
+  @media (max-width: 860px) {
+    .ov {
+      padding: 16px;
+    }
+
+    .panel {
+      grid-template-columns: 1fr;
+      max-height: 92vh;
+    }
+
+    .panel__body {
+      padding: 38px 26px;
+    }
+
+    .panel__visual {
+      padding: 26px;
+    }
+  }
+</style>

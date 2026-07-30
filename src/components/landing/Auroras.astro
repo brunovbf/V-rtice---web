@@ -1,0 +1,95 @@
+---
+/**
+ * Dos capas decorativas de fondo, fijas al documento:
+ *  1. cinco auroras que derivan suavemente
+ *  2. una trama de puntos de 26px
+ * Ambas con pointer-events:none y z-index 0.
+ *
+ * Los offsets en px son los del prototipo. Dejan los ultimos ~2400px de la
+ * pagina (contacto y footer) sin aurora detras: es a proposito, asi el hero
+ * queda como el punto mas brillante de la pagina.
+ */
+---
+
+<div class="auroras" aria-hidden="true">
+  <div class="aurora aurora--1"></div>
+  <div class="aurora aurora--2"></div>
+  <div class="aurora aurora--3"></div>
+  <div class="aurora aurora--4"></div>
+  <div class="aurora aurora--5"></div>
+</div>
+<div class="dots" aria-hidden="true"></div>
+
+<style>
+  .auroras {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .aurora {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  .aurora--1 {
+    top: -120px;
+    right: -80px;
+    width: 680px;
+    height: 680px;
+    background: radial-gradient(circle, rgba(124, 92, 255, 0.38), transparent 66%);
+    filter: blur(40px);
+    animation: floatA 11s ease-in-out infinite;
+  }
+
+  .aurora--2 {
+    top: 640px;
+    left: -160px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(178, 86, 220, 0.26), transparent 68%);
+    filter: blur(44px);
+    animation: floatB 14s ease-in-out infinite;
+  }
+
+  .aurora--3 {
+    top: 1500px;
+    right: -140px;
+    width: 640px;
+    height: 640px;
+    background: radial-gradient(circle, rgba(91, 227, 167, 0.17), transparent 68%);
+    filter: blur(44px);
+    animation: floatC 13s ease-in-out infinite;
+  }
+
+  .aurora--4 {
+    top: 2500px;
+    left: -120px;
+    width: 620px;
+    height: 620px;
+    background: radial-gradient(circle, rgba(124, 92, 255, 0.24), transparent 68%);
+    filter: blur(44px);
+    animation: floatA 15s ease-in-out infinite;
+  }
+
+  .aurora--5 {
+    top: 3400px;
+    right: -100px;
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, rgba(178, 86, 220, 0.2), transparent 68%);
+    filter: blur(44px);
+    animation: floatB 12s ease-in-out infinite;
+  }
+
+  .dots {
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 26px 26px;
+    pointer-events: none;
+    z-index: 0;
+  }
+</style>

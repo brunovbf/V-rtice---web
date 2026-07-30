@@ -1,0 +1,30 @@
+---
+import { rubros } from '../../data/landing';
+---
+
+<div class="strip container">
+  <span class="strip__label">Pensado para:</span>
+  {rubros.map((r) => <span class="chip">{r}</span>)}
+</div>
+
+<style>
+  .strip {
+    margin: 16px auto 0;
+    padding-top: 22px;
+    padding-bottom: 22px;
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: var(--text-faint);
+    font-size: 13.5px;
+  }
+
+  .strip__label {
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+</style>

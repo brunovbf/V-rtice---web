@@ -1,0 +1,142 @@
+---
+import Chevron from '../icons/Chevron.astro';
+import Stars from '../icons/Stars.astro';
+import { testimonios } from '../../data/landing';
+---
+
+<section class="band">
+  <div class="container tests">
+    <div class="reveal tests__head">
+      <p class="eyebrow">
+        <Chevron size={16} />
+        Lo que dicen
+      </p>
+      <h2 class="t-h2 tests__title">Clientes que ya dieron el paso</h2>
+    </div>
+
+    <div class="tests__grid">
+      {
+        testimonios.map((q) => (
+          <figure class="reveal quote">
+            <span class="quote__mark" aria-hidden="true">
+              ”
+            </span>
+            <Stars />
+            <blockquote class="quote__text">“{q.text}”</blockquote>
+            <figcaption class="quote__author">
+              <span class="quote__avatar">{q.initial}</span>
+              <span>
+                <span class="quote__name">{q.name}</span>
+                <span class="quote__role">{q.role}</span>
+              </span>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .tests {
+    padding-top: 80px;
+    padding-bottom: 74px;
+  }
+
+  .tests__head {
+    margin-bottom: 48px;
+  }
+
+  .tests__title {
+    max-width: 620px;
+  }
+
+  .tests__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+  }
+
+  .quote {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r-mock);
+    padding: 28px 26px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .quote:hover {
+    transform: translateY(-4px);
+    border-color: rgba(124, 92, 255, 0.4);
+  }
+
+  .quote__mark {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 60px;
+    line-height: 1;
+    color: rgba(124, 92, 255, 0.16);
+  }
+
+  .quote__text {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--text-quote);
+    margin: 16px 0 22px;
+    flex: 1;
+    text-wrap: pretty;
+  }
+
+  .quote__author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .quote__avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--violet), var(--violet-light));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    color: var(--bg);
+    flex: none;
+  }
+
+  .quote__name {
+    display: block;
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  .quote__role {
+    display: block;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 1024px) {
+    .tests__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 860px) {
+    .tests__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
