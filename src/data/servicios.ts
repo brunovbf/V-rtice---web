@@ -7,8 +7,8 @@
  */
 import { wa } from '../config/site';
 
-import capturaEstrella from '../assets/captura-estrella.png';
-import capturaJuridico from '../assets/captura-juridico.png';
+import capturaEstrella from '../assets/captura-estrella.webp';
+import capturaJuridico from '../assets/captura-juridico.webp';
 import panelReportes from '../assets/panel-reportes.jpg';
 import panelMantenimiento from '../assets/panel-mantenimiento.jpg';
 

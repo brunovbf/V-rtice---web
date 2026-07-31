@@ -1,8 +1,8 @@
 /** Las 4 demos de rubro, tal como se listan en la seccion #casos. */
-import capturaVeterinaria from '../assets/captura-veterinaria.png';
-import capturaDental from '../assets/captura-dental.png';
-import capturaJuridico from '../assets/captura-juridico.png';
-import capturaFisioterapia from '../assets/captura-fisioterapia.png';
+import capturaVeterinaria from '../assets/captura-veterinaria.webp';
+import capturaDental from '../assets/captura-dental.webp';
+import capturaJuridico from '../assets/captura-juridico.webp';
+import capturaFisioterapia from '../assets/captura-fisioterapia.webp';
 
 export interface Demo {
   rubro: string;
