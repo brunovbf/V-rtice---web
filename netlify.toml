@@ -3,7 +3,7 @@
   publish = "dist"
 
 [build.environment]
-  NODE_VERSION = "20.18.1"
+  NODE_VERSION = "24.18.1"
 
 # Los formularios de la landing y de las demos abren WhatsApp desde el cliente,
 # asi que no hace falta ninguna funcion ni redirect.
