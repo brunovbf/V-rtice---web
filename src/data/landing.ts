@@ -3,7 +3,7 @@
 export const trust = [
   'Entrega en ~7 días',
   'Precio fijo, sin sorpresas',
-  'Sin suscripciones mensuales',
+  'Pagás una vez, el sitio es tuyo',
 ];
 
 export const rubros = ['Comercios', 'Profesionales', 'Emprendimientos', 'Servicios'];
@@ -31,6 +31,24 @@ export const sobreMi = [
   'Trato directo, sin intermediarios',
   'Precio fijo desde el arranque',
 ];
+
+/**
+ * ─────────────────────────────────────────────────────────────────
+ *  INTERRUPTOR DE LA FOTO DE "SOBRE MI"
+ *
+ *  En `false` la seccion va a una sola columna, con el texto de
+ *  protagonista. Antes habia un recuadro que decia "Foto de Bruno":
+ *  eso le anunciaba al visitante que faltaba algo, justo en la unica
+ *  seccion que existe para probar que atras hay una persona.
+ *
+ *  PARA PONER LA FOTO (3 pasos):
+ *    1. Guardar la imagen en `src/assets/bruno.jpg` — vertical, 4/5.
+ *    2. En `SobreMi.astro`, descomentar los dos imports y la linea <Image>
+ *       (las tres estan marcadas con "PASO 2").
+ *    3. Poner esto en `true`.
+ * ─────────────────────────────────────────────────────────────────
+ */
+export const mostrarFotoBruno = false;
 
 /**
  * ─────────────────────────────────────────────────────────────────

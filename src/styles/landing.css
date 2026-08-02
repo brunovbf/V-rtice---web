@@ -96,7 +96,10 @@ a:hover {
   font-size: 130px;
   line-height: 1;
   letter-spacing: -6px;
-  background: linear-gradient(160deg, var(--violet-light), var(--violet) 60%, rgba(124, 92, 255, 0.25));
+  /* Cierra en violeta solido: el stop anterior terminaba en 25% de opacidad y la
+     cola del numero quedaba en 1.31:1 contra el fondo (minimo 3:1). Ahora el
+     degradado va de 7.65:1 a 4.47:1, mismo sentido, sin tramo invisible. */
+  background: linear-gradient(160deg, var(--violet-light), var(--violet));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

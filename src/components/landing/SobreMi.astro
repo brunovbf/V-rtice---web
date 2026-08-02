@@ -1,27 +1,33 @@
 ---
 import Chevron from '../icons/Chevron.astro';
 import Check from '../icons/Check.astro';
-import { sobreMi } from '../../data/landing';
+import { sobreMi, mostrarFotoBruno } from '../../data/landing';
+
+// PASO 2: descomentar estas dos lineas junto con el <Image> de abajo.
+// import { Image } from 'astro:assets';
+// import bruno from '../../assets/bruno.jpg';
 
 /**
- * PENDIENTE ANTES DE PUBLICAR: no hay foto de Bruno todavia.
- * Cuando este, guardarla en src/assets/bruno.jpg (vertical, 4/5) y cambiar el
- * bloque .about__ph por:
- *    <Image src={bruno} alt="Bruno, de Vértice" widths={[340,520]} class="about__img" />
+ * La foto vive detras de `mostrarFotoBruno` (src/data/landing.ts), que ahi
+ * documenta los 3 pasos para activarla. Mientras este en false la seccion va
+ * a una sola columna: sin foto, el texto es el protagonista y no queda un
+ * recuadro vacio anunciando lo que falta.
  */
 ---
 
 <section id="sobre" class="about container">
-  <div class="reveal about__grid">
-    <div class="about__media">
-      <div class="about__glow" aria-hidden="true"></div>
-      <div class="about__frame">
-        <div class="about__ph">
-          <img src="/assets/vertice-isotipo.svg" alt="" width="64" height="64" />
-          <span>Foto de Bruno</span>
+  <div class:list={['reveal', 'about__grid', { 'about__grid--solo': !mostrarFotoBruno }]}>
+    {
+      mostrarFotoBruno && (
+        <div class="about__media">
+          <div class="about__glow" aria-hidden="true" />
+          <div class="about__frame">
+            {/* PASO 2: descomentar tambien esta linea. */}
+            {/* <Image src={bruno} alt="Bruno, de Vértice" widths={[340, 520]} class="about__img" /> */}
+          </div>
         </div>
-      </div>
-    </div>
+      )
+    }
 
     <div>
       <p class="eyebrow">
@@ -69,6 +75,15 @@ import { sobreMi } from '../../data/landing';
     align-items: center;
   }
 
+  /*
+   * Sin foto no hay dos columnas: una sola, alineada a la izquierda y con el
+   * ancho acotado para que la medida de lectura no se estire.
+   */
+  .about__grid--solo {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 720px;
+  }
+
   .about__media {
     position: relative;
   }
@@ -96,23 +111,6 @@ import { sobreMi } from '../../data/landing';
     height: auto;
     aspect-ratio: 4/5;
     object-fit: cover;
-  }
-
-  /* Placeholder hasta que haya foto. */
-  .about__ph {
-    aspect-ratio: 4/5;
-    background: var(--surface);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    color: var(--text-faint);
-    font-size: 14px;
-  }
-
-  .about__ph img {
-    opacity: 0.5;
   }
 
   .about__title {
