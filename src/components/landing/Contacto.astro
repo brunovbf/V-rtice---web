@@ -103,14 +103,38 @@ const garantias = [
         <p class="contact__note">Te respondo por WhatsApp al número que dejes.</p>
       </form>
 
-      <div class="contact__sent" data-wa-sent hidden role="status">
-        <span class="contact__sent-icon">
+      {/*
+        `tabindex="-1"` no lo mete en el orden de tabulacion: solo lo hace
+        enfocable por codigo. Hace falta porque al enviar se oculta el form
+        con el foco todavia puesto en su boton, y quien navega con teclado
+        quedaba parado sobre un elemento invisible.
+      */}
+      <div class="contact__sent" data-wa-sent hidden role="status" tabindex="-1">
+        <span class="contact__sent-icon" data-wa-icon>
           <Check size={22} color="#5BE3A7" />
         </span>
-        <p class="contact__sent-title">¡Listo! Te abrí el chat</p>
-        <p class="contact__sent-text">
+        <p class="contact__sent-title" data-wa-title>¡Listo! Te abrí el chat</p>
+        <p class="contact__sent-text" data-wa-text>
           Si no se abrió solo, escribime al {WHATSAPP_DISPLAY} y te respondo el mismo día.
         </p>
+        {/*
+          Salida cuando el navegador bloquea el pop-up de wa.me. Un click sobre
+          un <a> real nunca se bloquea, a diferencia de window.open, asi que
+          este link siempre funciona. El href lo completa waForm.ts con el
+          mismo mensaje que ya se habia armado.
+        */}
+        <a class="contact__sent-open" data-wa-open href="#" target="_blank" rel="noopener" hidden>
+          Abrir WhatsApp
+        </a>
+        {/*
+          Sin esto el formulario quedaba muerto hasta recargar la pagina. Los
+          dos motivos reales para volver son que el navegador bloqueo el
+          pop-up o que el visitante se equivoco en un dato, asi que al volver
+          NO se limpian los campos: se recuperan tal cual los dejo.
+        */}
+        <button type="button" class="contact__sent-back" data-wa-back>
+          Volver al formulario
+        </button>
       </div>
     </div>
   </div>
@@ -301,15 +325,22 @@ const garantias = [
     margin-top: 2px;
   }
 
-  /* Estado `sent`. */
+  /*
+   * Estado `sent`.
+   *
+   * OJO: aca habia un `height: 100%`. El wrap es un div dentro de un grid, asi
+   * que el 100% se resolvia contra la columna de al lado (las tarjetas de
+   * contacto, mas altas) y el panel terminaba midiendo 674px cuando su
+   * contenido necesita 200. Eran ~470px de vacio abajo del texto. El alto lo
+   * fija `min-height`, que ademas amortigua el salto contra el form.
+   */
   .contact__sent {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    height: 100%;
-    min-height: 260px;
+    min-height: 300px;
     text-align: center;
     padding: 32px 24px;
     border-radius: var(--r-mock);
@@ -319,6 +350,56 @@ const garantias = [
 
   .contact__sent[hidden] {
     display: none;
+  }
+
+  /*
+   * Estado bloqueado: el pop-up no se abrio. Deja de ser un exito, asi que
+   * pierde el verde de confirmacion y toma el violeta neutro de la marca.
+   */
+  .contact__sent--blocked {
+    background: var(--violet-wash);
+    border-color: var(--border-violet);
+  }
+
+  .contact__sent-open {
+    margin-top: 4px;
+    display: inline-flex;
+    align-items: center;
+    background: var(--green);
+    color: var(--bg);
+    font-weight: 700;
+    font-size: var(--fs-base);
+    /* 13px de padding para que el alto llegue a 44px, el minimo tactil. */
+    padding: 13px 22px;
+    border-radius: var(--r-pill);
+    white-space: nowrap;
+    text-decoration: none;
+  }
+
+  .contact__sent-open[hidden] {
+    display: none;
+  }
+
+  .contact__sent-back {
+    margin-top: 6px;
+    background: none;
+    border: 1px solid var(--border-strong);
+    color: var(--text-soft);
+    font: inherit;
+    font-size: var(--fs-sm);
+    font-weight: 600;
+    /* 13px de padding para que el alto llegue a 44px, el minimo tactil. */
+    padding: 13px 20px;
+    border-radius: var(--r-pill);
+    /* El panel es flex column: sin esto el boton se encoge y parte el texto. */
+    white-space: nowrap;
+    cursor: pointer;
+    transition: border-color 0.18s ease, color 0.18s ease;
+  }
+
+  .contact__sent-back:hover {
+    border-color: var(--border-violet);
+    color: var(--text);
   }
 
   .contact__sent-icon {
