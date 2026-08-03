@@ -61,7 +61,10 @@ export const estrella: ServicioEstrella = {
   num: '01',
   eyebrow: 'El servicio estrella',
   titulo: 'Tu landing lista para captar clientes, en 7 días',
-  badge: 'MÁS ELEGIDO',
+  // "MAS ELEGIDO" era una afirmacion sobre otros clientes, y todavia no hay
+  // ninguno. Esto dirige igual la mirada pero sin inventar prueba social: le
+  // dice por donde arrancar al que no sabe que pedir.
+  badge: 'EMPEZÁ POR ACÁ',
   price: '$7.200',
   usd: 'pago único · USD 180',
   desc: 'Tu negocio visible en internet con una página profesional, rápida y pensada para captar clientes desde el celular. Incluye dominio el primer año.',

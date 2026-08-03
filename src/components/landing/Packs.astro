@@ -19,7 +19,12 @@ import { packs, rubrosPacks } from '../../data/servicios';
     {
       packs.map((p) => (
         <div class="pack">
-          {p.star && <span class="pack__badge">MÁS ELEGIDO</span>}
+          {/*
+            Antes decia "MAS ELEGIDO", que afirmaba algo sobre clientes que
+            todavia no existen. "EL MAS COMPLETO" es verificable: son 5
+            planillas contra 3 del Basico.
+          */}
+          {p.star && <span class="pack__badge">EL MÁS COMPLETO</span>}
 
           <div class="pack__head">
             <ChevronNumber num={p.n} size={56} fontSize={17} />
