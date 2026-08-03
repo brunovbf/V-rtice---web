@@ -32,6 +32,27 @@
   --text-faint: #7d769b;
   --text-min: #6f6890;
 
+  /*
+   * ---- Escala tipografica (banda chica / UI) ----
+   *
+   * Antes habia 20 tamanos distintos abajo de 24px, incluyendo medios pixeles
+   * (10.5, 12.5, 13.5, 14.5, 15.5, 16.5) heredados de escalar el prototipo
+   * proporcionalmente. Nadie distingue 15 de 15.5: eso no era decision, era
+   * residuo. Estos son los 8 pasos reales.
+   *
+   * NO cubre los titulos. `.t-h1`, `.t-h2`, `.t-h3`, `.t-lead`, `.t-price` y
+   * `.t-num` tienen su propia escalera responsive en landing.css (62/48/38/32,
+   * 130/96/64, etc.), que es deliberada y se mantiene tal cual.
+   */
+  --fs-2xs: 11px;
+  --fs-xs: 12px;
+  --fs-sm: 13px;
+  --fs-md: 15px;
+  --fs-base: 16px;
+  --fs-lg: 18px;
+  --fs-xl: 21px;
+  --fs-2xl: 24px;
+
   /* ---- Bordes ---- */
   --border-soft: rgba(255, 255, 255, 0.06);
   --border: rgba(255, 255, 255, 0.08);

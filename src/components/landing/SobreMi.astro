@@ -113,15 +113,17 @@ import { sobreMi, mostrarFotoBruno } from '../../data/landing';
     object-fit: cover;
   }
 
+  /*
+   * Sin font-size propio a proposito: es un h2 y usa la escalera de `.t-h2`
+   * (44/36/30) como todos los demas. Antes lo pisaba con 40/34/28, tres
+   * tamanos a pocos px de los del rol, sin razon. Aca solo va el margen.
+   */
   .about__title {
-    font-size: 40px;
-    line-height: 1.05;
-    letter-spacing: -1.2px;
     margin-bottom: 22px;
   }
 
   .about__p {
-    font-size: 17px;
+    font-size: var(--fs-lg);
     line-height: 1.7;
     color: var(--text-dim);
     margin-bottom: 18px;
@@ -146,7 +148,7 @@ import { sobreMi, mostrarFotoBruno } from '../../data/landing';
     display: flex;
     align-items: center;
     gap: 10px;
-    font-size: 15px;
+    font-size: var(--fs-md);
     color: var(--text-soft);
   }
 
@@ -158,16 +160,6 @@ import { sobreMi, mostrarFotoBruno } from '../../data/landing';
 
     .about__media {
       max-width: 340px;
-    }
-
-    .about__title {
-      font-size: 34px;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .about__title {
-      font-size: 28px;
     }
   }
 </style>

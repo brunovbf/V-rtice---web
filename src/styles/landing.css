@@ -121,7 +121,7 @@ a:hover {
   gap: 9px;
   color: var(--lavender);
   font-weight: 700;
-  font-size: 13px;
+  font-size: var(--fs-sm);
   letter-spacing: 1.5px;
   text-transform: uppercase;
 }
@@ -137,7 +137,7 @@ a:hover {
 .sec-mark__title {
   font-family: var(--font-display);
   font-weight: 800;
-  font-size: 15px;
+  font-size: var(--fs-md);
   letter-spacing: 3px;
   text-transform: uppercase;
   color: var(--text);
@@ -146,7 +146,7 @@ a:hover {
 
 .sec-mark__title--sub {
   font-weight: 700;
-  font-size: 14px;
+  font-size: var(--fs-md);
   letter-spacing: 1.4px;
   color: var(--text-muted);
 }
@@ -162,7 +162,7 @@ a:hover {
 }
 
 .sec-mark__note {
-  font-size: 14px;
+  font-size: var(--fs-md);
   color: var(--text-muted);
   white-space: nowrap;
 }
@@ -186,7 +186,7 @@ a:hover {
   background: var(--violet);
   color: #fff;
   padding: 18px 34px;
-  font-size: 17px;
+  font-size: var(--fs-lg);
   box-shadow: var(--sh-cta-violet);
 }
 
@@ -200,7 +200,7 @@ a:hover {
   background: var(--green);
   color: var(--bg);
   padding: 16px 30px;
-  font-size: 16px;
+  font-size: var(--fs-base);
   box-shadow: var(--sh-cta);
 }
 
@@ -214,7 +214,7 @@ a:hover {
   padding: 18px 30px;
   border: 1px solid var(--border-max);
   font-weight: 600;
-  font-size: 16px;
+  font-size: var(--fs-base);
   color: var(--text);
 }
 
@@ -229,7 +229,7 @@ a:hover {
   border: 1px solid var(--border-violet-mid);
   color: var(--text);
   padding: 15px 26px;
-  font-size: 15.5px;
+  font-size: var(--fs-md);
 }
 
 .btn--soft:hover {
@@ -250,7 +250,7 @@ a:hover {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: 15.5px;
+  font-size: var(--fs-md);
   color: var(--text);
 }
 

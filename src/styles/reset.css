@@ -74,6 +74,6 @@ html {
   input,
   select,
   textarea {
-    font-size: 16px !important;
+    font-size: var(--fs-base) !important;
   }
 }

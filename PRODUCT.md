@@ -65,6 +65,12 @@ Seis servicios con precio público en pesos uruguayos y dólares:
 | 05 | Pack Básico — 3 planillas | $3.600 · USD 90 |
 | 06 | Pack Completo — 5 planillas | $5.600 · USD 140 |
 
+- **Los precios están deliberadamente por debajo del mercado.** Decisión confirmada el
+  2026-08-02: el relevamiento del mercado uruguayo 2026 ubica una web profesional entre
+  USD 400 y USD 4.000+, y paquetes de agencia desde $15.000 UYU. La landing de Vértice
+  sale USD 180 y el institucional USD 300. **Es a propósito**, para acumular entre 7 y 10
+  trabajos reales; recién con experiencia comprobable se ajusta el precio. No proponer
+  subirlos antes de eso ni tratarlo como un error de posicionamiento.
 - **Tensión sin resolver:** la landing promete "Sin suscripciones mensuales" entre sus
   tres sellos de confianza, pero el servicio 04 es mensual. No inventar una resolución;
   es una decisión pendiente del dueño.
