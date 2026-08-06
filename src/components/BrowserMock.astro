@@ -20,24 +20,37 @@ interface Props {
   background?: string;
   widths?: number[];
   sizes?: string;
-  credit?: string;
-  creditHref?: string;
   class?: string;
   /**
    * Por defecto `top`: es un mockup de navegador, asi que cuando la captura no
    * calza justo con el contenedor conviene perder el pie y no el encabezado.
-   * La captura de veterinaria es 1.467 y el contenedor 16/10, asi que sin esto
-   * el recorte se come la barra de navegacion del sitio de la demo.
+   * Hoy las 4 capturas de demo son 16/10 exactas y no hay recorte, pero esto
+   * queda como red de seguridad para cuando se retome alguna con otro encuadre.
    */
   objectPosition?: string;
   /**
-   * Solo para el mockup del hero. `<Image>` de Astro pone `loading="lazy"` por
-   * defecto, asi que el escaner de precarga no descubre la imagen y el visitante
-   * ve el recuadro vacio mientras carga. Arriba del pliegue eso es el elemento
-   * LCP llegando tarde. Los mockups de mas abajo tienen que seguir en lazy.
+   * Cuando arranca la descarga. `<Image>` de Astro pone `loading="lazy"` por
+   * defecto, que sirve para el caso comun pero rompe en los dos extremos:
+   *
+   *   'lazy'   (default) mockup en el flujo y debajo del pliegue: que espere.
+   *   'hero'   arriba del pliegue. En lazy el escaner de precarga no descubre
+   *            la imagen y el visitante ve el recuadro vacio: es el LCP
+   *            llegando tarde. Va eager y con prioridad alta.
+   *   'hidden' dentro de un overlay con [hidden]. Un elemento en display:none
+   *            no genera caja, asi que nunca intersecta el viewport y el lazy
+   *            no dispara NUNCA: la descarga arranca recien al abrir el modal
+   *            y la foto aparece despues de la tarjeta. Va eager para ignorar
+   *            la visibilidad, y con prioridad baja para no pelearle la cola
+   *            de red al hero.
    */
-  eager?: boolean;
+  load?: 'lazy' | 'hero' | 'hidden';
 }
+
+const LOAD = {
+  lazy: { loading: 'lazy', fetchpriority: 'auto' },
+  hero: { loading: 'eager', fetchpriority: 'high' },
+  hidden: { loading: 'eager', fetchpriority: 'low' },
+} as const;
 
 const {
   src,
@@ -50,11 +63,9 @@ const {
   background = 'var(--surface)',
   widths = [560, 860, 1180],
   sizes = '(max-width: 860px) 100vw, 620px',
-  credit,
-  creditHref,
   class: className,
   objectPosition = 'top',
-  eager = false,
+  load = 'lazy',
 } = Astro.props;
 ---
 
@@ -74,22 +85,9 @@ const {
     widths={widths}
     sizes={sizes}
     class="mock__img"
-    loading={eager ? 'eager' : 'lazy'}
-    fetchpriority={eager ? 'high' : 'auto'}
+    loading={LOAD[load].loading}
+    fetchpriority={LOAD[load].fetchpriority}
   />
-  {
-    credit && (
-      <figcaption class="mock__credit">
-        {creditHref ? (
-          <a href={creditHref} target="_blank" rel="noopener nofollow">
-            {credit}
-          </a>
-        ) : (
-          credit
-        )}
-      </figcaption>
-    )
-  }
 </figure>
 
 <style>
@@ -141,19 +139,6 @@ const {
     aspect-ratio: var(--ratio);
     object-fit: cover;
     object-position: var(--obj-pos, top);
-  }
-
-  /* Atribucion de Unsplash: visible pero discreta. */
-  .mock__credit {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    font-size: var(--fs-2xs);
-    line-height: 1;
-    padding: 5px 8px;
-    color: rgba(255, 255, 255, 0.55);
-    background: rgba(6, 5, 12, 0.6);
-    border-top-left-radius: 6px;
   }
 
   @media (max-width: 560px) {

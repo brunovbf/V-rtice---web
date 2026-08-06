@@ -94,11 +94,6 @@ const waLink = wa('Buenos días, quisiera consultar por un asunto legal');
                 sizes="(max-width: 1024px) 100vw, 420px"
                 class="shot__img"
               />
-              <figcaption class="shot__credit">
-                <a href="https://unsplash.com/@giamboscaro" target="_blank" rel="noopener nofollow">
-                  Photo by Giammarco Boscaro on Unsplash
-                </a>
-              </figcaption>
             </figure>
           </div>
         </div>
@@ -603,12 +598,17 @@ const waLink = wa('Buenos días, quisiera consultar por un asunto legal');
     position: relative;
   }
 
-  /* Marco de laton desplazado 14px detras de la foto. */
+  /*
+   * Marco de laton al ras de la foto. Antes iba desplazado 14px con un
+   * translate: el sobrante colgaba por debajo y por la derecha y se leia como
+   * un recuadro vacio suelto, no como un marco. En mobile encima se metia 14px
+   * en el margen de la pagina (borde derecho en 372 contra 357 del resto de los
+   * bloques), asi que la foto parecia mas ancha que todo lo demas.
+   */
   .hero__frame {
     position: absolute;
     inset: -1px;
     border: 1px solid rgba(196, 168, 106, 0.35);
-    transform: translate(14px, 14px);
     pointer-events: none;
   }
 
@@ -623,17 +623,6 @@ const waLink = wa('Buenos días, quisiera consultar por un asunto legal');
     height: auto;
     aspect-ratio: 4/5;
     object-fit: cover;
-  }
-
-  .shot__credit {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    font-size: 10px;
-    line-height: 1;
-    padding: 6px 9px;
-    color: rgba(255, 255, 255, 0.75);
-    background: rgba(15, 25, 41, 0.6);
   }
 
   /* ---------- Metricas del hero ---------- */

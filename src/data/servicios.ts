@@ -41,9 +41,6 @@ export interface ServicioSecundario {
   url: string;
   src: ImageMetadata;
   alt: string;
-  /** Atribucion obligatoria cuando la foto es de Unsplash. */
-  credit?: string;
-  creditHref?: string;
 }
 
 export interface Pack {
@@ -122,8 +119,6 @@ export const secundarios: ServicioSecundario[] = [
     url: 'planilla de gestión · Vértice',
     src: panelReportes,
     alt: 'Tablero de reportes con gráficos de ventas y gastos',
-    credit: 'Photo by Luke Chesser on Unsplash',
-    creditHref: 'https://unsplash.com/@lukechesser',
   },
   {
     num: '04',
@@ -145,8 +140,6 @@ export const secundarios: ServicioSecundario[] = [
     url: 'soporte mensual · Vértice',
     src: panelMantenimiento,
     alt: 'Pantalla de código representando el mantenimiento del sitio',
-    credit: 'Photo by Chris Ried on Unsplash',
-    creditHref: 'https://unsplash.com/@cdr6934',
   },
 ];
 

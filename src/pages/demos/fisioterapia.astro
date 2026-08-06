@@ -88,7 +88,6 @@ const marquee = [...especialidades, ...especialidades];
         </div>
 
         <div class="hero__media">
-          <div class="hero__arc" aria-hidden="true"></div>
           <figure class="shot">
             <Image
               src={fotoHero}
@@ -97,11 +96,6 @@ const marquee = [...especialidades, ...especialidades];
               sizes="(max-width: 1024px) 100vw, 480px"
               class="shot__img"
             />
-            <figcaption class="shot__credit">
-              <a href="https://unsplash.com/@risenwang" target="_blank" rel="noopener nofollow">
-                Photo by Risen Wang on Unsplash
-              </a>
-            </figcaption>
           </figure>
         </div>
       </div>
@@ -579,17 +573,14 @@ const marquee = [...especialidades, ...especialidades];
     position: relative;
   }
 
-  /* Eco del recorte en arco, detras de la foto. */
-  .hero__arc {
-    position: absolute;
-    inset: auto -14px -14px auto;
-    width: 70%;
-    height: 60%;
-    background: var(--lime);
-    border-radius: 200px 24px 24px 24px;
-    opacity: 0.16;
-  }
-
+  /*
+   * Aca vivia .hero__arc, un bloque lima detras de la foto anclado con
+   * inset:auto -14px -14px auto. La foto es opaca y .shot recorta, asi que lo
+   * unico que se veia del arco era el sobrante de 14px asomando por abajo y por
+   * la derecha: un rectangulo palido sin forma, que ademas en mobile se metia
+   * en el margen de la pagina. Alinearlo con la foto lo dejaba 100% tapado, o
+   * sea sin nada que aportar, asi que se fue.
+   */
   .shot {
     position: relative;
     margin: 0;
@@ -603,17 +594,6 @@ const marquee = [...especialidades, ...especialidades];
     height: auto;
     aspect-ratio: 4/5;
     object-fit: cover;
-  }
-
-  .shot__credit {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    font-size: 10px;
-    line-height: 1;
-    padding: 6px 9px;
-    color: rgba(255, 255, 255, 0.7);
-    background: rgba(14, 17, 16, 0.6);
   }
 
   /* ---------- Stats ---------- */
