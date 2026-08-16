@@ -1,27 +1,33 @@
 /*
  * Patron de reveal al scrollear. Compartido por la landing (.reveal) y las
- * 4 demos (.rv).
+ * 5 demos (.rv).
  *
  * DETALLE CRITICO: los elementos NO nacen con opacity:0. Nacen visibles y el
  * JS les agrega .armed recien cuando confirma que existe IntersectionObserver
  * y que el usuario no pidio movimiento reducido. Si el observer nunca dispara
  * (pestana en segundo plano, impresion, export a PDF, bot de SEO) el contenido
- * igual se ve. Ver src/scripts/reveal.ts para la red de seguridad a 2.5s.
+ * igual se ve. Ver src/scripts/reveal.ts para la red de seguridad.
+ *
+ * DONDE VIVE LA TRANSICION: en `.armed`, no en `.reveal`. Varias tarjetas
+ * (.dcard, .card, .pack) declaran su propio `transition` para el hover con la
+ * misma especificidad que `.reveal`, y le ganaban por orden en el bundle: la
+ * entrada terminaba usando la curva del hover. Con la transicion en `.armed`
+ * (0,2,0) la entrada siempre manda, y cuando reveal.ts limpia las clases al
+ * terminar la animacion, el hover de la tarjeta vuelve a mandar sin pelea.
  */
-.reveal,
-.rv {
+.reveal.armed,
+.rv.armed {
+  opacity: 0;
   transition:
     opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.armed {
-  opacity: 0;
   transform: translateY(26px);
 }
 
 .rv.armed {
-  opacity: 0;
   transform: translateY(20px);
 }
 
@@ -29,8 +35,74 @@
 .rv.armed.in {
   opacity: 1;
   transform: none;
+  /*
+   * Entrada escalonada. El delay va en el estado de LLEGADA y no en `.armed`
+   * a proposito: cuando la red de seguridad de reveal.ts saca .armed para
+   * rescatar contenido, esa transicion no tiene que esperar ningun turno.
+   *
+   * `--rv-i` lo pone cada tarjeta desde su .map(), topeado en 4: una grilla de
+   * 6 no puede acumular medio segundo hasta la ultima.
+   */
+  transition-delay: calc(var(--rv-i, 0) * 70ms);
 }
 
+/*
+ * Variantes de entrada. Solo cambian el transform del estado armado; opacidad,
+ * curva y duracion son las de arriba. Van despues de `.reveal.armed` para
+ * ganarle por orden (misma especificidad).
+ */
+.reveal--left.armed {
+  transform: translate3d(-28px, 0, 0);
+}
+
+.reveal--right.armed {
+  transform: translate3d(28px, 0, 0);
+}
+
+.reveal--scale.armed {
+  transform: scale(0.97);
+}
+
+/*
+ * Abajo de 860px las columnas se apilan: un movimiento lateral en contenido
+ * apilado no lee como intencion, lee como layout roto. Vuelven al fade-up.
+ */
+@media (max-width: 860px) {
+  .reveal--left.armed,
+  .reveal--right.armed {
+    transform: translateY(26px);
+  }
+}
+
+/* En pantalla angosta todo entra de a uno: recorridos mas cortos y mas rapidos. */
+@media (max-width: 560px) {
+  .reveal.armed,
+  .rv.armed {
+    transition-duration: 0.55s;
+    transform: translateY(16px);
+  }
+
+  .reveal--left.armed,
+  .reveal--right.armed {
+    transform: translateY(16px);
+  }
+
+  /* La escala no depende del ancho: se mantiene, apenas mas suave. */
+  .reveal--scale.armed {
+    transform: scale(0.98);
+  }
+
+  .reveal.armed.in,
+  .rv.armed.in {
+    transition-delay: calc(var(--rv-i, 0) * 50ms);
+  }
+}
+
+/*
+ * Los dos bloques de abajo no listan las variantes: todo elemento que use
+ * `.reveal--left|right|scale` lleva tambien `.reveal`, asi que `.reveal.armed`
+ * con !important les gana igual.
+ */
 @media print {
   .reveal,
   .reveal.armed,
@@ -38,6 +110,7 @@
   .rv.armed {
     opacity: 1 !important;
     transform: none !important;
+    transition-delay: 0s !important;
   }
 }
 

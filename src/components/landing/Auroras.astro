@@ -84,6 +84,33 @@
     animation: floatB 12s ease-in-out infinite;
   }
 
+  /*
+   * Parallax: el fondo sube un poco mas lento que el contenido. Va en el
+   * contenedor, no en cada `.aurora`, para no pisarle el `floatA/B/C` que ya
+   * tienen; las dos animaciones se componen sin pelearse.
+   *
+   * Solo en escritorio. Son cinco capas de ~600px con blur(44px): moverlas
+   * cuesta relleno de pixeles y en un Android de gama media se nota. En
+   * celular el movimiento ya lo ponen el reveal escalonado, la barra de
+   * progreso y la escala de las capturas.
+   */
+  @supports (animation-timeline: scroll()) {
+    @media (min-width: 861px) and (prefers-reduced-motion: no-preference) {
+      .auroras {
+        animation-name: auroraParallax;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: scroll(root block);
+      }
+    }
+  }
+
+  @keyframes auroraParallax {
+    to {
+      transform: translateY(-160px);
+    }
+  }
+
   .dots {
     position: absolute;
     inset: 0;

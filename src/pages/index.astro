@@ -30,6 +30,13 @@ const fonts =
   description="Sitios web profesionales y planillas de gestión a medida para comercios y profesionales de Uruguay. Precio fijo, entrega en 7 días y el sitio queda tuyo."
   fonts={fonts}
 >
+  {/*
+    Barra de progreso de lectura. Va FUERA de `.page` a proposito: `.page`
+    tiene `overflow-x: clip` y los navegadores no coinciden en si eso recorta
+    o no a un hijo `position: fixed`. Aca arriba no hay ambiguedad.
+  */}
+  <div class="progress" aria-hidden="true"></div>
+
   <div class="page">
     <Auroras />
 
@@ -92,6 +99,45 @@ const fonts =
 
   .svc-section__mark {
     margin-bottom: 46px;
+  }
+
+  /*
+   * Progreso de lectura, sin una linea de JS: la animacion la maneja el
+   * scroll del documento (`animation-timeline`), asi que corre en el
+   * compositor. Un listener de scroll haciendo lo mismo compite con el hilo
+   * principal y en celular se ve a los saltos.
+   *
+   * Arranca en scaleX(0), asi que en un navegador sin soporte simplemente no
+   * se ve: no hay barra a medias ni una linea violeta fija arriba.
+   */
+  .progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    z-index: 60; /* el nav sticky de mobile usa 50 */
+    background: linear-gradient(90deg, var(--violet), var(--violet-light));
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    pointer-events: none;
+  }
+
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .progress {
+        animation-name: progressGrow;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: scroll(root block);
+      }
+    }
+  }
+
+  @keyframes progressGrow {
+    to {
+      transform: scaleX(1);
+    }
   }
 </style>
 

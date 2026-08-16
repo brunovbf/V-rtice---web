@@ -8,8 +8,8 @@ import ChevronNumber from '../ChevronNumber.astro';
 import { secundarios } from '../../data/servicios';
 ---
 
-<div class="reveal secs">
-  <div class="sec-mark secs__mark">
+<div class="secs">
+  <div class="reveal sec-mark secs__mark">
     <span class="sec-mark__title sec-mark__title--sub">También podés sumar</span>
     <span class="sec-mark__rule sec-mark__rule--neutral"></span>
   </div>
@@ -17,7 +17,7 @@ import { secundarios } from '../../data/servicios';
   <div class="secs__grid">
     {
       secundarios.map((o, i) => (
-        <a class="card" href={o.wa} data-svc-open={String(i)}>
+        <a class="reveal card" style={`--rv-i:${Math.min(i, 4)}`} href={o.wa} data-svc-open={String(i)}>
           <div class="card__head">
             <ChevronNumber num={o.num} size={52} fontSize={16} />
             <h3 class="card__title">{o.title}</h3>

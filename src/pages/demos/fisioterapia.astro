@@ -138,7 +138,7 @@ const marquee = [...especialidades, ...especialidades];
 
       <div class="g-serv">
         <!-- Destacada: 2 columnas, lima solido -->
-        <article class="rv scard scard--feat card-pad">
+        <article class="rv scard scard--feat card-pad" style="--rv-i:0">
           <div>
             <p class="scard__badge">{destacado.badge}</p>
             <h3 class="scard__title-lg">{destacado.title}</h3>
@@ -150,7 +150,7 @@ const marquee = [...especialidades, ...especialidades];
           </a>
         </article>
 
-        <article class="rv scard scard--dark card-pad">
+        <article class="rv scard scard--dark card-pad" style="--rv-i:1">
           <div>
             <h3 class="scard__title-md">{rpg.title}</h3>
             <p class="scard__desc">{rpg.desc}</p>
@@ -158,8 +158,12 @@ const marquee = [...especialidades, ...especialidades];
         </article>
 
         {
-          servicios.map((s) => (
-            <article class="rv scard scard--dark scard--sm card-pad">
+          /* +2: en esta grilla las dos primeras tarjetas son fijas, no del map. */
+          servicios.map((s, i) => (
+            <article
+              class="rv scard scard--dark scard--sm card-pad"
+              style={`--rv-i:${Math.min(i + 2, 4)}`}
+            >
               <div class="scard__meta">
                 <span class="scard__rule" />
                 <span class="scard__tag">{s.n}</span>
@@ -181,8 +185,8 @@ const marquee = [...especialidades, ...especialidades];
         </div>
         <div class="g-pasos">
           {
-            pasos.map((p) => (
-              <div class="rv paso">
+            pasos.map((p, i) => (
+              <div class="rv paso" style={`--rv-i:${Math.min(i, 4)}`}>
                 <div class="paso__n">{p.n}</div>
                 <h3 class="paso__title">{p.title}</h3>
                 <p class="paso__desc">{p.desc}</p>
@@ -291,8 +295,8 @@ const marquee = [...especialidades, ...especialidades];
         </div>
         <div class="g-test">
           {
-            testimonios.map((t) => (
-              <figure class="rv tcard card-pad">
+            testimonios.map((t, i) => (
+              <figure class="rv tcard card-pad" style={`--rv-i:${Math.min(i, 4)}`}>
                 <span class="tcard__mark" aria-hidden="true">
                   “
                 </span>

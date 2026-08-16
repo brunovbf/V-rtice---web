@@ -15,8 +15,8 @@ import { demoMain, demosRest } from '../../data/demos';
     <h2 class="t-h2 demos__title">Mirá cómo puede quedar tu negocio</h2>
   </div>
 
-  <div class="reveal demos__feat">
-    <div>
+  <div class="demos__feat">
+    <div class="reveal reveal--left">
       <p class="demos__live">
         <span class="demos__live-dot"></span>
         EN VIVO
@@ -36,7 +36,7 @@ import { demoMain, demosRest } from '../../data/demos';
       </a>
     </div>
 
-    <div class="demos__visual">
+    <div class="reveal reveal--right demos__visual">
       <div class="demos__glow" aria-hidden="true"></div>
       <BrowserMock
         src={demoMain.src}
@@ -57,9 +57,10 @@ import { demoMain, demosRest } from '../../data/demos';
 
   <div class="demos__grid">
     {
-      demosRest.map((d) => (
+      demosRest.map((d, i) => (
         <a
           class="reveal dcard"
+          style={`--rv-i:${Math.min(i, 4)}`}
           href={d.link}
           target="_blank"
           rel="noopener"
@@ -239,6 +240,38 @@ import { demoMain, demosRest } from '../../data/demos';
 
   .dcard:hover .dcard__link {
     color: var(--lavender-hover);
+  }
+
+  /*
+   * Las capturas se asientan mientras cruzan la pantalla: entran apenas
+   * agrandadas y llegan a su tamano real. A diferencia del reveal, que pasa
+   * una sola vez, esto acompana todo el recorrido — que es lo que hace que en
+   * celular, donde las tarjetas pasan de a una, la pagina se sienta viva.
+   *
+   * `view()` mide el recorrido del propio elemento por el viewport, no el
+   * scroll del documento: no hace falta calcular offsets ni escuchar scroll.
+   * El recorte lo pone el `overflow: hidden` de `.dcard` y de `.mock`.
+   */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .dcard__img,
+      .demos__visual :global(.mock__img) {
+        animation-name: settle;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 45%;
+      }
+    }
+  }
+
+  @keyframes settle {
+    from {
+      transform: scale(1.06);
+    }
+    to {
+      transform: scale(1);
+    }
   }
 
   @media (max-width: 1024px) {

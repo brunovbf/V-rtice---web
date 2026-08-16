@@ -182,8 +182,8 @@ const waLink = wa('Hola Bianchi, quiero consultar por un tratamiento');
 
       <div class="g-serv">
         {
-          tratamientos.map((t) => (
-            <article class="rv tcell card-pad">
+          tratamientos.map((t, i) => (
+            <article class="rv tcell card-pad" style={`--rv-i:${Math.min(i, 4)}`}>
               <div class="tcell__n">{t.n}</div>
               <h3 class="tcell__title">{t.title}</h3>
               <p class="tcell__desc">{t.desc}</p>
@@ -280,8 +280,8 @@ const waLink = wa('Hola Bianchi, quiero consultar por un tratamiento');
         </div>
         <div class="g-equipo">
           {
-            equipo.map((e) => (
-              <article class="rv person">
+            equipo.map((e, i) => (
+              <article class="rv person" style={`--rv-i:${Math.min(i, 4)}`}>
                 <div class="person__photo">
                   <span>{e.ini}</span>
                 </div>

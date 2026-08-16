@@ -3,10 +3,16 @@ import { pasos } from '../../data/landing';
 ---
 
 <div class="container steps-wrap">
-  <div class="reveal steps">
+  {/*
+    El recuadro NO revela: si el contenedor estuviera armado en opacity:0, sus
+    hijos igual dispararian el observer (que mira geometria, no opacidad) y el
+    escalonado se consumiria detras de un padre invisible. El marco queda fijo
+    y los pasos entran de a uno adentro.
+  */}
+  <div class="steps">
     {
-      pasos.map((p) => (
-        <div class="step">
+      pasos.map((p, i) => (
+        <div class="reveal step" style={`--rv-i:${Math.min(i, 4)}`}>
           <span class="step__n">{p.n}</span>
           <div>
             <h3 class="step__title">{p.title}</h3>

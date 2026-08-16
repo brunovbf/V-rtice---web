@@ -3,10 +3,15 @@
  *
  * Los elementos nacen VISIBLES en el CSS. Este script les agrega .armed
  * (que los oculta) solo despues de confirmar que hay IntersectionObserver y
- * que el usuario no pidio movimiento reducido. Ademas hay una red de
- * seguridad a 2.5s que desarma todo, para que nunca quede contenido invisible
- * si el observer no dispara: pestana en segundo plano, impresion, export a
- * PDF o bots de SEO.
+ * que el usuario no pidio movimiento reducido.
+ *
+ * RED DE SEGURIDAD: la regla es "nada que el visitante tenga delante de los
+ * ojos puede quedar invisible". Antes eso se cumplia desarmando TODO a los
+ * 2.5s, lo que apagaba el efecto en el resto de la pagina: el observer seguia
+ * disparando pero .in sin .armed no anima nada, asi que solo se veia moverse
+ * lo que estaba cerca del viewport en los primeros 2.5s. Ahora se desarma solo
+ * lo que esta EN pantalla y no llego a revelarse. Lo que esta abajo sigue
+ * armado y entra cuando el visitante llega, que es el punto del patron.
  *
  * @param selector `.reveal` en la landing, `.rv` en las demos.
  */
@@ -14,17 +19,44 @@ export function initReveal(selector = '.reveal'): void {
   const all = () => document.querySelectorAll<HTMLElement>(selector);
   const unarmAll = () => all().forEach((el) => el.classList.remove('armed'));
 
+  /** Un elemento cuenta como visible si su caja cruza el viewport. */
+  const enPantalla = (el: HTMLElement) => {
+    const r = el.getBoundingClientRect();
+    return r.top < window.innerHeight && r.bottom > 0;
+  };
+
   const reduce = window.matchMedia?.('(prefers-reduced-motion:reduce)').matches;
   if (reduce || !('IntersectionObserver' in window)) {
     unarmAll();
     return;
   }
 
+  /**
+   * Revela el elemento y, cuando la animacion termina, le saca las dos clases.
+   * El elemento queda igual que sin JS (opacidad 1, sin transform) y su propio
+   * `transition` de hover vuelve a mandar: varias tarjetas tienen uno y no
+   * tiene sentido que sigan arrastrando la curva de 0.7s de la entrada.
+   *
+   * El chequeo de `e.target` es necesario porque transitionend burbujea: sin
+   * el, el hover de cualquier hijo daria por terminada la entrada del padre.
+   */
+  const revelar = (el: HTMLElement) => {
+    if (el.classList.contains('in')) return;
+
+    const listo = (e: TransitionEvent) => {
+      if (e.target !== el) return;
+      el.removeEventListener('transitionend', listo);
+      el.classList.remove('armed', 'in');
+    };
+    el.addEventListener('transitionend', listo);
+    el.classList.add('in');
+  };
+
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((en) => {
         if (en.isIntersecting) {
-          en.target.classList.add('in');
+          revelar(en.target as HTMLElement);
           io.unobserve(en.target);
         }
       });
@@ -39,12 +71,11 @@ export function initReveal(selector = '.reveal'): void {
       if (seen.has(el)) return;
       seen.add(el);
 
-      const r = el.getBoundingClientRect();
       // Ya visible al primer barrido: armar y revelar en el acto, sin observer.
-      if (r.top < window.innerHeight && r.bottom > 0) {
+      if (enPantalla(el)) {
         el.classList.add('armed');
-        requestAnimationFrame(() => el.classList.add('in'));
-        setTimeout(() => el.classList.add('in'), 60);
+        requestAnimationFrame(() => revelar(el));
+        setTimeout(() => revelar(el), 60);
         return;
       }
 
@@ -53,10 +84,30 @@ export function initReveal(selector = '.reveal'): void {
     });
   };
 
+  /**
+   * Desarma lo que esta en pantalla sin haberse revelado: si el observer no
+   * disparo (pestana en segundo plano, throttling del navegador), el visitante
+   * igual ve el contenido. Lo de mas abajo no se toca.
+   */
+  const unarmVisible = () => {
+    all().forEach((el) => {
+      if (el.classList.contains('in')) return;
+      if (enPantalla(el)) el.classList.remove('armed');
+    });
+  };
+
   scan();
   const tick = setInterval(scan, 250);
   setTimeout(() => clearInterval(tick), 8000);
 
-  // Red de seguridad incondicional: nunca dejar contenido oculto.
-  setTimeout(unarmAll, 2500);
+  setTimeout(unarmVisible, 2500);
+
+  // Al volver de una pestana en segundo plano, rescatar lo que quedo colgado.
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') unarmVisible();
+  });
+
+  // Impresion y export a PDF: nada oculto, en toda la pagina. El @media print
+  // de reveal.css cubre lo mismo por CSS; esto es el cinturon del tirador.
+  window.addEventListener('beforeprint', unarmAll);
 }

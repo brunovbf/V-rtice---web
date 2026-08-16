@@ -135,8 +135,8 @@ const waGeneral = wa('Hola Patitas, quiero hacer una consulta');
         </div>
         <div class="g-serv">
           {
-            servicios.map((s) => (
-              <article class="rv scard card-pad">
+            servicios.map((s, i) => (
+              <article class="rv scard card-pad" style={`--rv-i:${Math.min(i, 4)}`}>
                 <div class="scard__icon" style={`background:${s.bg}`}>
                   <span style={`color:${s.fg}`}>{s.n}</span>
                 </div>
@@ -284,8 +284,8 @@ const waGeneral = wa('Hola Patitas, quiero hacer una consulta');
         </div>
         <div class="g-test">
           {
-            testimonios.map((q) => (
-              <figure class="rv tcard card-pad">
+            testimonios.map((q, i) => (
+              <figure class="rv tcard card-pad" style={`--rv-i:${Math.min(i, 4)}`}>
                 <div class="tcard__stars">
                   {Array.from({ length: 5 }).map(() => (
                     <svg width="17" height="17" viewBox="0 0 24 24" fill="#E8A63F" aria-hidden="true">

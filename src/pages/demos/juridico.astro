@@ -124,8 +124,8 @@ const waLink = wa('Buenos días, quisiera consultar por un asunto legal');
 
       <div class="g-areas">
         {
-          areas.map((a) => (
-            <article class="rv acell card-pad">
+          areas.map((a, i) => (
+            <article class="rv acell card-pad" style={`--rv-i:${Math.min(i, 4)}`}>
               <div class="acell__meta">
                 <span class="acell__rule"></span>
                 <span class="acell__n">{a.n}</span>
@@ -182,8 +182,8 @@ const waLink = wa('Buenos días, quisiera consultar por un asunto legal');
       </div>
       <div class="g-equipo">
         {
-          equipo.map((e) => (
-            <article class="rv person card-pad">
+          equipo.map((e, i) => (
+            <article class="rv person card-pad" style={`--rv-i:${Math.min(i, 4)}`}>
               <div class="person__mark">
                 <span>{e.ini}</span>
               </div>
