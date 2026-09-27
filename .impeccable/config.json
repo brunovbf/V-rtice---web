@@ -11,6 +11,12 @@
         ],
         "createdAt": "2026-08-02T20:00:52.993Z",
         "reason": "Bruno confirmo que el degradado violeta es identidad de marca: .grad marca la dualidad del mensaje (ver bien / funcionar mejor) y .t-num usa el mismo violeta. Contraste ya corregido a 7.15:1-4.18:1."
+      },
+      {
+        "rule": "overused-font",
+        "value": "inter",
+        "createdAt": "2026-09-26T23:28:32.587Z",
+        "reason": "Inter es la tipografia de cuerpo del sistema de diseno de Vertice (--font-body en tokens.css); Bruno la confirmo explicitamente como parte del sistema a respetar"
       }
     ]
   }
