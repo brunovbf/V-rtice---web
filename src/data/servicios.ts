@@ -1,15 +1,14 @@
 /**
- * Contenido de los 6 servicios. Bruno puede editar precios y textos aca sin
+ * Contenido de los 5 servicios. Bruno puede editar precios y textos aca sin
  * tocar markup.
  *   01       servicio estrella (tarjeta grande)
- *   02-04    servicios secundarios (tarjeta + modal de detalle)
- *   05-06    packs de planillas
+ *   02-03    servicios secundarios (tarjeta + modal de detalle)
+ *   04-05    packs de planillas
  */
 import { wa } from '../config/site';
 
 import capturaEstrella from '../assets/captura-estrella.webp';
 import capturaJuridico from '../assets/captura-juridico.webp';
-import panelReportes from '../assets/panel-reportes.jpg';
 import panelMantenimiento from '../assets/panel-mantenimiento.jpg';
 
 export interface ServicioEstrella {
@@ -101,27 +100,6 @@ export const secundarios: ServicioSecundario[] = [
   },
   {
     num: '03',
-    title: 'Reportes que se actualizan solos',
-    desc: 'Tus datos convertidos en gráficos claros, sin rearmar planillas. Capacitación incluida.',
-    price: '$4.800',
-    usd: 'USD 120',
-    lead: 'Cargás los datos una vez y la planilla hace el resto: gráficos de ventas, gastos y stock que se actualizan solos cada vez que anotás algo nuevo.',
-    items: [
-      'Tablero con tus números clave',
-      'Gráficos que se actualizan solos',
-      'Alertas de stock bajo',
-      'Adaptado a tu rubro',
-      'Capacitación por videollamada',
-      'Soporte los primeros 30 días',
-    ],
-    cta: 'Quiero mis reportes',
-    wa: wa('Hola Bruno, quiero un reporte automatizado a medida'),
-    url: 'planilla de gestión · Vértice',
-    src: panelReportes,
-    alt: 'Tablero de reportes con gráficos de ventas y gastos',
-  },
-  {
-    num: '04',
     title: 'Mantenimiento web',
     desc: 'Cambios, soporte prioritario y tu sitio siempre al día. Sin permanencia.',
     price: '$800/mes',
@@ -145,9 +123,9 @@ export const secundarios: ServicioSecundario[] = [
 
 export const packs: Pack[] = [
   {
-    n: '05',
+    n: '04',
     title: 'Pack Básico',
-    sub: '3 planillas esenciales',
+    sub: '3 planillas de Excel esenciales',
     price: '$3.600',
     usd: 'USD 90',
     items: [
@@ -161,9 +139,9 @@ export const packs: Pack[] = [
     wa: wa('Hola Bruno, me interesa el Pack Básico de planillas'),
   },
   {
-    n: '06',
+    n: '05',
     title: 'Pack Completo',
-    sub: '5 planillas · gestión integral',
+    sub: '5 planillas de Excel · gestión integral',
     price: '$5.600',
     usd: 'USD 140',
     items: [
@@ -185,4 +163,42 @@ export const rubrosPacks = [
   'Barbería',
   'Veterinaria',
   '+ tu rubro',
+];
+
+/**
+ * ─────────────────────────────────────────────────────────────────
+ *  INTERRUPTOR DEL EJEMPLO "BB STUDIO"
+ *
+ *  Esta en `false` porque las capturas todavia no existen en el proyecto.
+ *  Mismo criterio que `mostrarFotoBruno` en data/landing.ts: un recuadro
+ *  vacio le anuncia al visitante que falta algo, y este es justo el bloque
+ *  que existe para probar que la planilla es real. Apagado no se renderiza.
+ *
+ *  En `npm run dev` SI se ven recuadros numerados aunque esto siga en
+ *  `false`, para poder acomodar el layout sin tener las capturas. En el
+ *  build de produccion no se muestra nada hasta que esto pase a `true`.
+ *
+ *  PARA PUBLICARLO (2 pasos):
+ *    1. Guardar las capturas en `public/img/packs/` con estos nombres
+ *       exactos (la carpeta hay que crearla, todavia no existe):
+ *         bbstudio-1.webp
+ *         bbstudio-2.webp
+ *         bbstudio-3.webp
+ *       Se abren ampliadas al hacer clic, asi que conviene ~1600px de ancho.
+ *       El recorte de la miniatura es 3/2 desde arriba a la izquierda.
+ *       Para una cuarta captura: agregarla al array de abajo (hasta 4).
+ *    2. Poner esto en `true`.
+ *
+ *  OJO: solo capturas. Sin datos del cliente a la vista y sin explicar como
+ *  funciona la planilla — eso se muestra en la videollamada, que es a donde
+ *  lleva el boton del bloque.
+ * ─────────────────────────────────────────────────────────────────
+ */
+export const mostrarEjemploBBStudio = false;
+
+/** El orden del array es el orden en que se ven y se recorren en el visor. */
+export const capturasBBStudio = [
+  { src: '/img/packs/bbstudio-1.webp', alt: 'Captura 1 de la planilla de BB Studio' },
+  { src: '/img/packs/bbstudio-2.webp', alt: 'Captura 2 de la planilla de BB Studio' },
+  { src: '/img/packs/bbstudio-3.webp', alt: 'Captura 3 de la planilla de BB Studio' },
 ];

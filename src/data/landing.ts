@@ -91,7 +91,6 @@ export const necesidades = [
   'Una landing page',
   'Un sitio institucional',
   'Un pack de planillas',
-  'Un reporte automatizado',
   'Mantenimiento web',
   'No estoy seguro, quiero asesoría',
 ];

@@ -18,6 +18,7 @@ import Pasos from '../components/landing/Pasos.astro';
 import Contacto from '../components/landing/Contacto.astro';
 import Footer from '../components/landing/Footer.astro';
 import ServiceModal from '../components/landing/ServiceModal.astro';
+import PacksVisor from '../components/landing/PacksVisor.astro';
 import WhatsAppFab from '../components/landing/WhatsAppFab.astro';
 import { mostrarTestimonios } from '../data/landing';
 
@@ -57,11 +58,31 @@ const fonts =
 
           <ServicioEstrella />
           <ServiciosSecundarios />
-          <Packs />
         </div>
       </section>
 
       <Demos />
+
+      {/*
+        Los packs van despues de las demos, en su propia franja.
+
+        Son planillas de Excel, no sitios web: pegados abajo de Servicios se
+        leian como "otra cosa que hace una pagina". Ahora las demos quedan
+        contra los servicios que efectivamente muestran (01-03 son sitios), y
+        las planillas arrancan su propio bloque, con el ejemplo de BB Studio
+        adentro.
+
+        La numeracion sigue corriendo 01→05 hacia abajo, asi que el salto de
+        seccion no la interrumpe.
+      */}
+      <ChevronDivider />
+
+      <section class="band">
+        <div id="packs" class="container svc-section">
+          <Packs />
+        </div>
+      </section>
+
       {/* Apagada hasta tener testimonios reales. Ver `mostrarTestimonios`. */}
       {mostrarTestimonios && <Testimonios />}
       <SobreMi />
@@ -72,6 +93,7 @@ const fonts =
   </div>
 
   <ServiceModal />
+  <PacksVisor />
   <WhatsAppFab />
 </BaseLayout>
 
@@ -145,6 +167,7 @@ const fonts =
   import { initReveal } from '../scripts/reveal';
   import { initLogoDraw } from '../scripts/logoDraw';
   import { initServiceModal } from '../scripts/serviceModal';
+  import { initPacksGaleria } from '../scripts/packsGaleria';
   import { initWaForm } from '../scripts/waForm';
   import { initWhatsAppFab } from '../scripts/whatsappFab';
   import { initNavMenu } from '../scripts/navMenu';
@@ -152,6 +175,7 @@ const fonts =
   initReveal('.reveal');
   initLogoDraw();
   initServiceModal();
+  initPacksGaleria();
   initWaForm();
   initWhatsAppFab();
   initNavMenu();

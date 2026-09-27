@@ -25,10 +25,16 @@ const waLink = wa('Hola Bruno, quiero saber más sobre Vértice');
       <span class="nav__wordmark">Vértice</span>
     </a>
 
+    {/*
+      El orden sigue el de la pagina: Servicios (01-03) → Demos → Planillas
+      (04-05). "Planillas" existe porque los packs pasaron a ser seccion propia
+      despues de las demos, y sin este link no se llegaba desde el nav.
+    */}
     <nav class="nav__links" aria-label="Navegación principal">
       <a href="#servicios">Servicios</a>
       <a href="#servicios">Precios</a>
       <a href="#casos">Demos</a>
+      <a href="#packs">Planillas</a>
 
       <button
         class="nav__burger"
@@ -72,6 +78,7 @@ const waLink = wa('Hola Bruno, quiero saber más sobre Vértice');
     <a href="#servicios"><Chevron size={14} />Servicios</a>
     <a href="#servicios"><Chevron size={14} />Precios</a>
     <a href="#casos"><Chevron size={14} />Demos</a>
+    <a href="#packs"><Chevron size={14} />Planillas</a>
     <a href="#sobre"><Chevron size={14} />Sobre mí</a>
   </nav>
 

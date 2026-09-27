@@ -25,7 +25,7 @@ El canal de entrada y de conversación es WhatsApp, no email ni formulario.
 
 Vértice le da a un negocio chico dos cosas que normalmente tiene que comprar por
 separado: **que se vea bien y que funcione mejor**. Presencia web (landing o sitio
-institucional) y orden operativo (planillas de gestión, reportes automatizados).
+institucional) y orden operativo (planillas de gestión en Excel).
 
 El éxito es que el cliente quede funcionando y capacitado: no recibe un archivo, recibe
 algo andando que sabe usar.
@@ -54,16 +54,15 @@ estructural de operar solo, no una promesa de servicio.**
 
 ## Capabilities and Constraints
 
-Seis servicios con precio público en pesos uruguayos y dólares:
+Cinco servicios con precio público en pesos uruguayos y dólares:
 
 | # | Servicio | Precio |
 |---|---|---|
 | 01 | Landing page (servicio estrella, "MÁS ELEGIDO") | $7.200 · USD 180 pago único |
 | 02 | Sitio institucional | $12.000 · USD 300 |
-| 03 | Reportes automatizados | $4.800 · USD 120 |
-| 04 | Mantenimiento web | $800/mes · USD 20/mes |
-| 05 | Pack Básico — 3 planillas | $3.600 · USD 90 |
-| 06 | Pack Completo — 5 planillas | $5.600 · USD 140 |
+| 03 | Mantenimiento web | $800/mes · USD 20/mes |
+| 04 | Pack Básico — 3 planillas de Excel | $3.600 · USD 90 |
+| 05 | Pack Completo — 5 planillas de Excel | $5.600 · USD 140 |
 
 - **Los precios están deliberadamente por debajo del mercado.** Decisión confirmada el
   2026-08-02: el relevamiento del mercado uruguayo 2026 ubica una web profesional entre
@@ -123,5 +122,5 @@ registra, y la restricción que ningún trabajo futuro puede violar.
 4. **La persona es la ventaja.** El diferencial es que el cliente habla con quien
    ejecuta. El sitio no debe sonar a agencia ni a equipo — sonar corporativo destruye
    justamente lo que lo hace distinto.
-5. **Precio a la vista.** Los seis servicios muestran precio público. Ocultar precios
+5. **Precio a la vista.** Los cinco servicios muestran precio público. Ocultar precios
    detrás de "consultar" contradice la promesa de "sin sorpresas".

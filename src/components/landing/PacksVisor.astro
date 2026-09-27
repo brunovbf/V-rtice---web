@@ -1,0 +1,243 @@
+---
+/**
+ * Visor de las capturas de la planilla (bloque "Ejemplo real: BB Studio").
+ *
+ * Va suelto al final de la pagina, FUERA de `.page`, por el mismo motivo que
+ * ServiceModal y la barra de progreso: `.page` tiene `overflow-x: clip` y los
+ * navegadores no coinciden en si eso recorta a un hijo `position: fixed`.
+ *
+ * Las capturas se renderizan todas y el script solo cambia cual esta visible,
+ * en lugar de reescribir el src de una sola imagen. Dos motivos: al pasar de
+ * una a la otra no se ve un instante la anterior mientras la nueva decodifica,
+ * y con `loading="lazy"` dentro de un contenedor oculto el navegador no baja
+ * ninguna hasta que el visor se abre, asi que no cuesta nada de mas.
+ *
+ * Si no hay capturas no se renderiza: sin `[data-ej-overlay]` el script corta
+ * en la primera linea, y las miniaturas que lo abren tampoco existen.
+ */
+import { capturasBBStudio, mostrarEjemploBBStudio } from '../../data/servicios';
+---
+
+{
+  mostrarEjemploBBStudio && (
+    <div
+      class="ejov"
+      data-ej-overlay
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-label="Capturas de la planilla de BB Studio"
+    >
+      <div class="ejov__panel" data-ej-panel>
+        <button class="ejov__close" data-ej-close type="button" aria-label="Cerrar">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.6"
+            stroke-linecap="round"
+            aria-hidden="true"
+          >
+            <line x1="6" y1="6" x2="18" y2="18" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+          </svg>
+        </button>
+
+        <div class="ejov__stage">
+          {capturasBBStudio.map((c, i) => (
+            <img
+              class="ejov__img"
+              data-ej-slide={String(i)}
+              src={c.src}
+              alt={c.alt}
+              loading="lazy"
+              decoding="async"
+              hidden={i !== 0}
+            />
+          ))}
+        </div>
+
+        {capturasBBStudio.length > 1 && (
+          <div class="ejov__bar">
+            <button class="ejov__nav" data-ej-prev type="button" aria-label="Captura anterior">
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="15 5 8 12 15 19" />
+              </svg>
+            </button>
+
+            <span class="ejov__count" data-ej-count aria-live="polite" />
+
+            <button class="ejov__nav" data-ej-next type="button" aria-label="Captura siguiente">
+              <svg
+                width="17"
+                height="17"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="9 5 16 12 9 19" />
+              </svg>
+            </button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+<style>
+  /* Mismo lenguaje que el overlay de los servicios, un punto mas opaco: aca lo
+     que se mira es una imagen densa y el fondo tiene que desaparecer. */
+  .ejov {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: rgba(6, 5, 12, 0.88);
+    backdrop-filter: blur(7px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+
+  .ejov[hidden] {
+    display: none;
+  }
+
+  .ejov__panel {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+    max-width: 1100px;
+  }
+
+  .ejov__close {
+    position: absolute;
+    top: -6px;
+    right: 0;
+    z-index: 2;
+    width: 38px;
+    height: 38px;
+    border-radius: var(--r-md);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: rgba(13, 11, 26, 0.7);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition:
+      background 0.16s ease,
+      border-color 0.16s ease;
+  }
+
+  .ejov__close:hover {
+    background: rgba(124, 92, 255, 0.28);
+    border-color: var(--border-violet-hover);
+  }
+
+  .ejov__stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+  }
+
+  /*
+   * `max-height` en vh y no un alto fijo: las capturas de planilla vienen en
+   * proporciones distintas segun cuantas columnas entraron, y el visor tiene
+   * que aceptarlas sin recortar. `width:auto` deja que la imagen decida.
+   */
+  .ejov__img {
+    display: block;
+    max-width: 100%;
+    max-height: 72vh;
+    width: auto;
+    height: auto;
+    border-radius: var(--r-mock);
+    border: 1px solid var(--border-violet);
+    background: var(--surface);
+    box-shadow: var(--sh-mock);
+  }
+
+  /* Obligatorio: `.ejov__img` declara `display:block` y le gana a [hidden]. */
+  .ejov__img[hidden] {
+    display: none;
+  }
+
+  .ejov__bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .ejov__nav {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--r-md);
+    border: 1px solid var(--border-strong);
+    background: rgba(13, 11, 26, 0.7);
+    color: var(--text);
+    cursor: pointer;
+    transition:
+      background var(--t),
+      border-color var(--t);
+  }
+
+  .ejov__nav:hover {
+    background: var(--violet-fill);
+    border-color: var(--border-violet-hover);
+  }
+
+  .ejov__count {
+    min-width: 58px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--fs-md);
+    font-variant-numeric: tabular-nums;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 860px) {
+    .ejov {
+      padding: 16px;
+    }
+
+    /* Arriba del todo no hay lugar para la X colgando: pasa adentro. */
+    .ejov__panel {
+      padding-top: 46px;
+    }
+
+    .ejov__close {
+      top: 0;
+    }
+
+    .ejov__img {
+      max-height: 64vh;
+    }
+  }
+</style>

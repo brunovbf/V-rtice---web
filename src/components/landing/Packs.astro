@@ -2,18 +2,22 @@
 import Check from '../icons/Check.astro';
 import Arrow from '../icons/Arrow.astro';
 import ChevronNumber from '../ChevronNumber.astro';
+import PacksEjemplo from './PacksEjemplo.astro';
 import { packs, rubrosPacks } from '../../data/servicios';
 ---
 
 <div class="packs">
   <div class="reveal sec-mark packs__mark">
-    <span class="sec-mark__title">Packs de planillas</span>
+    <span class="sec-mark__title">Packs de planillas de Excel</span>
     <span class="sec-mark__rule"></span>
     <span class="sec-mark__note">Adaptado a tu rubro</span>
   </div>
 
-  <h3 class="reveal packs__title">Un sistema de gestión completo para tu negocio</h3>
-  <p class="reveal packs__lead">Pago único, sin suscripciones y con puesta en marcha incluida.</p>
+  <h3 class="reveal packs__title">Un sistema de gestión completo, armado en Excel</h3>
+  <p class="reveal packs__lead">
+    Planillas de Excel automatizadas y listas para usar: pago único, sin suscripciones y
+    con puesta en marcha incluida.
+  </p>
 
   <div class="packs__grid">
     {
@@ -63,12 +67,19 @@ import { packs, rubrosPacks } from '../../data/servicios';
     <span class="packs__rubros-label">Disponible para:</span>
     {rubrosPacks.map((r) => <span class="chip chip--sm">{r}</span>)}
   </div>
+
+  <PacksEjemplo />
 </div>
 
 <style>
-  /* Sin separador arriba: se saco a proposito. */
+  /*
+   * Sin margen propio: los packs ya son su propia franja en index.astro, con
+   * el chevron y el padding de `.svc-section` haciendo la separacion. Antes
+   * venian pegados abajo de los servicios secundarios y el margen lo ponia
+   * este bloque.
+   */
   .packs {
-    margin-top: 96px;
+    margin-top: 0;
   }
 
   .packs__mark {
